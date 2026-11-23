@@ -1,0 +1,57 @@
+{
+  "model": "qwen3.5-9b",
+  "served_model": "qwen3.5-9b",
+  "base_url": "http://127.0.0.1:8001/v1",
+  "suite": "main",
+  "tag": "zero",
+  "seed": 33550336,
+  "tasks": {
+    "causal_n4": {
+      "domain": "causal",
+      "dataset": "data/causal/n4.json",
+      "n_samples": 200,
+      "gt_filter": "8-200",
+      "multiplier": 2.0
+    },
+    "3d": {
+      "domain": "3d",
+      "dataset": "data/3d/g3_h3_b3.json",
+      "n_samples": 129,
+      "multiplier": 1.0
+    },
+    "boolean_basic": {
+      "domain": "boolean",
+      "dataset": "data/boolean/basic_d2.json",
+      "n_samples": 35,
+      "multiplier": 1.0
+    },
+    "boolean_extended": {
+      "domain": "boolean",
+      "dataset": "data/boolean/extended_d2.json",
+      "n_samples": 78,
+      "multiplier": 1.0
+    },
+    "boolean_full": {
+      "domain": "boolean",
+      "dataset": "data/boolean/full_d2.json",
+      "n_samples": 80,
+      "multiplier": 1.0
+    }
+  },
+  "sampling": {
+    "temperature": 0.7,
+    "max_tokens": 1024,
+    "extra_body": {
+      "chat_template_kwargs": {
+        "enable_thinking": false
+      }
+    }
+  },
+  "git": {
+    "commit": null,
+    "dirty": null
+  },
+  "started": "2026-11-22T10:06:35.052119",
+  "finished": "2026-11-22T16:28:05.427383",
+  "provenance": "reconstructed 2026-11-23 from the run JSONs: per-query completion tokens exceed 256 (e.g. 1030 tokens over 2 queries, 0 errors), so max_tokens was 1024; temperature/thinking mode confirmed by the team. Not recorded at run time."
+}

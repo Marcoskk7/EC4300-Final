@@ -15,7 +15,7 @@ ROOT = Path(__file__).resolve().parents[1]
 RUNS = ROOT / "runs"
 OUT = ROOT / "results"
 TASK_ORDER = ["causal_n4", "3d", "boolean_basic", "boolean_extended", "boolean_full"]
-COLS = ["task", "run", "model", "tag", "budget", "n", "parse", "VR", "NR", "RR", "tokens_per_sample", "commit"]
+COLS = ["task", "run", "model", "tag", "budget", "max_tokens", "n", "parse", "VR", "NR", "RR", "tokens_per_sample", "commit"]
 
 
 def budget(res, meta_task):
@@ -49,6 +49,7 @@ def rows():
                 "model": meta.get("served_model") or res.get("llm_name", "?"),
                 "tag": meta.get("tag") or "",
                 "budget": budget(res, meta.get("tasks", {}).get(f.stem)),
+                "max_tokens": (meta.get("sampling") or {}).get("max_tokens"),
                 "n": len(res["per_sample_results"]),
                 "parse": parse_rate(res),
                 "VR": s["valid_rate"]["mean"],
@@ -75,7 +76,7 @@ def main():
         w.writeheader()
         w.writerows(data)
 
-    md_cols = ["run", "模型", "tag", "预算", "实例数", "parse", "VR", "NR", "RR", "每样本 token", "commit"]
+    md_cols = ["run", "模型", "tag", "预算", "max_tokens", "实例数", "parse", "VR", "NR", "RR", "每样本 token", "commit"]
     lines = [
         "# 榜单",
         "",

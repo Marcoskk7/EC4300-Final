@@ -12,7 +12,7 @@ setup:            ## create .venv from env/bench.txt
 build:            ## materialise .build/hypospace = pristine upstream + patches/
 	$(PY) tools/bench.py
 
-test:             ## evaluator self-check with scripted fake LLMs, no network (~12 s)
+test:             ## evaluator self-check with scripted fake LLMs, no network
 	$(PY) tools/sanity_check.py
 
 smoke:            ## 2 instances x 2 queries per domain against $MODEL; never reportable
@@ -33,10 +33,10 @@ tunnel-status:    ## check which endpoints answer
 untunnel:
 	./scripts/tunnel.sh down
 
-serve-start:      ## start the 9B vLLM server (stop it before training)
+serve-start:      ## start the 9B vLLM server
 	./scripts/vllm9b.sh start
 
-serve-stop:       ## free the 9B GPU for training
+serve-stop:       ## stop the 9B vLLM server
 	./scripts/vllm9b.sh stop
 
 monitor:          ## GPU + vLLM queue + per-run progress; add WATCH=30 to refresh

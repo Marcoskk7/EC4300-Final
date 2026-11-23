@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Benchmark venv only. The training venv lives on the GPU node (see README).
+# Benchmark venv only.
 set -euo pipefail
 cd "$(dirname "$0")/.."
 uv venv -p 3.11 .venv

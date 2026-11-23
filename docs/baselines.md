@@ -1,4 +1,4 @@
-# Baselines：论文原始数字 + 我们的本地基线
+# 基线：论文原始数字 + 本地基线
 
 数字全部取自各 JSON 的 `statistics`（表里注明了 run 目录），不手抄。
 `tools/plot_paper_vs_8b.py` 仍指向 `results/legacy/` 的旧文件命名（`local_*_causal_n4_full.json`），要画新 run 需先改 `LOCAL_FILES`。
@@ -9,7 +9,7 @@
 
 `|H_O|` = 与观测一致的假设数。采样预算 `N = |H_O|`。± 为标准差。
 
-### Causal Inference（nodes=4/5/6）
+### 因果推断（节点数 4/5/6）
 
 | Level | 模型 | VR | NR | RR |
 |---|---|---|---|---|
@@ -35,7 +35,7 @@
 | 3 | GPT-4o | 72.8 ± 34.1 | 22.9 ± 27.2 | 6.7 ± 8.3 |
 | 3 | LLaMA-3.3-70B | 10.4 ± 26.0 | 38.0 ± 22.4 | 2.3 ± 2.7 |
 
-### 3D Voxel（难度 = top-down 视图数 tp）
+### 3D 体素（难度 = 俯视图数量 tp）
 
 | Level | 模型 | VR | NR | RR |
 |---|---|---|---|---|
@@ -56,7 +56,7 @@
 | 3 | GPT-4o | 19.4 ± 9.3 | 57.9 ± 14.0 | 14.3 ± 6.5 |
 | 3 | LLaMA-3.3-70B | 10.5 ± 13.1 | 66.7 ± 14.3 | 6.0 ± 5.6 |
 
-### Boolean（DNA interaction）
+### Boolean（DNA 交互）
 
 | Level | 模型 | VR | NR | RR |
 |---|---|---|---|---|
@@ -103,13 +103,13 @@
 
 Table 6（Boolean hard，RR 均值 ± 标准差）：温度/top-p 在 0.2–1.0 之间扫、预算加到 3×|H_O|，**都不解决问题**。
 GPT-4o 14.0→12.6（3×），Claude 17.1→25.6（+1.8），Gemini 49.9→37.3（−9.9）。
-Table 10 的结论更关键：模型 91–93% 的合法生成是 simple 假设，复杂区 RR 接近 0 —— **简单性偏差是主因，不是采样随机性**。
+Table 10 的结论更关键：模型 91–93% 的合法生成是简单假设，复杂区 RR 接近 0 —— **简单性偏差是主因，不是采样随机性**。
 
 ## 2. 我们的本地基线（`configs/suites/main.yaml`，seed 33550336）
 
 2026-11-22 跑的 zero-shot 主基线，两个模型同一套数据、同一套 prompt、同一预算：
 `runs/20261122_qwen3.5-9b_main_zero/`、`runs/20261122_qwen3.8-27b_main_zero/`。
-配置见 `configs/models/*.yaml`（temperature 0.7，max_tokens 256，thinking off）。
+配置见 `configs/models/*.yaml`（temperature 0.7，max_tokens 256，thinking 关闭）。
 
 | 设置 | 实例 | 模型 | 预算 | VR | NR | RR |
 |---|---|---|---|---|---|---|
@@ -133,7 +133,7 @@ Table 10 的结论更关键：模型 91–93% 的合法生成是 simple 假设�
 
 ## 3. 这些数字怎么读（限制，必须写进报告）
 
-- **不能和论文逐格对比。** 论文 Causal 按节点数分 Level（4/5/6）；我们是 n=4 数据集内取 `|H_O|≥8`，比论文 Level 1 难。论文 3D 用不同数量的 top-down 视图分难度；我们的 `g3_h3_b3` 是单一 top view、block 数 ≤3。Boolean 的算子集对得上（basic=AND/OR，extended=+NOT，full=+NOR），深度固定 2。
+- **不能和论文逐格对比。** 论文 causal 按节点数分 Level（4/5/6）；我们是 n=4 数据集内取 `|H_O|≥8`，比论文 Level 1 难。论文 3D 用不同数量的俯视图分难度；我们的 `g3_h3_b3` 是单一俯视图、block 数 ≤3。Boolean 的算子集对得上（basic=AND/OR，extended=+NOT，full=+NOR），深度固定 2。
 - **只做组内比较**：不同模型/配置必须同数据、同子集、同预算、同 prompt。
 - **预算**：causal 用上游默认 2.0×（论文与代码默认一致）；3D/Boolean 1.0×。不同预算下的 RR 不可比。
 - **旧结果不可混用**：`results/legacy/local_*` 是 2026-11-17 的早期跑，causal 是随机 200 个实例（含 46 个 `|H_O|=1`，中位数 3），与现在的 `|H_O|≥8` 子集（中位数 12）完全不同；27B 同一批 30 个 3D 实例重跑也有 +7 个点左右（70.5/67.2/45.4 → 73.5/70.7/52.3），因为 27B 服务配置变过。旧表只能当历史记录。

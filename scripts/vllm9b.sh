@@ -24,7 +24,8 @@ case "$cmd" in
     ssh9 "cd $DIR && nohup ./scripts/start_vllm_9b.sh > logs/vllm_9b_\$(date +%Y%m%d_%H%M).log 2>&1 & echo started"
     ;;
   stop)
-    ssh9 "pkill -f 'vllm serve' && echo stopped || echo 'not running'"
+    # [v]llm keeps pkill from matching the shell that runs it (and killing this SSH session).
+    ssh9 "pkill -f '[v]llm serve' && echo stopped || echo 'not running'"
     ;;
   restart)
     "$0" stop

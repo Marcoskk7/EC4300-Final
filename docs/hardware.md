@@ -30,8 +30,11 @@ make eval MODEL=configs/models/qwen3.8-27b.yaml ARGS="--base-url http://127.0.0.
   dies on the first decode.
 - `VLLM_USE_FLASHINFER_SAMPLER=0`: no `nvcc` in the image, and FlashInfer's sampler JITs.
 - 27B NVFP4 needs `--enforce-eager`, otherwise CUDA graph capture OOMs.
-- 9B runs bf16 from `/opt/data/private/isaaclab/ec4300-9b/hf-cache/Qwen3.5-9B-bf16`
-  (script: `ec4300-9b/scripts/start_vllm_9b.sh`).
+- 9B runs bf16 from `/opt/data/private/isaaclab/ec4300-9b/hf-cache/Qwen3.5-9B-bf16`.
+
+`scripts/serve/start_vllm_{9b,27b}.sh` are copies of the scripts that run on the nodes (taken
+2026-11-23); the node copies are authoritative. Both use `--max-num-seqs 1` (27B) / `4` (9B),
+which is the first knob for throughput work.
 
 ## GPU sharing
 

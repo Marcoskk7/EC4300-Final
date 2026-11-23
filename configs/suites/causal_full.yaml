@@ -1,0 +1,10 @@
+# Causal n=4 full set: all 847 observation sets, no |H_O| filter (includes the 175 |H_O|=1 instances).
+# Budget = upstream default 2.0x (run_causal_benchmark.py query_multiplier). Task name differs from
+# main.yaml's causal_n4 so the leaderboard never mixes the 847 run with the 200-instance subset.
+seed: 33550336
+tasks:
+  causal_n4_all:
+    domain: causal
+    dataset: data/causal/n4.json
+    n_samples: 847
+    multiplier: 2.0

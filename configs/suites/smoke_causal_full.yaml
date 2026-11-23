@@ -1,0 +1,5 @@
+# Pipeline check for causal_full.yaml (2 instances x 2 fixed queries, no filter). Never report these numbers.
+# Suite name starts with "smoke" so runs land in runs/*_smoke*/ (gitignored).
+seed: 33550336
+tasks:
+  causal_n4_all: {domain: causal, dataset: data/causal/n4.json, n_samples: 2, n_queries: 2}

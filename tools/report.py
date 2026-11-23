@@ -14,7 +14,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 RUNS = ROOT / "runs"
 OUT = ROOT / "results"
-TASK_ORDER = ["causal_n4", "3d", "boolean_basic", "boolean_extended", "boolean_full"]
+TASK_ORDER = ["causal_n4", "causal_n4_all", "3d", "boolean_basic", "boolean_extended", "boolean_full"]
 COLS = ["task", "run", "model", "tag", "budget", "max_tokens", "n", "parse", "VR", "NR", "RR", "tokens_per_sample", "commit"]
 
 
@@ -34,10 +34,10 @@ def rows():
     for run in sorted(p for p in RUNS.iterdir() if p.is_dir()):
         meta_path = run / "meta.json"
         meta = json.loads(meta_path.read_text()) if meta_path.exists() else {}
-        if meta.get("suite") == "smoke":  # pipeline checks, never reportable
+        if (meta.get("suite") or "").startswith("smoke"):  # pipeline checks, never reportable
             continue
         for f in sorted(run.glob("*.json")):
-            if f.name == "meta.json":
+            if f.name == "meta.json" or f.name.endswith(".connfail.json"):
                 continue
             res = json.loads(f.read_text())
             if "statistics" not in res:

@@ -164,7 +164,16 @@ def main():
             failed.append(name)
             print(f"[FAIL] {name}: exit {rc}, see {run_dir / (name + '.log')}")
             continue
-        s = json.loads(out.read_text())["statistics"]
+        res = json.loads(out.read_text())
+        # Upstream runners record endpoint outages as per-query errors and still write a result;
+        # such a file must not count as finished, or a resume would skip the task.
+        conn_errs = res.get("error_summary", {}).get("error_types", {}).get("connection_error", 0)
+        if conn_errs:
+            out.rename(out.with_suffix(".connfail.json"))
+            failed.append(name)
+            print(f"[FAIL] {name}: {conn_errs} connection errors; moved to {out.stem}.connfail.json")
+            continue
+        s = res["statistics"]
         print(
             f"[done] {name}: VR={s['valid_rate']['mean']:.3f} "
             f"NR={s['novelty_rate']['mean']:.3f} RR={s['recovery_rate']['mean']:.3f}"

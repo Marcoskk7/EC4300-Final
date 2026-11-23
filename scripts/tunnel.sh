@@ -12,6 +12,7 @@ mkdir -p .build/tunnel
 HOST=${HYPOSPACE_SSH_HOST:-10.1.3.100}
 USER_=${HYPOSPACE_SSH_USER:-isaac}
 KEY=${HYPOSPACE_SSH_KEY:-}
+JUMP=${HYPOSPACE_SSH_JUMP:-}   # e.g. user@jumphost when 10.1.3.100 is not directly reachable
 
 # name ssh_port local_port remote_port
 LINKS=(
@@ -32,6 +33,7 @@ up_one() {
   fi
   local keyopt=()
   [[ -n $KEY ]] && keyopt=(-i "$KEY")
+  [[ -n $JUMP ]] && keyopt+=(-J "$JUMP")
   ssh -fN -o ExitOnForwardFailure=yes -o ServerAliveInterval=30 -o ConnectTimeout=10 \
       ${keyopt[@]+"${keyopt[@]}"} -p "$sport" -L "$lport:127.0.0.1:$rport" "$USER_@$HOST"
   local pid

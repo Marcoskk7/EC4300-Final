@@ -49,7 +49,8 @@ make setup                        # 由 env/bench.txt 创建 .venv（Python 3.11
 make test                         # 评测器自检，脚本化 LLM，不联网
 make tunnel                       # 到两个 GPU 节点的 SSH 隧道（见 docs/hardware.md）
 make tunnel-status
-make smoke                        # 每个域 2 个实例 × 2 个固定 query
+make smoke                        # 每个域 2 个实例 × 2 个固定 query（默认 9B）
+make smoke MODEL=configs/models/qwen3.8-27b.yaml   # 对 27B 冒烟（走 18000 隧道）
 make eval MODEL=configs/models/qwen3.5-9b.yaml SUITE=configs/suites/main.yaml
 make eval MODEL=... ARGS="--served-model qwen3.5-9b-alt --tag alt-v1"
 make report                       # 由 runs/ 生成 results/leaderboard.{md,csv}

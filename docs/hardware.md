@@ -13,6 +13,8 @@ make tunnel-status    # 哪些端点可达，返回的 model id 是什么
 make untunnel
 ```
 
+以下命令默认在**本机**执行（Mac 或 Windows/WSL）；GPU 节点上只运行 vLLM。只有带 `--base-url http://127.0.0.1:8000/v1` 的那条是在节点上直接跑。
+
 `HYPOSPACE_SSH_HOST`（默认 `10.1.3.100`）、`HYPOSPACE_SSH_USER`（默认 `isaac`）、`HYPOSPACE_PORT_27B` / `HYPOSPACE_PORT_9B` 可覆盖默认值；私钥默认走 `~/.ssh/config`，也可用 `HYPOSPACE_SSH_KEY=/path/to/ec4300_team` 指定。私钥线下分发，绝不提交。
 
 在节点**上**运行时不需要隧道，直接传 guest URL：
@@ -39,21 +41,39 @@ make eval MODEL=configs/models/qwen3.8-27b.yaml ARGS="--base-url http://127.0.0.
 | 0.85（当前脚本） | 约 27 GB | 约 5 GB |
 | 0.45 | 约 15 GB | 约 17 GB |
 
-**决策：训练时停服务。** 9B bf16 权重 16.7 GiB，0.85 时服务占约 27.7 GB，QLoRA 需要 10–16 GB，两者无法共存。流程固定为：
+重启服务前先停掉旧进程，避免端口被占：
 
 ```bash
-make serve-stop      # scripts/vllm9b.sh stop，训练前
-# ... 训练、保存 adapter ...
-make serve-start     # 评测前重新起服务
+make serve-stop
+make serve-start
 ```
 
-训练进程退出后再启动服务，并等它加载完成再跑 `make smoke`：加载中发出的请求会失败，runner 会重试，等于悄悄消耗预算。27B 服务属于 harness track，这个脚本不会碰它。
+9B bf16 权重 16.7 GiB，0.85 时服务占约 27.7 GB，剩下的显存不足以再加载一份 9B。服务加载完成前发出的请求会失败，runner 会重试，等于悄悄消耗预算；等 `/v1/models` 有响应后再跑 `make smoke`。
 
 服务配置记录在 `meta.json`；只有配置一致时才能比较不同 run。
 
 ## 3D 提示词
 
 除非 system prompt 明令禁止，Qwen 会先写一段散文再给结构，而答案在 `max_tokens` 内写不完。`tools/run_eval.py` 对 3D 域发送 "Answer with the requested Structure/Layer format only, no explanation."。允许在模型配置里覆盖 `system_prompts`，但先看 `parse_success_rate`：低于 0.9 时 VR/NR/RR 没有意义。
+
+## Windows
+
+`make` 与 `scripts/tunnel.sh` 依赖 POSIX shell（`find`、`rm`、`pgrep`、`ssh -fN`），Windows 原生不能直接用。两种做法：
+
+1. **WSL2（推荐）**：在 WSL 里 clone 仓库，按上面命令执行，隧道也留在 WSL。
+2. **PowerShell + 直接调 Python**（不用 make）：
+
+```powershell
+py -3.11 -m venv .venv
+.venv\Scripts\python -m pip install -r env\bench.txt
+# 两个独立窗口，各自保持前台
+ssh -N -L 18000:127.0.0.1:8000 -p 20049 isaac@10.1.3.100
+ssh -N -L 18001:127.0.0.1:8001 -p 20050 isaac@10.1.3.100
+.venv\Scripts\python tools\run_eval.py --model configs\models\qwen3.8-27b.yaml `
+  --suite configs\suites\smoke.yaml --tag smoke
+```
+
+Windows 的 venv 解释器在 `.venv\Scripts\python.exe`，不是 `.venv/bin/python`；若在 Git Bash 里用 make，需要 `make PY=.venv/Scripts/python.exe ...`。Python 侧的 `run_eval.py` / `report.py` / `monitor.py` 本身是跨平台的（`monitor.py` 在没有 `nvidia-smi` 时会跳过 GPU 行）。
 
 ## 已知坑
 

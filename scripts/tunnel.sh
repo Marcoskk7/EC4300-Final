@@ -33,7 +33,7 @@ up_one() {
   local keyopt=()
   [[ -n $KEY ]] && keyopt=(-i "$KEY")
   ssh -fN -o ExitOnForwardFailure=yes -o ServerAliveInterval=30 -o ConnectTimeout=10 \
-      "${keyopt[@]}" -p "$sport" -L "$lport:127.0.0.1:$rport" "$USER_@$HOST"
+      ${keyopt[@]+"${keyopt[@]}"} -p "$sport" -L "$lport:127.0.0.1:$rport" "$USER_@$HOST"
   local pid
   pid=$(pgrep -f -- "-L $lport:127.0.0.1:$rport" | tail -1 || true)
   [[ -n $pid ]] && echo "$pid" > "$pidf"

@@ -3,7 +3,7 @@ PY ?= .venv/bin/python
 MODEL ?= configs/models/qwen3.5-9b.yaml
 SUITE ?= configs/suites/main.yaml
 
-.PHONY: setup test build smoke eval report monitor tunnel tunnel-status untunnel clean
+.PHONY: setup test build smoke eval report monitor tunnel tunnel-status untunnel serve-start serve-stop clean
 
 setup:            ## create .venv from env/bench.txt
 	uv venv -p 3.11 .venv
@@ -32,6 +32,12 @@ tunnel-status:    ## check which endpoints answer
 
 untunnel:
 	./scripts/tunnel.sh down
+
+serve-start:      ## start the 9B vLLM server (stop it before training)
+	./scripts/vllm9b.sh start
+
+serve-stop:       ## free the 9B GPU for training
+	./scripts/vllm9b.sh stop
 
 monitor:          ## GPU + vLLM queue + per-run progress; add WATCH=30 to refresh
 	$(PY) tools/monitor.py $(if $(WATCH),--watch $(WATCH))

@@ -109,7 +109,7 @@ Table 10 的结论更关键：模型 91–93% 的合法生成是简单假设，�
 
 2026-11-22 跑的 zero-shot 主基线，两个模型同一套数据、同一套 prompt、同一预算：
 `runs/20261122_qwen3.5-9b_main_zero/`、`runs/20261122_qwen3.8-27b_main_zero/`。
-配置见 `configs/models/*.yaml`（temperature 0.7，max_tokens 256，thinking 关闭）。
+配置见 `configs/models/*.yaml`（temperature 0.7，max_tokens 1024，thinking 关闭）。基线就是按这个设置跑的：27B 在 boolean_basic 上单次 1030 completion tokens（`n_queries=2`、0 error），9B 在 boolean_full 上单次 1049（`n_queries=4`），都不可能来自 256 的上限。
 
 | 设置 | 实例 | 模型 | 预算 | VR | NR | RR |
 |---|---|---|---|---|---|---|

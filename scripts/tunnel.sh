@@ -11,6 +11,7 @@ cd "$(dirname "$0")/.."
 mkdir -p .build/tunnel
 HOST=${HYPOSPACE_SSH_HOST:-10.1.3.100}
 USER_=${HYPOSPACE_SSH_USER:-isaac}
+KEY=${HYPOSPACE_SSH_KEY:-}
 
 # name ssh_port local_port remote_port
 LINKS=(
@@ -29,8 +30,10 @@ up_one() {
     echo "$name: already up (pid $(cat "$pidf"))"
     return
   fi
+  local keyopt=()
+  [[ -n $KEY ]] && keyopt=(-i "$KEY")
   ssh -fN -o ExitOnForwardFailure=yes -o ServerAliveInterval=30 -o ConnectTimeout=10 \
-      -p "$sport" -L "$lport:127.0.0.1:$rport" "$USER_@$HOST"
+      "${keyopt[@]}" -p "$sport" -L "$lport:127.0.0.1:$rport" "$USER_@$HOST"
   local pid
   pid=$(pgrep -f -- "-L $lport:127.0.0.1:$rport" | tail -1 || true)
   [[ -n $pid ]] && echo "$pid" > "$pidf"

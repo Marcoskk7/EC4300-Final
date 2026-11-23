@@ -9,3 +9,4 @@ runs/*/config.*.yaml
 .build/
 .env
 runs/*_smoke*/
+.DS_Store

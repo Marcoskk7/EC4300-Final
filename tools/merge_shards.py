@@ -76,6 +76,10 @@ def merge(shards: list[dict]) -> dict:
             "avg_cost_per_query": cost / denom if n else 0,
         },
         "error_summary": {"total_errors": n_err, "error_types": err_types, "error_rate": n_err / denom if n else 0},
+        "truncation": {
+            "n_truncated_queries": sum(len(r.get("truncated_queries", [])) for r in per_sample),
+            "truncated_sample_ids": [r["observation_set_id"] for r in per_sample if r.get("truncated_queries")],
+        },
         "per_sample_results": per_sample,
     }
 

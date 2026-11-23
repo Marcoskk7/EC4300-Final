@@ -303,12 +303,14 @@
  class ResponseParser:
      """Parser for extracting causal graphs from LLM responses."""
      
---- a/causal/modules/llm_interface.py	2026-11-23 19:42:32.454033153 +0800
-+++ b/causal/modules/llm_interface.py	2026-11-16 23:59:53.898911289 +0800
-@@ -392,6 +392,79 @@
+--- a/causal/modules/llm_interface.py
++++ b/causal/modules/llm_interface.py
+@@ -390,8 +390,82 @@
+             'claude-3.5-sonnet-20241022': {'input': 3.0, 'output': 15.0},
+         }
          return pricing_map.get(self.model, {'input': 3.0, 'output': 15.0})
- 
- 
++
++
 +class LocalLLM(LLMInterface):
 +    """Interface for a local OpenAI-compatible server (e.g. vLLM)."""
 +
@@ -361,6 +363,7 @@
 +            usage = result.get("usage", {})
 +            return {
 +                "response": content,
++                "finish_reason": result["choices"][0].get("finish_reason"),
 +                "usage": {
 +                    "prompt_tokens": usage.get("prompt_tokens", 0),
 +                    "completion_tokens": usage.get("completion_tokens", 0),
@@ -374,10 +377,10 @@
 +                "usage": {"prompt_tokens": 0, "completion_tokens": 0, "total_tokens": 0},
 +                "cost": 0.0,
 +            }
-+
+ 
 +    def get_name(self) -> str:
 +        return f"Local({self.model})"
-+
+ 
 +    def get_model_pricing(self) -> Dict[str, float]:
 +        return {"input": 0.0, "output": 0.0}
 +
@@ -396,7 +399,46 @@
  from generate_causal_dataset import PerturbationObservation, CausalDatasetGenerator
  
  class CausalBenchmarkEnhanced:
-@@ -513,7 +513,9 @@
+@@ -384,6 +384,7 @@
+         # Error tracking
+         errors = []
+         error_counts = {}
++        truncated_queries = []  # hit max_tokens: recorded, not retried; rerun later at a larger max_tokens
+         
+         for i in range(n_queries):
+             prompt = self.create_prompt(observations, all_hypotheses)
+@@ -405,6 +406,13 @@
+                         total_completion_tokens += usage.get('completion_tokens', 0)
+                         total_tokens += usage.get('total_tokens', 0)
+                         total_cost += result.get('cost', 0.0)
++                        truncated = result.get('finish_reason') == 'length'
++                        if truncated:
++                            truncated_queries.append({
++                                'query_index': i,
++                                'attempt': attempt + 1,
++                                'completion_tokens': usage.get('completion_tokens', 0),
++                            })
+                     else:
+                         response = llm.query(prompt)
+                     
+@@ -425,6 +433,8 @@
+                     if hypothesis:
+                         parse_success_count += 1
+                         break
++                    if hasattr(llm, 'query_with_usage') and truncated:
++                        break
+                         
+                 except Exception as e:
+                     query_error = {
+@@ -499,6 +509,7 @@
+                 'total_errors': len(errors),
+                 'error_types': error_counts
+             },
++            'truncated_queries': truncated_queries,
+             'all_hypotheses': [h.to_dict() for h in all_hypotheses],
+             'valid_hypotheses': [h.to_dict() for h in valid_hypotheses],
+             'unique_graphs': [g.to_dict() for g in unique_valid_graphs]
+@@ -513,7 +524,9 @@
          seed: Optional[int] = None,
          verbose: bool = True,
          checkpoint_dir: str = "checkpoints",
@@ -407,7 +449,7 @@
      ) -> Dict:
          """
          Run the enhanced benchmark with comprehensive tracking.
-@@ -538,7 +540,8 @@
+@@ -538,7 +551,8 @@
          # Generate run ID and checkpoint file
          run_id = datetime.now().strftime("%Y%m%d_%H%M%S")
          safe_llm_name = llm.get_name().replace('/', '_').replace('(', '_').replace(')', '_').replace(' ', '_')
@@ -417,7 +459,7 @@
          
          print(f"\nRunning Enhanced Causal Benchmark")
          print(f"LLM: {llm.get_name()}")
-@@ -553,6 +556,11 @@
+@@ -553,6 +567,11 @@
          
          # Sample observation sets
          sampled_sets = self.sample_observation_sets(n_samples, seed)
@@ -429,12 +471,21 @@
          
          # Initialize results tracking
          all_results = []
-@@ -838,6 +846,17 @@
-             model=kwargs.get('model', 'anthropic/claude-3.5-sonnet'),
-             api_key=api_key,
+@@ -748,6 +767,10 @@
+                 'error_types': total_error_counts,
+                 'error_rate': len(all_errors) / (len(all_results) * (n_queries_per_sample or 1)) if all_results else 0
+             },
++            'truncation': {
++                'n_truncated_queries': sum(len(r.get('truncated_queries', [])) for r in all_results),
++                'truncated_sample_ids': [r['observation_set_id'] for r in all_results if r.get('truncated_queries')],
++            },
+             'per_sample_results': all_results
+         }
+         
+@@ -840,6 +863,17 @@
              temperature=kwargs.get('temperature', 0.7)
-+        )
-+    
+         )
+     
 +    elif llm_type == "local":
 +        return LocalLLM(
 +            model=kwargs.get('model', 'qwen3.8-27b'),
@@ -444,10 +495,12 @@
 +            max_tokens=kwargs.get('max_tokens', 1024),
 +            system_prompt=kwargs.get('system_prompt') or 'You are a helpful assistant.',
 +            extra_body=kwargs.get('extra_body'),
-         )
-     
++        )
++    
      else:
-@@ -939,6 +958,7 @@
+         raise ValueError(f"Unknown LLM type: {llm_type}")
+ 
+@@ -939,6 +973,7 @@
      parser.add_argument("--max-retries", type=int, default=3, help="Maximum retries per query")
      parser.add_argument("--seed", type=int, default=None, help="Random seed for sampling")
      parser.add_argument("--checkpoint-dir", default="checkpoints", help="Directory for checkpoints")
@@ -455,7 +508,7 @@
      parser.add_argument("--output", default=None, help="Output file path")
      parser.add_argument("--verbose", action="store_true", default=True, help="Verbose output")
      parser.add_argument("--quiet", action="store_true", help="Disable verbose output")
-@@ -958,7 +978,8 @@
+@@ -958,7 +993,8 @@
          default_models = {
              'openrouter': 'openai/gpt-3.5-turbo',
              'openai': 'gpt-4o',
@@ -465,7 +518,7 @@
          }
          model = default_models.get(llm_type)
      
-@@ -967,7 +988,8 @@
+@@ -967,7 +1003,8 @@
          env_vars = {
              'openai': 'OPENAI_API_KEY',
              'anthropic': 'ANTHROPIC_API_KEY',
@@ -475,7 +528,7 @@
          }
          if llm_type in env_vars:
              api_key = os.environ.get(env_vars[llm_type])
-@@ -1035,7 +1057,11 @@
+@@ -1035,7 +1072,11 @@
          llm_type,
          model=model,
          api_key=api_key,
@@ -488,7 +541,7 @@
      )
      
      # Run benchmark
-@@ -1047,7 +1073,9 @@
+@@ -1047,7 +1088,9 @@
          seed=args.seed,
          verbose=verbose,
          checkpoint_dir=checkpoint_dir,

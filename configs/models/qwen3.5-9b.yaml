@@ -1,0 +1,8 @@
+name: qwen3.5-9b
+served_model: qwen3.5-9b        # vLLM --served-model-name (or LoRA adapter name)
+base_url: http://127.0.0.1:18001/v1   # via: scripts/tunnel.sh up
+temperature: 0.7
+max_tokens: 256
+extra_body:
+  chat_template_kwargs:
+    enable_thinking: false

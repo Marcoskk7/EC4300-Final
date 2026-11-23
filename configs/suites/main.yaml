@@ -1,0 +1,30 @@
+# Main evaluation protocol. Every reported number uses exactly these settings.
+# Budget: n_queries = max(1, floor(|H_O| * multiplier)); causal keeps the upstream default 2.0.
+seed: 33550336
+tasks:
+  causal_n4:
+    domain: causal
+    dataset: data/causal/n4.json
+    n_samples: 200
+    gt_filter: "8-200"
+    multiplier: 2.0
+  3d:
+    domain: 3d
+    dataset: data/3d/g3_h3_b3.json
+    n_samples: 129
+    multiplier: 1.0
+  boolean_basic:
+    domain: boolean
+    dataset: data/boolean/basic_d2.json
+    n_samples: 35
+    multiplier: 1.0
+  boolean_extended:
+    domain: boolean
+    dataset: data/boolean/extended_d2.json
+    n_samples: 78
+    multiplier: 1.0
+  boolean_full:
+    domain: boolean
+    dataset: data/boolean/full_d2.json
+    n_samples: 80
+    multiplier: 1.0

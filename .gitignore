@@ -1,0 +1,11 @@
+.venv/
+__pycache__/
+*.pyc
+# internal notes: cluster accounts, SSH ports, registry paths — never publish
+private/
+checkpoints/
+runs/*/checkpoints/
+runs/*/config.*.yaml
+.build/
+.env
+runs/*_smoke*/

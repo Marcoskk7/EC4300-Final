@@ -1,0 +1,449 @@
+--- a/3d/modules/llm_interface.py	2026-11-23 19:42:32.450884116 +0800
++++ b/3d/modules/llm_interface.py	2026-11-17 00:00:00.188016185 +0800
+@@ -392,6 +392,79 @@
+         return pricing_map.get(self.model, {'input': 3.0, 'output': 15.0})
+ 
+ 
++class LocalLLM(LLMInterface):
++    """Interface for a local OpenAI-compatible server (e.g. vLLM)."""
++
++    def __init__(
++        self,
++        model: str = "qwen3.8-27b",
++        base_url: str = "http://127.0.0.1:8000/v1",
++        api_key: Optional[str] = "EMPTY",
++        temperature: float = 0.7,
++        max_tokens: int = 256,
++        system_prompt: str = "You are a helpful assistant.",
++        extra_body: Optional[Dict[str, Any]] = None,
++    ):
++        self.model = model
++        self.base_url = base_url.rstrip("/")
++        self.temperature = temperature
++        self.max_tokens = max_tokens
++        self.system_prompt = system_prompt
++        self.extra_body = dict(extra_body or {})
++        self.headers = {
++            "Authorization": f"Bearer {api_key or 'EMPTY'}",
++            "Content-Type": "application/json",
++        }
++
++    def query(self, prompt: str) -> str:
++        return self.query_with_usage(prompt)["response"]
++
++    def query_with_usage(self, prompt: str) -> Dict[str, Any]:
++        try:
++            payload = {
++                "model": self.model,
++                "messages": [
++                    {"role": "system", "content": self.system_prompt},
++                    {"role": "user", "content": prompt},
++                ],
++                "temperature": self.temperature,
++                "max_tokens": self.max_tokens,
++            }
++            payload.update(self.extra_body)
++            response = requests.post(
++                f"{self.base_url}/chat/completions",
++                headers=self.headers,
++                json=payload,
++                timeout=300,
++            )
++            response.raise_for_status()
++            result = response.json()
++            message = result["choices"][0]["message"]
++            content = message.get("content") or message.get("reasoning_content") or ""
++            usage = result.get("usage", {})
++            return {
++                "response": content,
++                "usage": {
++                    "prompt_tokens": usage.get("prompt_tokens", 0),
++                    "completion_tokens": usage.get("completion_tokens", 0),
++                    "total_tokens": usage.get("total_tokens", 0),
++                },
++                "cost": 0.0,
++            }
++        except Exception as e:
++            return {
++                "response": f"Error querying local model: {str(e)}",
++                "usage": {"prompt_tokens": 0, "completion_tokens": 0, "total_tokens": 0},
++                "cost": 0.0,
++            }
++
++    def get_name(self) -> str:
++        return f"Local({self.model})"
++
++    def get_model_pricing(self) -> Dict[str, float]:
++        return {"input": 0.0, "output": 0.0}
++
++
+ class ResponseParser:
+     """Parser for extracting causal graphs from LLM responses."""
+     
+--- a/3d/run_3d_benchmark.py	2026-11-23 19:42:32.451362574 +0800
++++ b/3d/run_3d_benchmark.py	2026-11-23 19:47:07.808901758 +0800
+@@ -15,7 +15,7 @@
+ # Add parent directory to path if needed
+ sys.path.append(str(Path(__file__).parent))
+ 
+-from modules.llm_interface import LLMInterface, OpenRouterLLM, OpenAILLM, AnthropicLLM
++from modules.llm_interface import LLMInterface, OpenRouterLLM, OpenAILLM, AnthropicLLM, LocalLLM
+ 
+ 
+ class Structure3D:
+@@ -1024,6 +1024,17 @@
+             temperature=kwargs.get('temperature', 0.7)
+         )
+     
++    elif llm_type == "local":
++        return LocalLLM(
++            model=kwargs.get('model', 'qwen3.8-27b'),
++            base_url=kwargs.get('base_url') or 'http://127.0.0.1:8000/v1',
++            api_key=kwargs.get('api_key'),
++            temperature=kwargs.get('temperature', 0.7),
++            max_tokens=kwargs.get('max_tokens', 256),
++            system_prompt=kwargs.get('system_prompt') or 'You are a helpful assistant.',
++            extra_body=kwargs.get('extra_body'),
++        )
++    
+     else:
+         raise ValueError(f"Unknown LLM type: {llm_type}")
+ 
+@@ -1072,7 +1083,8 @@
+         default_models = {
+             'openrouter': 'openai/gpt-3.5-turbo',
+             'openai': 'gpt-4',
+-            'anthropic': 'claude-3-opus-20240229'
++            'anthropic': 'claude-3-opus-20240229',
++            'local': 'qwen3.8-27b'
+         }
+         model = default_models.get(llm_type)
+     
+@@ -1081,7 +1093,8 @@
+         env_vars = {
+             'openai': 'OPENAI_API_KEY',
+             'anthropic': 'ANTHROPIC_API_KEY',
+-            'openrouter': 'OPENROUTER_API_KEY'
++            'openrouter': 'OPENROUTER_API_KEY',
++            'local': 'HYPOSPACE_API_KEY'
+         }
+         if llm_type in env_vars:
+             api_key = os.environ.get(env_vars[llm_type])
+@@ -1128,7 +1141,11 @@
+         llm_type,
+         model=model,
+         api_key=api_key,
+-        temperature=temperature
++        temperature=temperature,
++        base_url=config.get('llm', {}).get('base_url'),
++        max_tokens=config.get('llm', {}).get('max_tokens', 256),
++        system_prompt=config.get('llm', {}).get('system_prompt'),
++        extra_body=config.get('llm', {}).get('extra_body'),
+     )
+     
+     # Run benchmark
+--- a/boolean/boolean_benchmark.py	2026-11-23 19:42:32.452041656 +0800
++++ b/boolean/boolean_benchmark.py	2026-11-23 19:47:07.811175504 +0800
+@@ -19,7 +19,7 @@
+ # Add parent directory to path if needed
+ sys.path.append(str(Path(__file__).parent))
+ 
+-from modules.llm_interface import LLMInterface, OpenRouterLLM, OpenAILLM, AnthropicLLM
++from modules.llm_interface import LLMInterface, OpenRouterLLM, OpenAILLM, AnthropicLLM, LocalLLM
+ from boolean_dataset import BooleanExpression, BooleanObservation
+ 
+ 
+@@ -917,6 +917,17 @@
+             temperature=kwargs.get('temperature', 0.7)
+         )
+     
++    elif llm_type == "local":
++        return LocalLLM(
++            model=kwargs.get('model', 'qwen3.8-27b'),
++            base_url=kwargs.get('base_url') or 'http://127.0.0.1:8000/v1',
++            api_key=kwargs.get('api_key'),
++            temperature=kwargs.get('temperature', 0.7),
++            max_tokens=kwargs.get('max_tokens', 256),
++            system_prompt=kwargs.get('system_prompt') or 'You are a helpful assistant.',
++            extra_body=kwargs.get('extra_body'),
++        )
++    
+     else:
+         raise ValueError(f"Unknown LLM type: {llm_type}")
+ 
+@@ -937,6 +948,7 @@
+     parser.add_argument("--n-queries", type=int, default=None, help="Fixed number of queries per observation set (if not set, uses adaptive)")
+     parser.add_argument("--query-multiplier", type=float, default=1.0, help="Multiplier for adaptive queries (n_queries = n_gt * multiplier)")
+     parser.add_argument("--seed", type=int, default=None, help="Random seed for sampling")
++    parser.add_argument("--output", type=str, default=None, help="Output file path")
+     
+     args = parser.parse_args()
+     
+@@ -949,7 +961,8 @@
+         default_models = {
+             'openrouter': 'openai/gpt-3.5-turbo',
+             'openai': 'gpt-4',
+-            'anthropic': 'claude-3-opus-20240229'
++            'anthropic': 'claude-3-opus-20240229',
++            'local': 'qwen3.8-27b'
+         }
+         model = default_models.get(llm_type)
+     
+@@ -958,7 +971,8 @@
+         env_vars = {
+             'openai': 'OPENAI_API_KEY',
+             'anthropic': 'ANTHROPIC_API_KEY',
+-            'openrouter': 'OPENROUTER_API_KEY'
++            'openrouter': 'OPENROUTER_API_KEY',
++            'local': 'HYPOSPACE_API_KEY'
+         }
+         if llm_type in env_vars:
+             api_key = os.environ.get(env_vars[llm_type])
+@@ -974,7 +988,7 @@
+     dataset_name = Path(args.dataset).stem
+     model_name = Path(model).stem if model else llm_type
+     output_pattern = config.get('benchmark', {}).get('output_pattern', 'results_{dataset_name}_{model}.json')
+-    output = output_pattern.format(dataset_name=dataset_name, model=model_name, llm_type=llm_type)
++    output = args.output or output_pattern.format(dataset_name=dataset_name, model=model_name, llm_type=llm_type)
+ 
+     # Generate output filename if not specified
+     if output is None:
+@@ -1005,7 +1019,11 @@
+         llm_type,
+         model=model,
+         api_key=api_key,
+-        temperature=temperature
++        temperature=temperature,
++        base_url=config.get('llm', {}).get('base_url'),
++        max_tokens=config.get('llm', {}).get('max_tokens', 256),
++        system_prompt=config.get('llm', {}).get('system_prompt'),
++        extra_body=config.get('llm', {}).get('extra_body'),
+     )
+     
+     # Run benchmark
+--- a/boolean/modules/llm_interface.py	2026-11-23 19:42:32.452781405 +0800
++++ b/boolean/modules/llm_interface.py	2026-11-17 00:00:00.189793849 +0800
+@@ -392,6 +392,79 @@
+         return pricing_map.get(self.model, {'input': 3.0, 'output': 15.0})
+ 
+ 
++class LocalLLM(LLMInterface):
++    """Interface for a local OpenAI-compatible server (e.g. vLLM)."""
++
++    def __init__(
++        self,
++        model: str = "qwen3.8-27b",
++        base_url: str = "http://127.0.0.1:8000/v1",
++        api_key: Optional[str] = "EMPTY",
++        temperature: float = 0.7,
++        max_tokens: int = 256,
++        system_prompt: str = "You are a helpful assistant.",
++        extra_body: Optional[Dict[str, Any]] = None,
++    ):
++        self.model = model
++        self.base_url = base_url.rstrip("/")
++        self.temperature = temperature
++        self.max_tokens = max_tokens
++        self.system_prompt = system_prompt
++        self.extra_body = dict(extra_body or {})
++        self.headers = {
++            "Authorization": f"Bearer {api_key or 'EMPTY'}",
++            "Content-Type": "application/json",
++        }
++
++    def query(self, prompt: str) -> str:
++        return self.query_with_usage(prompt)["response"]
++
++    def query_with_usage(self, prompt: str) -> Dict[str, Any]:
++        try:
++            payload = {
++                "model": self.model,
++                "messages": [
++                    {"role": "system", "content": self.system_prompt},
++                    {"role": "user", "content": prompt},
++                ],
++                "temperature": self.temperature,
++                "max_tokens": self.max_tokens,
++            }
++            payload.update(self.extra_body)
++            response = requests.post(
++                f"{self.base_url}/chat/completions",
++                headers=self.headers,
++                json=payload,
++                timeout=300,
++            )
++            response.raise_for_status()
++            result = response.json()
++            message = result["choices"][0]["message"]
++            content = message.get("content") or message.get("reasoning_content") or ""
++            usage = result.get("usage", {})
++            return {
++                "response": content,
++                "usage": {
++                    "prompt_tokens": usage.get("prompt_tokens", 0),
++                    "completion_tokens": usage.get("completion_tokens", 0),
++                    "total_tokens": usage.get("total_tokens", 0),
++                },
++                "cost": 0.0,
++            }
++        except Exception as e:
++            return {
++                "response": f"Error querying local model: {str(e)}",
++                "usage": {"prompt_tokens": 0, "completion_tokens": 0, "total_tokens": 0},
++                "cost": 0.0,
++            }
++
++    def get_name(self) -> str:
++        return f"Local({self.model})"
++
++    def get_model_pricing(self) -> Dict[str, float]:
++        return {"input": 0.0, "output": 0.0}
++
++
+ class ResponseParser:
+     """Parser for extracting causal graphs from LLM responses."""
+     
+--- a/causal/modules/llm_interface.py	2026-11-23 19:42:32.454033153 +0800
++++ b/causal/modules/llm_interface.py	2026-11-16 23:59:53.898911289 +0800
+@@ -392,6 +392,79 @@
+         return pricing_map.get(self.model, {'input': 3.0, 'output': 15.0})
+ 
+ 
++class LocalLLM(LLMInterface):
++    """Interface for a local OpenAI-compatible server (e.g. vLLM)."""
++
++    def __init__(
++        self,
++        model: str = "qwen3.8-27b",
++        base_url: str = "http://127.0.0.1:8000/v1",
++        api_key: Optional[str] = "EMPTY",
++        temperature: float = 0.7,
++        max_tokens: int = 256,
++        system_prompt: str = "You are a helpful assistant.",
++        extra_body: Optional[Dict[str, Any]] = None,
++    ):
++        self.model = model
++        self.base_url = base_url.rstrip("/")
++        self.temperature = temperature
++        self.max_tokens = max_tokens
++        self.system_prompt = system_prompt
++        self.extra_body = dict(extra_body or {})
++        self.headers = {
++            "Authorization": f"Bearer {api_key or 'EMPTY'}",
++            "Content-Type": "application/json",
++        }
++
++    def query(self, prompt: str) -> str:
++        return self.query_with_usage(prompt)["response"]
++
++    def query_with_usage(self, prompt: str) -> Dict[str, Any]:
++        try:
++            payload = {
++                "model": self.model,
++                "messages": [
++                    {"role": "system", "content": self.system_prompt},
++                    {"role": "user", "content": prompt},
++                ],
++                "temperature": self.temperature,
++                "max_tokens": self.max_tokens,
++            }
++            payload.update(self.extra_body)
++            response = requests.post(
++                f"{self.base_url}/chat/completions",
++                headers=self.headers,
++                json=payload,
++                timeout=300,
++            )
++            response.raise_for_status()
++            result = response.json()
++            message = result["choices"][0]["message"]
++            content = message.get("content") or message.get("reasoning_content") or ""
++            usage = result.get("usage", {})
++            return {
++                "response": content,
++                "usage": {
++                    "prompt_tokens": usage.get("prompt_tokens", 0),
++                    "completion_tokens": usage.get("completion_tokens", 0),
++                    "total_tokens": usage.get("total_tokens", 0),
++                },
++                "cost": 0.0,
++            }
++        except Exception as e:
++            return {
++                "response": f"Error querying local model: {str(e)}",
++                "usage": {"prompt_tokens": 0, "completion_tokens": 0, "total_tokens": 0},
++                "cost": 0.0,
++            }
++
++    def get_name(self) -> str:
++        return f"Local({self.model})"
++
++    def get_model_pricing(self) -> Dict[str, float]:
++        return {"input": 0.0, "output": 0.0}
++
++
+ class ResponseParser:
+     """Parser for extracting causal graphs from LLM responses."""
+     
+--- a/causal/run_causal_benchmark.py	2026-11-23 19:42:32.454333611 +0800
++++ b/causal/run_causal_benchmark.py	2026-11-23 19:47:07.803802641 +0800
+@@ -16,7 +16,7 @@
+ import traceback
+ 
+ from modules.models import CausalGraph
+-from modules.llm_interface import LLMInterface, OpenRouterLLM, OpenAILLM, AnthropicLLM
++from modules.llm_interface import LLMInterface, OpenRouterLLM, OpenAILLM, AnthropicLLM, LocalLLM
+ from generate_causal_dataset import PerturbationObservation, CausalDatasetGenerator
+ 
+ class CausalBenchmarkEnhanced:
+@@ -840,6 +840,17 @@
+             temperature=kwargs.get('temperature', 0.7)
+         )
+     
++    elif llm_type == "local":
++        return LocalLLM(
++            model=kwargs.get('model', 'qwen3.8-27b'),
++            base_url=kwargs.get('base_url') or 'http://127.0.0.1:8000/v1',
++            api_key=kwargs.get('api_key'),
++            temperature=kwargs.get('temperature', 0.7),
++            max_tokens=kwargs.get('max_tokens', 256),
++            system_prompt=kwargs.get('system_prompt') or 'You are a helpful assistant.',
++            extra_body=kwargs.get('extra_body'),
++        )
++    
+     else:
+         raise ValueError(f"Unknown LLM type: {llm_type}")
+ 
+@@ -958,7 +969,8 @@
+         default_models = {
+             'openrouter': 'openai/gpt-3.5-turbo',
+             'openai': 'gpt-4o',
+-            'anthropic': 'claude-3-opus-20240229'
++            'anthropic': 'claude-3-opus-20240229',
++            'local': 'qwen3.8-27b'
+         }
+         model = default_models.get(llm_type)
+     
+@@ -967,7 +979,8 @@
+         env_vars = {
+             'openai': 'OPENAI_API_KEY',
+             'anthropic': 'ANTHROPIC_API_KEY',
+-            'openrouter': 'OPENROUTER_API_KEY'
++            'openrouter': 'OPENROUTER_API_KEY',
++            'local': 'HYPOSPACE_API_KEY'
+         }
+         if llm_type in env_vars:
+             api_key = os.environ.get(env_vars[llm_type])
+@@ -1035,7 +1048,11 @@
+         llm_type,
+         model=model,
+         api_key=api_key,
+-        temperature=temperature
++        temperature=temperature,
++        base_url=config.get('llm', {}).get('base_url'),
++        max_tokens=config.get('llm', {}).get('max_tokens', 256),
++        system_prompt=config.get('llm', {}).get('system_prompt'),
++        extra_body=config.get('llm', {}).get('extra_body'),
+     )
+     
+     # Run benchmark

@@ -1,0 +1,6 @@
+# Pipeline check only (2 instances x 2 fixed queries per task). Never report these numbers.
+seed: 33550336
+tasks:
+  causal_n4:  {domain: causal,  dataset: data/causal/n4.json,          n_samples: 2, gt_filter: "8-200", n_queries: 2}
+  3d:         {domain: 3d,      dataset: data/3d/g3_h3_b3.json,        n_samples: 2, n_queries: 2}
+  boolean_extended: {domain: boolean, dataset: data/boolean/extended_d2.json, n_samples: 2, n_queries: 2}

@@ -1,0 +1,9 @@
+# Training venv (B/C). Installed with uv on the GPU node; versions recorded from the
+# verified 2026-11-17 environment (docs/hardware.md).
+torch==2.15.0
+transformers==5.23.0
+peft==0.21.3
+bitsandbytes==0.50.2
+trl==1.18.0
+datasets
+accelerate

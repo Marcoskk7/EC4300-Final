@@ -1,0 +1,4675 @@
+{
+  "run_id": "20261117_140741",
+  "llm_name": "Local(qwen3.8-27b)",
+  "n_samples": 80,
+  "n_queries_per_sample": null,
+  "query_multiplier": 1.0,
+  "query_mode": "adaptive_1.0x",
+  "seed": 33550336,
+  "timestamp": "2026-11-17T15:06:21.947324",
+  "statistics": {
+    "valid_rate": {
+      "mean": 0.3903403918403918,
+      "std": 0.23782864716262467,
+      "var": 0.05656246541120422,
+      "min": 0.0,
+      "max": 0.918918918918919,
+      "p_value": 4.011740107903686e-24
+    },
+    "novelty_rate": {
+      "mean": 0.3212949663114137,
+      "std": 0.1590081406029613,
+      "var": 0.025283588778011113,
+      "min": 0.0,
+      "max": 1.0,
+      "p_value": 1.278206232627067e-29
+    },
+    "recovery_rate": {
+      "mean": 0.17959706876647666,
+      "std": 0.10642253899277655,
+      "var": 0.011325756805669045,
+      "min": 0.0,
+      "max": 0.5,
+      "p_value": 7.919683550671989e-25
+    }
+  },
+  "token_usage": {
+    "prompt_tokens": 624443,
+    "completion_tokens": 37933,
+    "total_tokens": 662376,
+    "avg_tokens_per_sample": 8279.7,
+    "avg_tokens_per_query": 8279.7
+  },
+  "cost": {
+    "total_cost": 0.0,
+    "avg_cost_per_sample": 0.0,
+    "avg_cost_per_query": 0.0
+  },
+  "error_summary": {
+    "total_errors": 0,
+    "error_types": {},
+    "error_rate": 0.0
+  },
+  "per_sample_results": [
+    {
+      "observation_set_id": "n3_inputs_00_10_11_outputs_111",
+      "n_observations": 3,
+      "n_ground_truths": 8,
+      "n_queries": 8,
+      "n_valid": 1,
+      "n_unique_valid": 1,
+      "n_unique_all": 3,
+      "n_recovered_gts": 1,
+      "parse_success_rate": 1.0,
+      "in_space_rate": 0.5,
+      "valid_rate": 0.125,
+      "novelty_rate": 0.375,
+      "recovery_rate": 0.125,
+      "all_hypotheses": [
+        "NOT (x AND y)",
+        "(x OR y) OR NOT x",
+        "To find a Boolean expression consistent with the observations, let's analyze the truth table for the variables x and y",
+        "x OR y",
+        "x OR y",
+        "*   The only combination not explicitly given is (x=0, y=1)",
+        "NOT (NOT x AND y)",
+        "The function outputs 1 for:"
+      ],
+      "valid_hypotheses": [
+        "(x OR y) OR NOT x"
+      ],
+      "unique_valid_expressions": [
+        "(x OR y) OR NOT x"
+      ],
+      "unique_all_expressions": [
+        "NOT (x AND y)",
+        "(x OR y) OR NOT x",
+        "x OR y"
+      ],
+      "token_usage": {
+        "prompt_tokens": 4846,
+        "completion_tokens": 810,
+        "total_tokens": 5656
+      },
+      "cost": 0.0,
+      "errors": [],
+      "error_summary": {
+        "total_errors": 0,
+        "error_types": {}
+      }
+    },
+    {
+      "observation_set_id": "n4_inputs_00_01_10_11_outputs_0010",
+      "n_observations": 4,
+      "n_ground_truths": 5,
+      "n_queries": 5,
+      "n_valid": 1,
+      "n_unique_valid": 1,
+      "n_unique_all": 1,
+      "n_recovered_gts": 1,
+      "parse_success_rate": 1.0,
+      "in_space_rate": 0.2,
+      "valid_rate": 0.2,
+      "novelty_rate": 0.2,
+      "recovery_rate": 0.2,
+      "all_hypotheses": [
+        "x AND NOT y",
+        "NOR (NOR (x, y), y)",
+        "NOT (x OR y) AND x",
+        "x AND NOR(x, y)",
+        "NOR (NOR (x, y), x)"
+      ],
+      "valid_hypotheses": [
+        "x AND NOT y"
+      ],
+      "unique_valid_expressions": [
+        "x AND NOT y"
+      ],
+      "unique_all_expressions": [
+        "x AND NOT y"
+      ],
+      "token_usage": {
+        "prompt_tokens": 2974,
+        "completion_tokens": 56,
+        "total_tokens": 3030
+      },
+      "cost": 0.0,
+      "errors": [],
+      "error_summary": {
+        "total_errors": 0,
+        "error_types": {}
+      }
+    },
+    {
+      "observation_set_id": "n2_inputs_10_11_outputs_00",
+      "n_observations": 2,
+      "n_ground_truths": 26,
+      "n_queries": 26,
+      "n_valid": 19,
+      "n_unique_valid": 4,
+      "n_unique_all": 10,
+      "n_recovered_gts": 4,
+      "parse_success_rate": 1.0,
+      "in_space_rate": 0.5384615384615384,
+      "valid_rate": 0.7307692307692307,
+      "novelty_rate": 0.38461538461538464,
+      "recovery_rate": 0.15384615384615385,
+      "all_hypotheses": [
+        "NOT x",
+        "x AND y",
+        "NOT y",
+        "x NOR y",
+        "x NOR y",
+        "y AND NOT x",
+        "To find a Boolean expression consistent with the observations and not previously generated, let's analyze the constraints and valid expressions",
+        "(NOT x) AND (NOT y)",
+        "(NOT x) OR y",
+        "y NOR x",
+        "x AND NOT y",
+        "The variables are x and y. The possible inputs are:",
+        "NOT (x AND y)",
+        "NOT x",
+        "x NOR (x OR y)",
+        "*   A simple expression that satisfies this is NOT  x. Let's check:",
+        "Let's analyze the observations and the constraints",
+        "NOT (x OR y)",
+        "x OR y",
+        "y NOR x",
+        "x AND y",
+        "(NOT x) AND y",
+        "x NOR y",
+        "*   Let's check the truth table for x:",
+        "y AND (NOT x)",
+        "The other two possible combinations for variables x and y are not observed, so the expression can output either 0 or 1 for these cases:"
+      ],
+      "valid_hypotheses": [
+        "NOT x",
+        "x NOR y",
+        "x NOR y",
+        "y AND NOT x",
+        "To find a Boolean expression consistent with the observations and not previously generated, let's analyze the constraints and valid expressions",
+        "(NOT x) AND (NOT y)",
+        "y NOR x",
+        "The variables are x and y. The possible inputs are:",
+        "NOT x",
+        "x NOR (x OR y)",
+        "*   A simple expression that satisfies this is NOT  x. Let's check:",
+        "Let's analyze the observations and the constraints",
+        "NOT (x OR y)",
+        "y NOR x",
+        "(NOT x) AND y",
+        "x NOR y",
+        "*   Let's check the truth table for x:",
+        "y AND (NOT x)",
+        "The other two possible combinations for variables x and y are not observed, so the expression can output either 0 or 1 for these cases:"
+      ],
+      "unique_valid_expressions": [
+        "NOT x",
+        "y AND NOT x",
+        "(NOT x) AND (NOT y)",
+        "NOT (x OR y)"
+      ],
+      "unique_all_expressions": [
+        "NOT x",
+        "x AND y",
+        "NOT y",
+        "y AND NOT x",
+        "(NOT x) AND (NOT y)",
+        "(NOT x) OR y",
+        "x AND NOT y",
+        "NOT (x AND y)",
+        "NOT (x OR y)",
+        "x OR y"
+      ],
+      "token_usage": {
+        "prompt_tokens": 17196,
+        "completion_tokens": 1680,
+        "total_tokens": 18876
+      },
+      "cost": 0.0,
+      "errors": [],
+      "error_summary": {
+        "total_errors": 0,
+        "error_types": {}
+      }
+    },
+    {
+      "observation_set_id": "n2_inputs_10_11_outputs_01",
+      "n_observations": 2,
+      "n_ground_truths": 12,
+      "n_queries": 12,
+      "n_valid": 3,
+      "n_unique_valid": 1,
+      "n_unique_all": 3,
+      "n_recovered_gts": 1,
+      "parse_success_rate": 1.0,
+      "in_space_rate": 0.6666666666666666,
+      "valid_rate": 0.25,
+      "novelty_rate": 0.25,
+      "recovery_rate": 0.08333333333333333,
+      "all_hypotheses": [
+        "x",
+        "x AND y",
+        "To find a Boolean expression consistent with the observations, let's analyze the truth table implied by the data and the constraints",
+        "x AND y",
+        "The other two combinations (x=0, y=0) and (x=0, y=1) are not specified, so the output for these cases can be either 0 or 1. We need to find an expression that satisfies the two given points and uses only the allowed operators (AND, OR, NOT, NOR) with a nesting depth of at most 2",
+        "NOR (NOR (x, y), y)",
+        "(x OR y) AND x",
+        "x",
+        "(x OR y) AND x",
+        "x AND y",
+        "x",
+        "NOT NOR(x, y)"
+      ],
+      "valid_hypotheses": [
+        "x AND y",
+        "x AND y",
+        "x AND y"
+      ],
+      "unique_valid_expressions": [
+        "x AND y"
+      ],
+      "unique_all_expressions": [
+        "x",
+        "x AND y",
+        "(x OR y) AND x"
+      ],
+      "token_usage": {
+        "prompt_tokens": 7751,
+        "completion_tokens": 585,
+        "total_tokens": 8336
+      },
+      "cost": 0.0,
+      "errors": [],
+      "error_summary": {
+        "total_errors": 0,
+        "error_types": {}
+      }
+    },
+    {
+      "observation_set_id": "n2_inputs_00_01_outputs_01",
+      "n_observations": 2,
+      "n_ground_truths": 14,
+      "n_queries": 14,
+      "n_valid": 5,
+      "n_unique_valid": 3,
+      "n_unique_all": 5,
+      "n_recovered_gts": 3,
+      "parse_success_rate": 1.0,
+      "in_space_rate": 0.5714285714285714,
+      "valid_rate": 0.35714285714285715,
+      "novelty_rate": 0.35714285714285715,
+      "recovery_rate": 0.21428571428571427,
+      "all_hypotheses": [
+        "y",
+        "NOR(NOR(x, y), x)",
+        "x OR y",
+        "NOT x AND y",
+        "x AND y",
+        "NOT x",
+        "-   `NOR(NOR(x, y), x)`: Let's check this",
+        "y",
+        "We need to find an expression consistent with these. The true values for the remaining inputs (x=1, y=0) and (x=1, y=1) are not given, so the expression just needs to work for the two given cases",
+        "NOR(NOR(x, y), y)",
+        "Let's evaluate simple expressions based on the allowed operators (AND, OR, NOT, NOR)",
+        "We need to check simple expressions against these constraints",
+        "y",
+        "NOT x"
+      ],
+      "valid_hypotheses": [
+        "y",
+        "x OR y",
+        "NOT x AND y",
+        "y",
+        "y"
+      ],
+      "unique_valid_expressions": [
+        "y",
+        "x OR y",
+        "NOT x AND y"
+      ],
+      "unique_all_expressions": [
+        "y",
+        "x OR y",
+        "NOT x AND y",
+        "x AND y",
+        "NOT x"
+      ],
+      "token_usage": {
+        "prompt_tokens": 8716,
+        "completion_tokens": 1089,
+        "total_tokens": 9805
+      },
+      "cost": 0.0,
+      "errors": [],
+      "error_summary": {
+        "total_errors": 0,
+        "error_types": {}
+      }
+    },
+    {
+      "observation_set_id": "n4_inputs_00_01_10_11_outputs_0100",
+      "n_observations": 4,
+      "n_ground_truths": 5,
+      "n_queries": 5,
+      "n_valid": 1,
+      "n_unique_valid": 1,
+      "n_unique_all": 2,
+      "n_recovered_gts": 1,
+      "parse_success_rate": 1.0,
+      "in_space_rate": 0.4,
+      "valid_rate": 0.2,
+      "novelty_rate": 0.4,
+      "recovery_rate": 0.2,
+      "all_hypotheses": [
+        "x NOR (x AND y)",
+        "(NOT x) AND y",
+        "NOR (x OR y, y)",
+        "The output is 1 only when x=0 and y=1. This corresponds to the logical expression \\bar{x} \\cdot y (NOT x AND y)",
+        "NOR(NOT x, y)"
+      ],
+      "valid_hypotheses": [
+        "(NOT x) AND y"
+      ],
+      "unique_valid_expressions": [
+        "(NOT x) AND y"
+      ],
+      "unique_all_expressions": [
+        "(NOT x) AND y",
+        "NOR (x OR y, y)"
+      ],
+      "token_usage": {
+        "prompt_tokens": 2998,
+        "completion_tokens": 296,
+        "total_tokens": 3294
+      },
+      "cost": 0.0,
+      "errors": [],
+      "error_summary": {
+        "total_errors": 0,
+        "error_types": {}
+      }
+    },
+    {
+      "observation_set_id": "n3_inputs_00_01_10_outputs_111",
+      "n_observations": 3,
+      "n_ground_truths": 7,
+      "n_queries": 7,
+      "n_valid": 3,
+      "n_unique_valid": 1,
+      "n_unique_all": 2,
+      "n_recovered_gts": 1,
+      "parse_success_rate": 1.0,
+      "in_space_rate": 0.5714285714285714,
+      "valid_rate": 0.42857142857142855,
+      "novelty_rate": 0.2857142857142857,
+      "recovery_rate": 0.14285714285714285,
+      "all_hypotheses": [
+        "NOT (x AND y)",
+        "NOT (x AND y)",
+        "NOR(x, y) OR x",
+        "x OR y",
+        "(x OR y) OR NOT (x AND y)",
+        "NOT (x AND y)",
+        "The only missing observation is (1,1). Since we need an expression consistent with the given observations, let's find a simple expression that outputs 1 for all three given cases"
+      ],
+      "valid_hypotheses": [
+        "NOT (x AND y)",
+        "NOT (x AND y)",
+        "NOT (x AND y)"
+      ],
+      "unique_valid_expressions": [
+        "NOT (x AND y)"
+      ],
+      "unique_all_expressions": [
+        "NOT (x AND y)",
+        "x OR y"
+      ],
+      "token_usage": {
+        "prompt_tokens": 4132,
+        "completion_tokens": 314,
+        "total_tokens": 4446
+      },
+      "cost": 0.0,
+      "errors": [],
+      "error_summary": {
+        "total_errors": 0,
+        "error_types": {}
+      }
+    },
+    {
+      "observation_set_id": "n2_inputs_01_10_outputs_01",
+      "n_observations": 2,
+      "n_ground_truths": 16,
+      "n_queries": 16,
+      "n_valid": 5,
+      "n_unique_valid": 3,
+      "n_unique_all": 5,
+      "n_recovered_gts": 3,
+      "parse_success_rate": 1.0,
+      "in_space_rate": 0.4375,
+      "valid_rate": 0.3125,
+      "novelty_rate": 0.3125,
+      "recovery_rate": 0.1875,
+      "all_hypotheses": [
+        "x",
+        "x NOR NOT y",
+        "x OR y",
+        "x OR (x AND y)",
+        "x AND NOT y",
+        "NOR(x, y)",
+        "NOR(x, y) OR y",
+        "To find a Boolean expression consistent with the observations and distinct from the prior ones, let's analyze the requirements",
+        "(x NOR y) OR x",
+        "NOR(NOT x, y)",
+        "NOT (x NOR y)",
+        "(NOT x) NOR y",
+        "x OR (x AND y)",
+        "x OR (x NOR y)",
+        "(NOT x) NOR y",
+        "x OR (x AND y)"
+      ],
+      "valid_hypotheses": [
+        "x",
+        "x OR (x AND y)",
+        "x AND NOT y",
+        "x OR (x AND y)",
+        "x OR (x AND y)"
+      ],
+      "unique_valid_expressions": [
+        "x",
+        "x OR (x AND y)",
+        "x AND NOT y"
+      ],
+      "unique_all_expressions": [
+        "x",
+        "x OR y",
+        "x OR (x AND y)",
+        "x AND NOT y",
+        "NOR(x, y)"
+      ],
+      "token_usage": {
+        "prompt_tokens": 9867,
+        "completion_tokens": 385,
+        "total_tokens": 10252
+      },
+      "cost": 0.0,
+      "errors": [],
+      "error_summary": {
+        "total_errors": 0,
+        "error_types": {}
+      }
+    },
+    {
+      "observation_set_id": "n1_inputs_11_outputs_1",
+      "n_observations": 1,
+      "n_ground_truths": 28,
+      "n_queries": 28,
+      "n_valid": 15,
+      "n_unique_valid": 6,
+      "n_unique_all": 8,
+      "n_recovered_gts": 6,
+      "parse_success_rate": 1.0,
+      "in_space_rate": 0.6428571428571429,
+      "valid_rate": 0.5357142857142857,
+      "novelty_rate": 0.2857142857142857,
+      "recovery_rate": 0.21428571428571427,
+      "all_hypotheses": [
+        "x",
+        "x OR y",
+        "y",
+        "x AND y",
+        "NOR(NOR(x, y), y)",
+        "NOT NOR(x, y)",
+        "NOR(NOR(x, y), x)",
+        "x OR y",
+        "NOT NOR(x, y)",
+        "NOR(NOR(x, y), x)",
+        "x AND NOT y",
+        "NOT (NOR(x, y) AND y)",
+        "x OR NOT y",
+        "NOT NOR(x, x)",
+        "x",
+        "Let's analyze the constraints and prior expressions:",
+        "x AND NOT y",
+        "x OR y",
+        "x",
+        "x OR y",
+        "NOR(x, y) AND x",
+        "x OR y",
+        "x",
+        "x",
+        "x AND y",
+        "NOR(NOR(x, y), x)",
+        "To find a Boolean expression consistent with the observation (x=1, y=1) \\to 1, we need an expression that evaluates to 1 when both x and y are 1",
+        "NOT x AND y"
+      ],
+      "valid_hypotheses": [
+        "x",
+        "x OR y",
+        "y",
+        "x AND y",
+        "x OR y",
+        "x OR NOT y",
+        "NOT NOR(x, x)",
+        "x",
+        "x OR y",
+        "x",
+        "x OR y",
+        "x OR y",
+        "x",
+        "x",
+        "x AND y"
+      ],
+      "unique_valid_expressions": [
+        "x",
+        "x OR y",
+        "y",
+        "x AND y",
+        "x OR NOT y",
+        "NOT NOR(x, x)"
+      ],
+      "unique_all_expressions": [
+        "x",
+        "x OR y",
+        "y",
+        "x AND y",
+        "x AND NOT y",
+        "x OR NOT y",
+        "NOT NOR(x, x)",
+        "NOT x AND y"
+      ],
+      "token_usage": {
+        "prompt_tokens": 18025,
+        "completion_tokens": 705,
+        "total_tokens": 18730
+      },
+      "cost": 0.0,
+      "errors": [],
+      "error_summary": {
+        "total_errors": 0,
+        "error_types": {}
+      }
+    },
+    {
+      "observation_set_id": "n3_inputs_00_10_11_outputs_010",
+      "n_observations": 3,
+      "n_ground_truths": 6,
+      "n_queries": 6,
+      "n_valid": 2,
+      "n_unique_valid": 1,
+      "n_unique_all": 2,
+      "n_recovered_gts": 1,
+      "parse_success_rate": 1.0,
+      "in_space_rate": 0.5,
+      "valid_rate": 0.3333333333333333,
+      "novelty_rate": 0.3333333333333333,
+      "recovery_rate": 0.16666666666666666,
+      "all_hypotheses": [
+        "x AND NOT y",
+        "x NOR y",
+        "NOT (x OR y)",
+        "x NOR NOT y",
+        "NOT (x NOR y)",
+        "x AND NOT y"
+      ],
+      "valid_hypotheses": [
+        "x AND NOT y",
+        "x AND NOT y"
+      ],
+      "unique_valid_expressions": [
+        "x AND NOT y"
+      ],
+      "unique_all_expressions": [
+        "x AND NOT y",
+        "NOT (x OR y)"
+      ],
+      "token_usage": {
+        "prompt_tokens": 3483,
+        "completion_tokens": 45,
+        "total_tokens": 3528
+      },
+      "cost": 0.0,
+      "errors": [],
+      "error_summary": {
+        "total_errors": 0,
+        "error_types": {}
+      }
+    },
+    {
+      "observation_set_id": "n3_inputs_00_01_11_outputs_010",
+      "n_observations": 3,
+      "n_ground_truths": 6,
+      "n_queries": 6,
+      "n_valid": 2,
+      "n_unique_valid": 1,
+      "n_unique_all": 1,
+      "n_recovered_gts": 1,
+      "parse_success_rate": 1.0,
+      "in_space_rate": 0.3333333333333333,
+      "valid_rate": 0.3333333333333333,
+      "novelty_rate": 0.16666666666666666,
+      "recovery_rate": 0.16666666666666666,
+      "all_hypotheses": [
+        "x NOR y",
+        "The observation for (x=1, y=0) is not provided, so the output can be either 0 or 1. We need to find an expression that matches the known rows",
+        "y AND NOT x",
+        "To find a Boolean expression consistent with the observations, let's analyze the truth table for the variables x and y",
+        "y AND NOT x",
+        "(x OR y) NOR x"
+      ],
+      "valid_hypotheses": [
+        "y AND NOT x",
+        "y AND NOT x"
+      ],
+      "unique_valid_expressions": [
+        "y AND NOT x"
+      ],
+      "unique_all_expressions": [
+        "y AND NOT x"
+      ],
+      "token_usage": {
+        "prompt_tokens": 3650,
+        "completion_tokens": 542,
+        "total_tokens": 4192
+      },
+      "cost": 0.0,
+      "errors": [],
+      "error_summary": {
+        "total_errors": 0,
+        "error_types": {}
+      }
+    },
+    {
+      "observation_set_id": "n3_inputs_00_01_10_outputs_100",
+      "n_observations": 3,
+      "n_ground_truths": 6,
+      "n_queries": 6,
+      "n_valid": 5,
+      "n_unique_valid": 2,
+      "n_unique_all": 2,
+      "n_recovered_gts": 2,
+      "parse_success_rate": 1.0,
+      "in_space_rate": 0.8333333333333334,
+      "valid_rate": 0.8333333333333334,
+      "novelty_rate": 0.3333333333333333,
+      "recovery_rate": 0.3333333333333333,
+      "all_hypotheses": [
+        "NOR(x, y)",
+        "NOT x AND NOT y",
+        "NOR(x, y OR x)",
+        "NOR(x, y) AND NOT x",
+        "NOT x AND NOT y",
+        "NOT (x OR y)"
+      ],
+      "valid_hypotheses": [
+        "NOR(x, y)",
+        "NOT x AND NOT y",
+        "NOR(x, y OR x)",
+        "NOT x AND NOT y",
+        "NOT (x OR y)"
+      ],
+      "unique_valid_expressions": [
+        "NOR(x, y)",
+        "NOT x AND NOT y"
+      ],
+      "unique_all_expressions": [
+        "NOR(x, y)",
+        "NOT x AND NOT y"
+      ],
+      "token_usage": {
+        "prompt_tokens": 3506,
+        "completion_tokens": 54,
+        "total_tokens": 3560
+      },
+      "cost": 0.0,
+      "errors": [],
+      "error_summary": {
+        "total_errors": 0,
+        "error_types": {}
+      }
+    },
+    {
+      "observation_set_id": "n1_inputs_10_outputs_1",
+      "n_observations": 1,
+      "n_ground_truths": 27,
+      "n_queries": 27,
+      "n_valid": 9,
+      "n_unique_valid": 7,
+      "n_unique_all": 11,
+      "n_recovered_gts": 7,
+      "parse_success_rate": 1.0,
+      "in_space_rate": 0.5185185185185185,
+      "valid_rate": 0.3333333333333333,
+      "novelty_rate": 0.4074074074074074,
+      "recovery_rate": 0.25925925925925924,
+      "all_hypotheses": [
+        "x",
+        "y",
+        "NOR(x, y)",
+        "NOT y",
+        "x OR y",
+        "x AND y",
+        "x AND NOT y",
+        "x OR NOT y",
+        "NOR(x, y) AND NOT x",
+        "NOR(NOR(x, y), y)",
+        "x OR (NOR(x, y) AND y)",
+        "x AND NOT y",
+        "NOR(NOR(x, y), x)",
+        "NOT (x AND y)",
+        "To find a Boolean expression consistent with the observation (x=1, y=0) \\to 1, we need an expression that evaluates to 1 when x is true and y is false",
+        "NOR(x, y) OR y",
+        "x OR (x AND y)",
+        "x AND NOR(x, y)",
+        "NOT (x AND y)",
+        "NOR(x, y) OR x",
+        "x OR NOR(x, y)",
+        "NOR(x, NOR(x, y))",
+        "To find a Boolean expression consistent with the observation (x=1, y=0) \\to 1, we need an expression that evaluates to true when x is true and y is false",
+        "NOR(x, NOR(x, y))",
+        "NOR(NOR(x, y), x)",
+        "NOT x",
+        "x AND y"
+      ],
+      "valid_hypotheses": [
+        "x",
+        "NOT y",
+        "x OR y",
+        "x AND NOT y",
+        "x OR NOT y",
+        "x AND NOT y",
+        "NOT (x AND y)",
+        "x OR (x AND y)",
+        "NOT (x AND y)"
+      ],
+      "unique_valid_expressions": [
+        "x",
+        "NOT y",
+        "x OR y",
+        "x AND NOT y",
+        "x OR NOT y",
+        "NOT (x AND y)",
+        "x OR (x AND y)"
+      ],
+      "unique_all_expressions": [
+        "x",
+        "y",
+        "NOR(x, y)",
+        "NOT y",
+        "x OR y",
+        "x AND y",
+        "x AND NOT y",
+        "x OR NOT y",
+        "NOT (x AND y)",
+        "x OR (x AND y)",
+        "NOT x"
+      ],
+      "token_usage": {
+        "prompt_tokens": 17905,
+        "completion_tokens": 729,
+        "total_tokens": 18634
+      },
+      "cost": 0.0,
+      "errors": [],
+      "error_summary": {
+        "total_errors": 0,
+        "error_types": {}
+      }
+    },
+    {
+      "observation_set_id": "n2_inputs_00_10_outputs_00",
+      "n_observations": 2,
+      "n_ground_truths": 26,
+      "n_queries": 26,
+      "n_valid": 18,
+      "n_unique_valid": 3,
+      "n_unique_all": 6,
+      "n_recovered_gts": 3,
+      "parse_success_rate": 1.0,
+      "in_space_rate": 0.7692307692307693,
+      "valid_rate": 0.6923076923076923,
+      "novelty_rate": 0.23076923076923078,
+      "recovery_rate": 0.11538461538461539,
+      "all_hypotheses": [
+        "NOR(x, y)",
+        "NOR(x, x)",
+        "NOT x",
+        "NOR(NOR(x, y), x)",
+        "y",
+        "NOR(x, y)",
+        "y",
+        "NOT x",
+        "To find a Boolean expression consistent with the observations, let's analyze the truth table for the variables x and y",
+        "x AND y",
+        "NOT x AND y",
+        "x AND y",
+        "NOR(x, y)",
+        "x NOR y",
+        "Let's test simple expressions based on the allowed variables x and y and operators AND, OR, NOT, NOR",
+        "y AND NOT x",
+        "NOT (x AND y)",
+        "y",
+        "NOR(x, NOR(x, y))",
+        "x AND y",
+        "NOT x AND y",
+        "NOR(x, NOR(x, y))",
+        "x AND y",
+        "y",
+        "NOT x",
+        "y AND NOT x"
+      ],
+      "valid_hypotheses": [
+        "NOR(NOR(x, y), x)",
+        "y",
+        "y",
+        "To find a Boolean expression consistent with the observations, let's analyze the truth table for the variables x and y",
+        "x AND y",
+        "NOT x AND y",
+        "x AND y",
+        "x NOR y",
+        "Let's test simple expressions based on the allowed variables x and y and operators AND, OR, NOT, NOR",
+        "y AND NOT x",
+        "y",
+        "NOR(x, NOR(x, y))",
+        "x AND y",
+        "NOT x AND y",
+        "NOR(x, NOR(x, y))",
+        "x AND y",
+        "y",
+        "y AND NOT x"
+      ],
+      "unique_valid_expressions": [
+        "y",
+        "x AND y",
+        "NOT x AND y"
+      ],
+      "unique_all_expressions": [
+        "NOR(x, y)",
+        "NOR(x, x)",
+        "y",
+        "x AND y",
+        "NOT x AND y",
+        "NOT (x AND y)"
+      ],
+      "token_usage": {
+        "prompt_tokens": 17050,
+        "completion_tokens": 676,
+        "total_tokens": 17726
+      },
+      "cost": 0.0,
+      "errors": [],
+      "error_summary": {
+        "total_errors": 0,
+        "error_types": {}
+      }
+    },
+    {
+      "observation_set_id": "n2_inputs_00_11_outputs_01",
+      "n_observations": 2,
+      "n_ground_truths": 16,
+      "n_queries": 16,
+      "n_valid": 8,
+      "n_unique_valid": 4,
+      "n_unique_all": 5,
+      "n_recovered_gts": 4,
+      "parse_success_rate": 1.0,
+      "in_space_rate": 0.5625,
+      "valid_rate": 0.5,
+      "novelty_rate": 0.3125,
+      "recovery_rate": 0.25,
+      "all_hypotheses": [
+        "x",
+        "x AND y",
+        "x OR y",
+        "x",
+        "x AND NOR(x, y)",
+        "x AND NOT y",
+        "NOR(NOR(x, y), NOT x)",
+        "x AND (x OR y)",
+        "x AND (x OR y)",
+        "x OR NOR(x, y)",
+        "The observations do not specify the output for (0, 1) or (1, 0). We need to construct an expression that satisfies the two known points and avoids the previously generated expressions",
+        "x AND (x OR y)",
+        "x AND (x OR y)",
+        "NOR(NOR(x, y), y)",
+        "x AND NOR(NOR(x, y), y)",
+        "x AND (x OR NOT y)"
+      ],
+      "valid_hypotheses": [
+        "x",
+        "x AND y",
+        "x OR y",
+        "x",
+        "x AND (x OR y)",
+        "x AND (x OR y)",
+        "x AND (x OR y)",
+        "x AND (x OR y)"
+      ],
+      "unique_valid_expressions": [
+        "x",
+        "x AND y",
+        "x OR y",
+        "x AND (x OR y)"
+      ],
+      "unique_all_expressions": [
+        "x",
+        "x AND y",
+        "x OR y",
+        "x AND NOT y",
+        "x AND (x OR y)"
+      ],
+      "token_usage": {
+        "prompt_tokens": 9897,
+        "completion_tokens": 393,
+        "total_tokens": 10290
+      },
+      "cost": 0.0,
+      "errors": [],
+      "error_summary": {
+        "total_errors": 0,
+        "error_types": {}
+      }
+    },
+    {
+      "observation_set_id": "n4_inputs_00_01_10_11_outputs_0000",
+      "n_observations": 4,
+      "n_ground_truths": 13,
+      "n_queries": 13,
+      "n_valid": 7,
+      "n_unique_valid": 2,
+      "n_unique_all": 4,
+      "n_recovered_gts": 2,
+      "parse_success_rate": 1.0,
+      "in_space_rate": 0.38461538461538464,
+      "valid_rate": 0.5384615384615384,
+      "novelty_rate": 0.3076923076923077,
+      "recovery_rate": 0.15384615384615385,
+      "all_hypotheses": [
+        "NOR(x, y) AND NOR(x, y)",
+        "The observations indicate that the function outputs 0 for all possible combinations of inputs (x, y). This is the constant function 0 (False)",
+        "NOR(x, y) AND NOT (NOR(x, y))",
+        "x AND NOT x",
+        "y AND NOT y",
+        "x AND y",
+        "x NOR y",
+        "x AND NOR(x, y)",
+        "NOT (x OR y)",
+        "y NOR y",
+        "The function outputs `0` for all combinations of inputs. This is the constant function `False` (or `0`)",
+        "(x OR y) AND NOR(x, y)",
+        "x NOR x"
+      ],
+      "valid_hypotheses": [
+        "The observations indicate that the function outputs 0 for all possible combinations of inputs (x, y). This is the constant function 0 (False)",
+        "x AND NOT x",
+        "y AND NOT y",
+        "x NOR y",
+        "y NOR y",
+        "The function outputs `0` for all combinations of inputs. This is the constant function `False` (or `0`)",
+        "x NOR x"
+      ],
+      "unique_valid_expressions": [
+        "x AND NOT x",
+        "y AND NOT y"
+      ],
+      "unique_all_expressions": [
+        "NOR(x, y) AND NOR(x, y)",
+        "x AND NOT x",
+        "y AND NOT y",
+        "x AND y"
+      ],
+      "token_usage": {
+        "prompt_tokens": 8536,
+        "completion_tokens": 614,
+        "total_tokens": 9150
+      },
+      "cost": 0.0,
+      "errors": [],
+      "error_summary": {
+        "total_errors": 0,
+        "error_types": {}
+      }
+    },
+    {
+      "observation_set_id": "n3_inputs_00_01_11_outputs_001",
+      "n_observations": 3,
+      "n_ground_truths": 8,
+      "n_queries": 8,
+      "n_valid": 4,
+      "n_unique_valid": 2,
+      "n_unique_all": 2,
+      "n_recovered_gts": 2,
+      "parse_success_rate": 1.0,
+      "in_space_rate": 0.5,
+      "valid_rate": 0.5,
+      "novelty_rate": 0.25,
+      "recovery_rate": 0.25,
+      "all_hypotheses": [
+        "x AND y",
+        "NOR(NOR(x, y), x)",
+        "x AND (x OR y)",
+        "NOR(NOR(x, y), y)",
+        "x AND (x OR y)",
+        "x AND (x OR y)",
+        "x OR (NOT y AND x)",
+        "x AND NOT NOR(x, y)"
+      ],
+      "valid_hypotheses": [
+        "x AND y",
+        "x AND (x OR y)",
+        "x AND (x OR y)",
+        "x AND (x OR y)"
+      ],
+      "unique_valid_expressions": [
+        "x AND y",
+        "x AND (x OR y)"
+      ],
+      "unique_all_expressions": [
+        "x AND y",
+        "x AND (x OR y)"
+      ],
+      "token_usage": {
+        "prompt_tokens": 4771,
+        "completion_tokens": 82,
+        "total_tokens": 4853
+      },
+      "cost": 0.0,
+      "errors": [],
+      "error_summary": {
+        "total_errors": 0,
+        "error_types": {}
+      }
+    },
+    {
+      "observation_set_id": "n2_inputs_00_10_outputs_10",
+      "n_observations": 2,
+      "n_ground_truths": 12,
+      "n_queries": 12,
+      "n_valid": 7,
+      "n_unique_valid": 2,
+      "n_unique_all": 2,
+      "n_recovered_gts": 2,
+      "parse_success_rate": 1.0,
+      "in_space_rate": 0.5833333333333334,
+      "valid_rate": 0.5833333333333334,
+      "novelty_rate": 0.16666666666666666,
+      "recovery_rate": 0.16666666666666666,
+      "all_hypotheses": [
+        "NOR(x, y)",
+        "NOR(x, x)",
+        "NOR(x, y)",
+        "NOT x",
+        "x NOR y",
+        "x NOR y",
+        "NOT x",
+        "x NOR y",
+        "NOT x",
+        "NOR(x, NOR(x, y))",
+        "NOR(x, y)",
+        "The variables are x and y. The possible combinations are:"
+      ],
+      "valid_hypotheses": [
+        "NOR(x, y)",
+        "NOR(x, x)",
+        "NOR(x, y)",
+        "NOT x",
+        "NOT x",
+        "NOT x",
+        "NOR(x, y)"
+      ],
+      "unique_valid_expressions": [
+        "NOR(x, y)",
+        "NOR(x, x)"
+      ],
+      "unique_all_expressions": [
+        "NOR(x, y)",
+        "NOR(x, x)"
+      ],
+      "token_usage": {
+        "prompt_tokens": 7054,
+        "completion_tokens": 332,
+        "total_tokens": 7386
+      },
+      "cost": 0.0,
+      "errors": [],
+      "error_summary": {
+        "total_errors": 0,
+        "error_types": {}
+      }
+    },
+    {
+      "observation_set_id": "n2_inputs_00_01_outputs_00",
+      "n_observations": 2,
+      "n_ground_truths": 26,
+      "n_queries": 26,
+      "n_valid": 19,
+      "n_unique_valid": 5,
+      "n_unique_all": 11,
+      "n_recovered_gts": 5,
+      "parse_success_rate": 1.0,
+      "in_space_rate": 0.6923076923076923,
+      "valid_rate": 0.7307692307692307,
+      "novelty_rate": 0.4230769230769231,
+      "recovery_rate": 0.19230769230769232,
+      "all_hypotheses": [
+        "x AND y",
+        "x NOR y",
+        "y",
+        "x",
+        "NOT x",
+        "NOT y",
+        "(x OR y) AND NOT x",
+        "To find a Boolean expression consistent with the observations and not equivalent to the prior ones, let's analyze the truth table and the constraints",
+        "x NOR y",
+        "x AND NOT y",
+        "NOT y AND x",
+        "x AND y OR NOT y",
+        "x NOR y",
+        "x NOR y",
+        "x AND NOT y",
+        "x AND y",
+        "x\" is in the list of prior expressions. We must avoid repeating it",
+        "NOT x",
+        "NOT (x OR y)",
+        "x AND y",
+        "x AND (x OR y)",
+        "x AND NOT y",
+        "x AND y",
+        "(x OR y) AND NOT y",
+        "To find a Boolean expression consistent with the observations and not equivalent to the prior ones, let's analyze the constraints",
+        "x NOR y"
+      ],
+      "valid_hypotheses": [
+        "x AND y",
+        "x NOR y",
+        "x",
+        "To find a Boolean expression consistent with the observations and not equivalent to the prior ones, let's analyze the truth table and the constraints",
+        "x NOR y",
+        "x AND NOT y",
+        "NOT y AND x",
+        "x NOR y",
+        "x NOR y",
+        "x AND NOT y",
+        "x AND y",
+        "x\" is in the list of prior expressions. We must avoid repeating it",
+        "x AND y",
+        "x AND (x OR y)",
+        "x AND NOT y",
+        "x AND y",
+        "(x OR y) AND NOT y",
+        "To find a Boolean expression consistent with the observations and not equivalent to the prior ones, let's analyze the constraints",
+        "x NOR y"
+      ],
+      "unique_valid_expressions": [
+        "x AND y",
+        "x",
+        "x AND NOT y",
+        "x AND (x OR y)",
+        "(x OR y) AND NOT y"
+      ],
+      "unique_all_expressions": [
+        "x AND y",
+        "y",
+        "x",
+        "NOT x",
+        "NOT y",
+        "(x OR y) AND NOT x",
+        "x AND NOT y",
+        "x AND y OR NOT y",
+        "NOT (x OR y)",
+        "x AND (x OR y)",
+        "(x OR y) AND NOT y"
+      ],
+      "token_usage": {
+        "prompt_tokens": 16888,
+        "completion_tokens": 923,
+        "total_tokens": 17811
+      },
+      "cost": 0.0,
+      "errors": [],
+      "error_summary": {
+        "total_errors": 0,
+        "error_types": {}
+      }
+    },
+    {
+      "observation_set_id": "n3_inputs_00_01_11_outputs_111",
+      "n_observations": 3,
+      "n_ground_truths": 8,
+      "n_queries": 8,
+      "n_valid": 0,
+      "n_unique_valid": 0,
+      "n_unique_all": 2,
+      "n_recovered_gts": 0,
+      "parse_success_rate": 1.0,
+      "in_space_rate": 0.25,
+      "valid_rate": 0.0,
+      "novelty_rate": 0.25,
+      "recovery_rate": 0.0,
+      "all_hypotheses": [
+        "NOT x AND y",
+        "We are given observations for a Boolean function with variables x and y:",
+        "NOT (x AND NOT y)",
+        "NOR(NOT x, y)",
+        "NOT (x AND NOT y)",
+        "x OR y",
+        "*   The missing observation is x=1, y=0. Since no constraint is given for this case, the function can be 0 or 1. However, usually, in such problems, we look for the simplest expression that fits the *given* points. Let's look at the pattern",
+        "NOT (x AND NOT y)"
+      ],
+      "valid_hypotheses": [],
+      "unique_valid_expressions": [],
+      "unique_all_expressions": [
+        "NOT x AND y",
+        "x OR y"
+      ],
+      "token_usage": {
+        "prompt_tokens": 4845,
+        "completion_tokens": 565,
+        "total_tokens": 5410
+      },
+      "cost": 0.0,
+      "errors": [],
+      "error_summary": {
+        "total_errors": 0,
+        "error_types": {}
+      }
+    },
+    {
+      "observation_set_id": "n3_inputs_01_10_11_outputs_111",
+      "n_observations": 3,
+      "n_ground_truths": 8,
+      "n_queries": 8,
+      "n_valid": 1,
+      "n_unique_valid": 1,
+      "n_unique_all": 1,
+      "n_recovered_gts": 1,
+      "parse_success_rate": 1.0,
+      "in_space_rate": 0.125,
+      "valid_rate": 0.125,
+      "novelty_rate": 0.125,
+      "recovery_rate": 0.125,
+      "all_hypotheses": [
+        "x OR y",
+        "NOT (NOR(x, y))",
+        "The only missing case is (x=0, y=0). Since the function outputs 1 for all cases where at least one variable is 1, and we need to avoid repeating `x OR y` and `NOT (NOR(x, y))`, let's look for other structurally distinct expressions that evaluate to 1 for these three inputs",
+        "(x OR y) OR NOT (NOR(x, y))",
+        "NOT (NOR(x, y) AND NOR(x, y))",
+        "*   The missing case is (x=0, y=0). The function is 1 for all cases where at least one input is 1. This is the OR function. However, we must avoid repeating `x OR y` and `NOT (NOR(x, y))`",
+        "The only missing case is x=0, y=0. The function behaves exactly like the OR operation (x OR y) for the three given cases. The value for (0,0) is not specified, but any expression that evaluates to 1 for the three given cases is valid. The simplest function matching these is x OR y",
+        "NOT (NOR(x, y) AND NOR(x, y))"
+      ],
+      "valid_hypotheses": [
+        "x OR y"
+      ],
+      "unique_valid_expressions": [
+        "x OR y"
+      ],
+      "unique_all_expressions": [
+        "x OR y"
+      ],
+      "token_usage": {
+        "prompt_tokens": 5298,
+        "completion_tokens": 836,
+        "total_tokens": 6134
+      },
+      "cost": 0.0,
+      "errors": [],
+      "error_summary": {
+        "total_errors": 0,
+        "error_types": {}
+      }
+    },
+    {
+      "observation_set_id": "n2_inputs_00_10_outputs_01",
+      "n_observations": 2,
+      "n_ground_truths": 14,
+      "n_queries": 14,
+      "n_valid": 5,
+      "n_unique_valid": 4,
+      "n_unique_all": 5,
+      "n_recovered_gts": 4,
+      "parse_success_rate": 1.0,
+      "in_space_rate": 0.42857142857142855,
+      "valid_rate": 0.35714285714285715,
+      "novelty_rate": 0.35714285714285715,
+      "recovery_rate": 0.2857142857142857,
+      "all_hypotheses": [
+        "x",
+        "x OR y",
+        "x AND NOT y",
+        "NOT y",
+        "x AND (NOT y OR NOT x)",
+        "x NOR NOR(x, x)",
+        "x AND (NOT y OR NOT x)",
+        "NOR(NOR(x, y), NOR(x, x))",
+        "x AND (x OR y)",
+        "x AND NOR(NOR(x, y), NOR(x, y))",
+        "x AND NOR(x, y)",
+        "x AND NOT y",
+        "x AND (NOT y OR NOT x)",
+        "x AND NOR(x, y)"
+      ],
+      "valid_hypotheses": [
+        "x",
+        "x OR y",
+        "x AND NOT y",
+        "x AND (x OR y)",
+        "x AND NOT y"
+      ],
+      "unique_valid_expressions": [
+        "x",
+        "x OR y",
+        "x AND NOT y",
+        "x AND (x OR y)"
+      ],
+      "unique_all_expressions": [
+        "x",
+        "x OR y",
+        "x AND NOT y",
+        "NOT y",
+        "x AND (x OR y)"
+      ],
+      "token_usage": {
+        "prompt_tokens": 8489,
+        "completion_tokens": 137,
+        "total_tokens": 8626
+      },
+      "cost": 0.0,
+      "errors": [],
+      "error_summary": {
+        "total_errors": 0,
+        "error_types": {}
+      }
+    },
+    {
+      "observation_set_id": "n3_inputs_00_10_11_outputs_011",
+      "n_observations": 3,
+      "n_ground_truths": 8,
+      "n_queries": 8,
+      "n_valid": 4,
+      "n_unique_valid": 2,
+      "n_unique_all": 4,
+      "n_recovered_gts": 2,
+      "parse_success_rate": 1.0,
+      "in_space_rate": 0.75,
+      "valid_rate": 0.5,
+      "novelty_rate": 0.5,
+      "recovery_rate": 0.25,
+      "all_hypotheses": [
+        "x",
+        "(x OR y) AND x",
+        "NOT (NOT x AND NOT y)",
+        "NOT (NOT x AND y)",
+        "x",
+        "(x OR y) AND NOT y",
+        "NOT y AND x",
+        "x AND (x OR y)"
+      ],
+      "valid_hypotheses": [
+        "x",
+        "(x OR y) AND x",
+        "x",
+        "x AND (x OR y)"
+      ],
+      "unique_valid_expressions": [
+        "x",
+        "(x OR y) AND x"
+      ],
+      "unique_all_expressions": [
+        "x",
+        "(x OR y) AND x",
+        "(x OR y) AND NOT y",
+        "NOT y AND x"
+      ],
+      "token_usage": {
+        "prompt_tokens": 4722,
+        "completion_tokens": 67,
+        "total_tokens": 4789
+      },
+      "cost": 0.0,
+      "errors": [],
+      "error_summary": {
+        "total_errors": 0,
+        "error_types": {}
+      }
+    },
+    {
+      "observation_set_id": "n4_inputs_00_01_10_11_outputs_0111",
+      "n_observations": 4,
+      "n_ground_truths": 3,
+      "n_queries": 3,
+      "n_valid": 1,
+      "n_unique_valid": 1,
+      "n_unique_all": 2,
+      "n_recovered_gts": 1,
+      "parse_success_rate": 1.0,
+      "in_space_rate": 0.6666666666666666,
+      "valid_rate": 0.3333333333333333,
+      "novelty_rate": 0.6666666666666666,
+      "recovery_rate": 0.3333333333333333,
+      "all_hypotheses": [
+        "x OR y",
+        "NOR(NOT x, NOT y)",
+        "NOT (x AND y)"
+      ],
+      "valid_hypotheses": [
+        "x OR y"
+      ],
+      "unique_valid_expressions": [
+        "x OR y"
+      ],
+      "unique_all_expressions": [
+        "x OR y",
+        "NOT (x AND y)"
+      ],
+      "token_usage": {
+        "prompt_tokens": 1747,
+        "completion_tokens": 26,
+        "total_tokens": 1773
+      },
+      "cost": 0.0,
+      "errors": [],
+      "error_summary": {
+        "total_errors": 0,
+        "error_types": {}
+      }
+    },
+    {
+      "observation_set_id": "n4_inputs_00_01_10_11_outputs_0001",
+      "n_observations": 4,
+      "n_ground_truths": 3,
+      "n_queries": 3,
+      "n_valid": 1,
+      "n_unique_valid": 1,
+      "n_unique_all": 1,
+      "n_recovered_gts": 1,
+      "parse_success_rate": 1.0,
+      "in_space_rate": 0.3333333333333333,
+      "valid_rate": 0.3333333333333333,
+      "novelty_rate": 0.3333333333333333,
+      "recovery_rate": 0.3333333333333333,
+      "all_hypotheses": [
+        "x AND y",
+        "NOR(NOR(x, y), NOR(x, y))",
+        "NOT NOR(x, y)"
+      ],
+      "valid_hypotheses": [
+        "x AND y"
+      ],
+      "unique_valid_expressions": [
+        "x AND y"
+      ],
+      "unique_all_expressions": [
+        "x AND y"
+      ],
+      "token_usage": {
+        "prompt_tokens": 1751,
+        "completion_tokens": 30,
+        "total_tokens": 1781
+      },
+      "cost": 0.0,
+      "errors": [],
+      "error_summary": {
+        "total_errors": 0,
+        "error_types": {}
+      }
+    },
+    {
+      "observation_set_id": "n3_inputs_00_10_11_outputs_110",
+      "n_observations": 3,
+      "n_ground_truths": 5,
+      "n_queries": 5,
+      "n_valid": 0,
+      "n_unique_valid": 0,
+      "n_unique_all": 3,
+      "n_recovered_gts": 0,
+      "parse_success_rate": 1.0,
+      "in_space_rate": 0.6,
+      "valid_rate": 0.0,
+      "novelty_rate": 0.6,
+      "recovery_rate": 0.0,
+      "all_hypotheses": [
+        "NOR(x, y)",
+        "x OR NOT y",
+        "NOR(x AND y, x)",
+        "NOT x OR y",
+        "We are missing the observation for (x=0, y=1). However, we need to find an expression that matches the three given points. Let's look at the truth table for the known values:"
+      ],
+      "valid_hypotheses": [],
+      "unique_valid_expressions": [],
+      "unique_all_expressions": [
+        "NOR(x, y)",
+        "x OR NOT y",
+        "NOT x OR y"
+      ],
+      "token_usage": {
+        "prompt_tokens": 2892,
+        "completion_tokens": 288,
+        "total_tokens": 3180
+      },
+      "cost": 0.0,
+      "errors": [],
+      "error_summary": {
+        "total_errors": 0,
+        "error_types": {}
+      }
+    },
+    {
+      "observation_set_id": "n3_inputs_01_10_11_outputs_110",
+      "n_observations": 3,
+      "n_ground_truths": 3,
+      "n_queries": 3,
+      "n_valid": 0,
+      "n_unique_valid": 0,
+      "n_unique_all": 1,
+      "n_recovered_gts": 0,
+      "parse_success_rate": 1.0,
+      "in_space_rate": 0.3333333333333333,
+      "valid_rate": 0.0,
+      "novelty_rate": 0.3333333333333333,
+      "recovery_rate": 0.0,
+      "all_hypotheses": [
+        "x XOR y",
+        "NOR(x, y) OR (x AND y)",
+        "NOR(x, y)"
+      ],
+      "valid_hypotheses": [],
+      "unique_valid_expressions": [],
+      "unique_all_expressions": [
+        "NOR(x, y)"
+      ],
+      "token_usage": {
+        "prompt_tokens": 1714,
+        "completion_tokens": 28,
+        "total_tokens": 1742
+      },
+      "cost": 0.0,
+      "errors": [],
+      "error_summary": {
+        "total_errors": 0,
+        "error_types": {}
+      }
+    },
+    {
+      "observation_set_id": "n3_inputs_00_01_10_outputs_110",
+      "n_observations": 3,
+      "n_ground_truths": 6,
+      "n_queries": 6,
+      "n_valid": 2,
+      "n_unique_valid": 1,
+      "n_unique_all": 1,
+      "n_recovered_gts": 1,
+      "parse_success_rate": 1.0,
+      "in_space_rate": 0.3333333333333333,
+      "valid_rate": 0.3333333333333333,
+      "novelty_rate": 0.16666666666666666,
+      "recovery_rate": 0.16666666666666666,
+      "all_hypotheses": [
+        "NOR(x, x)",
+        "NOT x",
+        "*   When x=0, the output is always 1, regardless of y (both y=0 and y=1 yield 1)",
+        "NOR(x, NOR(x, y))",
+        "NOR(x, NOR(x, y))",
+        "The case (x=1, y=1) is not provided, so the output can be either 0 or 1"
+      ],
+      "valid_hypotheses": [
+        "NOR(x, x)",
+        "NOT x"
+      ],
+      "unique_valid_expressions": [
+        "NOR(x, x)"
+      ],
+      "unique_all_expressions": [
+        "NOR(x, x)"
+      ],
+      "token_usage": {
+        "prompt_tokens": 3566,
+        "completion_tokens": 547,
+        "total_tokens": 4113
+      },
+      "cost": 0.0,
+      "errors": [],
+      "error_summary": {
+        "total_errors": 0,
+        "error_types": {}
+      }
+    },
+    {
+      "observation_set_id": "n3_inputs_01_10_11_outputs_001",
+      "n_observations": 3,
+      "n_ground_truths": 4,
+      "n_queries": 4,
+      "n_valid": 1,
+      "n_unique_valid": 1,
+      "n_unique_all": 1,
+      "n_recovered_gts": 1,
+      "parse_success_rate": 1.0,
+      "in_space_rate": 0.25,
+      "valid_rate": 0.25,
+      "novelty_rate": 0.25,
+      "recovery_rate": 0.25,
+      "all_hypotheses": [
+        "x AND y",
+        "x AND y\" and \"avoid repeating any expression that is equivalent\". So we cannot use this",
+        "NOR (NOR (x, y), NOR (x, y))",
+        "NOR (NOR (x, y), NOR (x, y))"
+      ],
+      "valid_hypotheses": [
+        "x AND y"
+      ],
+      "unique_valid_expressions": [
+        "x AND y"
+      ],
+      "unique_all_expressions": [
+        "x AND y"
+      ],
+      "token_usage": {
+        "prompt_tokens": 2330,
+        "completion_tokens": 298,
+        "total_tokens": 2628
+      },
+      "cost": 0.0,
+      "errors": [],
+      "error_summary": {
+        "total_errors": 0,
+        "error_types": {}
+      }
+    },
+    {
+      "observation_set_id": "n2_inputs_01_11_outputs_11",
+      "n_observations": 2,
+      "n_ground_truths": 16,
+      "n_queries": 16,
+      "n_valid": 6,
+      "n_unique_valid": 3,
+      "n_unique_all": 3,
+      "n_recovered_gts": 3,
+      "parse_success_rate": 1.0,
+      "in_space_rate": 0.375,
+      "valid_rate": 0.375,
+      "novelty_rate": 0.1875,
+      "recovery_rate": 0.1875,
+      "all_hypotheses": [
+        "y",
+        "x OR y",
+        "NOR(NOT x, NOT y)",
+        "The variables are x and y. The possible inputs are (0,0), (0,1), (1,0), (1,1)",
+        "NOR(NOT x, NOT y)",
+        "NOR(NOT x, y)",
+        "NOR(NOT x, NOT y)",
+        "y",
+        "To find a Boolean expression consistent with the observations (x=0, y=1) \\to 1 and (x=1, y=1) \\to 1, we analyze the truth table requirements",
+        "x OR y",
+        "NOR(NOT x, y)",
+        "NOR(x, NOR(x, y))",
+        "y",
+        "NOT (x AND NOT y)",
+        "NOT x OR y",
+        "*   Operators: AND, OR, NOT, NOR"
+      ],
+      "valid_hypotheses": [
+        "y",
+        "x OR y",
+        "y",
+        "x OR y",
+        "y",
+        "NOT x OR y"
+      ],
+      "unique_valid_expressions": [
+        "y",
+        "x OR y",
+        "NOT x OR y"
+      ],
+      "unique_all_expressions": [
+        "y",
+        "x OR y",
+        "NOT x OR y"
+      ],
+      "token_usage": {
+        "prompt_tokens": 10340,
+        "completion_tokens": 873,
+        "total_tokens": 11213
+      },
+      "cost": 0.0,
+      "errors": [],
+      "error_summary": {
+        "total_errors": 0,
+        "error_types": {}
+      }
+    },
+    {
+      "observation_set_id": "n2_inputs_00_01_outputs_10",
+      "n_observations": 2,
+      "n_ground_truths": 12,
+      "n_queries": 12,
+      "n_valid": 7,
+      "n_unique_valid": 2,
+      "n_unique_all": 4,
+      "n_recovered_gts": 2,
+      "parse_success_rate": 1.0,
+      "in_space_rate": 0.75,
+      "valid_rate": 0.5833333333333334,
+      "novelty_rate": 0.3333333333333333,
+      "recovery_rate": 0.16666666666666666,
+      "all_hypotheses": [
+        "NOT y",
+        "NOT x",
+        "Let's evaluate the behavior of the function based on the variable y:",
+        "NOR(x, y)",
+        "NOR(x, NOR(x, y))",
+        "NOT (x AND y)",
+        "NOR(x, y)",
+        "NOR(x, NOR(x, y))",
+        "NOR(x, y)",
+        "NOR(x, y)",
+        "NOT (x OR y)",
+        "NOT y"
+      ],
+      "valid_hypotheses": [
+        "NOT y",
+        "NOR(x, y)",
+        "NOR(x, y)",
+        "NOR(x, y)",
+        "NOR(x, y)",
+        "NOT (x OR y)",
+        "NOT y"
+      ],
+      "unique_valid_expressions": [
+        "NOT y",
+        "NOR(x, y)"
+      ],
+      "unique_all_expressions": [
+        "NOT y",
+        "NOT x",
+        "NOR(x, y)",
+        "NOT (x AND y)"
+      ],
+      "token_usage": {
+        "prompt_tokens": 7188,
+        "completion_tokens": 343,
+        "total_tokens": 7531
+      },
+      "cost": 0.0,
+      "errors": [],
+      "error_summary": {
+        "total_errors": 0,
+        "error_types": {}
+      }
+    },
+    {
+      "observation_set_id": "n2_inputs_10_11_outputs_10",
+      "n_observations": 2,
+      "n_ground_truths": 11,
+      "n_queries": 11,
+      "n_valid": 6,
+      "n_unique_valid": 2,
+      "n_unique_all": 3,
+      "n_recovered_gts": 2,
+      "parse_success_rate": 1.0,
+      "in_space_rate": 0.6363636363636364,
+      "valid_rate": 0.5454545454545454,
+      "novelty_rate": 0.2727272727272727,
+      "recovery_rate": 0.18181818181818182,
+      "all_hypotheses": [
+        "x AND NOT y",
+        "NOR (x AND y, x)",
+        "x AND NOT y",
+        "NOR (x AND y, x)",
+        "NOR (x AND y, x)",
+        "To find a Boolean expression consistent with the observations and avoiding the previously generated ones, let's analyze the truth table and the constraints",
+        "NOR (x, y)",
+        "NOT (x AND y)",
+        "NOT (x AND y)",
+        "x AND NOT y",
+        "x AND NOT y"
+      ],
+      "valid_hypotheses": [
+        "x AND NOT y",
+        "x AND NOT y",
+        "NOT (x AND y)",
+        "NOT (x AND y)",
+        "x AND NOT y",
+        "x AND NOT y"
+      ],
+      "unique_valid_expressions": [
+        "x AND NOT y",
+        "NOT (x AND y)"
+      ],
+      "unique_all_expressions": [
+        "x AND NOT y",
+        "NOR (x, y)",
+        "NOT (x AND y)"
+      ],
+      "token_usage": {
+        "prompt_tokens": 6648,
+        "completion_tokens": 344,
+        "total_tokens": 6992
+      },
+      "cost": 0.0,
+      "errors": [],
+      "error_summary": {
+        "total_errors": 0,
+        "error_types": {}
+      }
+    },
+    {
+      "observation_set_id": "n3_inputs_00_10_11_outputs_101",
+      "n_observations": 3,
+      "n_ground_truths": 4,
+      "n_queries": 4,
+      "n_valid": 0,
+      "n_unique_valid": 0,
+      "n_unique_all": 1,
+      "n_recovered_gts": 0,
+      "parse_success_rate": 1.0,
+      "in_space_rate": 0.25,
+      "valid_rate": 0.0,
+      "novelty_rate": 0.25,
+      "recovery_rate": 0.0,
+      "all_hypotheses": [
+        "NOR(NOT x, y)",
+        "NOR(x, y)",
+        "NOT (x AND NOT y)",
+        "Let's analyze the given observations to determine the correct Boolean function"
+      ],
+      "valid_hypotheses": [],
+      "unique_valid_expressions": [],
+      "unique_all_expressions": [
+        "NOR(x, y)"
+      ],
+      "token_usage": {
+        "prompt_tokens": 2306,
+        "completion_tokens": 284,
+        "total_tokens": 2590
+      },
+      "cost": 0.0,
+      "errors": [],
+      "error_summary": {
+        "total_errors": 0,
+        "error_types": {}
+      }
+    },
+    {
+      "observation_set_id": "n2_inputs_00_01_outputs_11",
+      "n_observations": 2,
+      "n_ground_truths": 13,
+      "n_queries": 13,
+      "n_valid": 5,
+      "n_unique_valid": 3,
+      "n_unique_all": 5,
+      "n_recovered_gts": 3,
+      "parse_success_rate": 1.0,
+      "in_space_rate": 0.6153846153846154,
+      "valid_rate": 0.38461538461538464,
+      "novelty_rate": 0.38461538461538464,
+      "recovery_rate": 0.23076923076923078,
+      "all_hypotheses": [
+        "NOT x",
+        "NOT y",
+        "x NOR y",
+        "x OR y",
+        "(NOT x) OR y",
+        "NOT (x AND y)",
+        "x NOR y",
+        "Let's analyze the truth table for the known variables:",
+        "x NOR y",
+        "NOT (x AND y)",
+        "x NOR y",
+        "NOT x",
+        "NOT y"
+      ],
+      "valid_hypotheses": [
+        "NOT x",
+        "(NOT x) OR y",
+        "NOT (x AND y)",
+        "NOT (x AND y)",
+        "NOT x"
+      ],
+      "unique_valid_expressions": [
+        "NOT x",
+        "(NOT x) OR y",
+        "NOT (x AND y)"
+      ],
+      "unique_all_expressions": [
+        "NOT x",
+        "NOT y",
+        "x OR y",
+        "(NOT x) OR y",
+        "NOT (x AND y)"
+      ],
+      "token_usage": {
+        "prompt_tokens": 7690,
+        "completion_tokens": 333,
+        "total_tokens": 8023
+      },
+      "cost": 0.0,
+      "errors": [],
+      "error_summary": {
+        "total_errors": 0,
+        "error_types": {}
+      }
+    },
+    {
+      "observation_set_id": "n4_inputs_00_01_10_11_outputs_1100",
+      "n_observations": 4,
+      "n_ground_truths": 3,
+      "n_queries": 3,
+      "n_valid": 1,
+      "n_unique_valid": 1,
+      "n_unique_all": 2,
+      "n_recovered_gts": 1,
+      "parse_success_rate": 1.0,
+      "in_space_rate": 0.6666666666666666,
+      "valid_rate": 0.3333333333333333,
+      "novelty_rate": 0.6666666666666666,
+      "recovery_rate": 0.3333333333333333,
+      "all_hypotheses": [
+        "NOR(x, y)",
+        "NOT x",
+        "x NOR y"
+      ],
+      "valid_hypotheses": [
+        "NOT x"
+      ],
+      "unique_valid_expressions": [
+        "NOT x"
+      ],
+      "unique_all_expressions": [
+        "NOR(x, y)",
+        "NOT x"
+      ],
+      "token_usage": {
+        "prompt_tokens": 1745,
+        "completion_tokens": 19,
+        "total_tokens": 1764
+      },
+      "cost": 0.0,
+      "errors": [],
+      "error_summary": {
+        "total_errors": 0,
+        "error_types": {}
+      }
+    },
+    {
+      "observation_set_id": "n3_inputs_01_10_11_outputs_100",
+      "n_observations": 3,
+      "n_ground_truths": 8,
+      "n_queries": 8,
+      "n_valid": 2,
+      "n_unique_valid": 1,
+      "n_unique_all": 1,
+      "n_recovered_gts": 1,
+      "parse_success_rate": 1.0,
+      "in_space_rate": 0.25,
+      "valid_rate": 0.25,
+      "novelty_rate": 0.125,
+      "recovery_rate": 0.125,
+      "all_hypotheses": [
+        "NOT x AND y",
+        "y AND NOT x",
+        "NOR x",
+        "y NOR x",
+        "(x OR y) NOR y",
+        "x NOR y",
+        "NOT (x OR y) OR y",
+        "The missing observation is `(x=0, y=0)`. Let's determine what value it must take or if it's don't-care"
+      ],
+      "valid_hypotheses": [
+        "NOT x AND y",
+        "y AND NOT x"
+      ],
+      "unique_valid_expressions": [
+        "NOT x AND y"
+      ],
+      "unique_all_expressions": [
+        "NOT x AND y"
+      ],
+      "token_usage": {
+        "prompt_tokens": 4691,
+        "completion_tokens": 557,
+        "total_tokens": 5248
+      },
+      "cost": 0.0,
+      "errors": [],
+      "error_summary": {
+        "total_errors": 0,
+        "error_types": {}
+      }
+    },
+    {
+      "observation_set_id": "n3_inputs_00_01_10_outputs_001",
+      "n_observations": 3,
+      "n_ground_truths": 10,
+      "n_queries": 10,
+      "n_valid": 2,
+      "n_unique_valid": 1,
+      "n_unique_all": 2,
+      "n_recovered_gts": 1,
+      "parse_success_rate": 1.0,
+      "in_space_rate": 0.3,
+      "valid_rate": 0.2,
+      "novelty_rate": 0.2,
+      "recovery_rate": 0.1,
+      "all_hypotheses": [
+        "x AND NOT y",
+        "NOT (x OR y)",
+        "x AND (NOT (x AND y))",
+        "x AND NOT y",
+        "x NOR NOR(x, y)",
+        "x AND (x NOR y)",
+        "x AND NOR(x, y)",
+        "x AND (NOT y OR x)",
+        "x AND (NOR(x, y) OR y)",
+        "x NOR NOR(x, y)"
+      ],
+      "valid_hypotheses": [
+        "x AND NOT y",
+        "x AND NOT y"
+      ],
+      "unique_valid_expressions": [
+        "x AND NOT y"
+      ],
+      "unique_all_expressions": [
+        "x AND NOT y",
+        "NOT (x OR y)"
+      ],
+      "token_usage": {
+        "prompt_tokens": 6040,
+        "completion_tokens": 101,
+        "total_tokens": 6141
+      },
+      "cost": 0.0,
+      "errors": [],
+      "error_summary": {
+        "total_errors": 0,
+        "error_types": {}
+      }
+    },
+    {
+      "observation_set_id": "n2_inputs_01_10_outputs_11",
+      "n_observations": 2,
+      "n_ground_truths": 11,
+      "n_queries": 11,
+      "n_valid": 3,
+      "n_unique_valid": 2,
+      "n_unique_all": 2,
+      "n_recovered_gts": 2,
+      "parse_success_rate": 1.0,
+      "in_space_rate": 0.2727272727272727,
+      "valid_rate": 0.2727272727272727,
+      "novelty_rate": 0.18181818181818182,
+      "recovery_rate": 0.18181818181818182,
+      "all_hypotheses": [
+        "x OR y",
+        "NOR(NOT x, NOT y)",
+        "x NOR y",
+        "(NOT x AND y) OR (x AND NOT y)",
+        "NOR(x AND y, x AND y)",
+        "NOT (x AND y)",
+        "(x OR y) AND NOT (x AND y)",
+        "NOT (x NOR y)",
+        "x NOR NOR(x, y)",
+        "x NOR (x AND y)",
+        "The function is true when exactly one of the inputs is true. This corresponds to the XOR function: x \\oplus y"
+      ],
+      "valid_hypotheses": [
+        "x OR y",
+        "NOR(x AND y, x AND y)",
+        "NOT (x AND y)"
+      ],
+      "unique_valid_expressions": [
+        "x OR y",
+        "NOR(x AND y, x AND y)"
+      ],
+      "unique_all_expressions": [
+        "x OR y",
+        "NOR(x AND y, x AND y)"
+      ],
+      "token_usage": {
+        "prompt_tokens": 6605,
+        "completion_tokens": 360,
+        "total_tokens": 6965
+      },
+      "cost": 0.0,
+      "errors": [],
+      "error_summary": {
+        "total_errors": 0,
+        "error_types": {}
+      }
+    },
+    {
+      "observation_set_id": "n1_inputs_01_outputs_0",
+      "n_observations": 1,
+      "n_ground_truths": 38,
+      "n_queries": 38,
+      "n_valid": 26,
+      "n_unique_valid": 4,
+      "n_unique_all": 8,
+      "n_recovered_gts": 4,
+      "parse_success_rate": 1.0,
+      "in_space_rate": 0.8421052631578947,
+      "valid_rate": 0.6842105263157895,
+      "novelty_rate": 0.21052631578947367,
+      "recovery_rate": 0.10526315789473684,
+      "all_hypotheses": [
+        "NOR(x, y)",
+        "x",
+        "NOT y",
+        "x OR y",
+        "NOR(x, y) OR NOT y",
+        "x",
+        "NOT x",
+        "y",
+        "x AND y",
+        "y AND NOT x",
+        "To find a valid Boolean expression, we analyze the constraints and observations",
+        "y AND NOT x",
+        "NOR(x, y)",
+        "x",
+        "y AND x",
+        "To find a valid Boolean expression, we analyze the given observation and constraints",
+        "x",
+        "NOR(x, y)",
+        "NOT x",
+        "x",
+        "NOT x",
+        "Let's evaluate some simple candidates against the observation (0, 1):",
+        "x",
+        "x",
+        "x",
+        "x OR y",
+        "x",
+        "NOR(x, y)",
+        "y",
+        "NOT (x OR y)",
+        "x",
+        "x",
+        "The user wants a Boolean expression for variables x and y that satisfies the observation:",
+        "x",
+        "x",
+        "NOT x",
+        "x",
+        "NOR(x, y) AND NOT y"
+      ],
+      "valid_hypotheses": [
+        "NOR(x, y)",
+        "x",
+        "NOT y",
+        "x",
+        "x AND y",
+        "To find a valid Boolean expression, we analyze the constraints and observations",
+        "NOR(x, y)",
+        "x",
+        "y AND x",
+        "To find a valid Boolean expression, we analyze the given observation and constraints",
+        "x",
+        "NOR(x, y)",
+        "x",
+        "Let's evaluate some simple candidates against the observation (0, 1):",
+        "x",
+        "x",
+        "x",
+        "x",
+        "NOR(x, y)",
+        "NOT (x OR y)",
+        "x",
+        "x",
+        "The user wants a Boolean expression for variables x and y that satisfies the observation:",
+        "x",
+        "x",
+        "x"
+      ],
+      "unique_valid_expressions": [
+        "NOR(x, y)",
+        "x",
+        "NOT y",
+        "x AND y"
+      ],
+      "unique_all_expressions": [
+        "NOR(x, y)",
+        "x",
+        "NOT y",
+        "x OR y",
+        "NOT x",
+        "y",
+        "x AND y",
+        "y AND NOT x"
+      ],
+      "token_usage": {
+        "prompt_tokens": 25268,
+        "completion_tokens": 1214,
+        "total_tokens": 26482
+      },
+      "cost": 0.0,
+      "errors": [],
+      "error_summary": {
+        "total_errors": 0,
+        "error_types": {}
+      }
+    },
+    {
+      "observation_set_id": "n3_inputs_01_10_11_outputs_011",
+      "n_observations": 3,
+      "n_ground_truths": 8,
+      "n_queries": 8,
+      "n_valid": 3,
+      "n_unique_valid": 2,
+      "n_unique_all": 4,
+      "n_recovered_gts": 2,
+      "parse_success_rate": 1.0,
+      "in_space_rate": 0.625,
+      "valid_rate": 0.375,
+      "novelty_rate": 0.5,
+      "recovery_rate": 0.25,
+      "all_hypotheses": [
+        "x OR y",
+        "x",
+        "x AND NOT y",
+        "(NOT x OR y) AND x",
+        "x AND (x OR y)",
+        "x AND (x OR y)",
+        "- x=0, y=0 \\rightarrow 0 (Consistent with standard logic, though not observed)",
+        "x OR (NOT x AND y)"
+      ],
+      "valid_hypotheses": [
+        "x",
+        "x AND (x OR y)",
+        "x AND (x OR y)"
+      ],
+      "unique_valid_expressions": [
+        "x",
+        "x AND (x OR y)"
+      ],
+      "unique_all_expressions": [
+        "x OR y",
+        "x",
+        "x AND NOT y",
+        "x AND (x OR y)"
+      ],
+      "token_usage": {
+        "prompt_tokens": 4719,
+        "completion_tokens": 315,
+        "total_tokens": 5034
+      },
+      "cost": 0.0,
+      "errors": [],
+      "error_summary": {
+        "total_errors": 0,
+        "error_types": {}
+      }
+    },
+    {
+      "observation_set_id": "n4_inputs_00_01_10_11_outputs_0110",
+      "n_observations": 4,
+      "n_ground_truths": 1,
+      "n_queries": 1,
+      "n_valid": 0,
+      "n_unique_valid": 0,
+      "n_unique_all": 0,
+      "n_recovered_gts": 0,
+      "parse_success_rate": 1.0,
+      "in_space_rate": 0.0,
+      "valid_rate": 0.0,
+      "novelty_rate": 0.0,
+      "recovery_rate": 0.0,
+      "all_hypotheses": [
+        "x XOR y"
+      ],
+      "valid_hypotheses": [],
+      "unique_valid_expressions": [],
+      "unique_all_expressions": [],
+      "token_usage": {
+        "prompt_tokens": 576,
+        "completion_tokens": 6,
+        "total_tokens": 582
+      },
+      "cost": 0.0,
+      "errors": [],
+      "error_summary": {
+        "total_errors": 0,
+        "error_types": {}
+      }
+    },
+    {
+      "observation_set_id": "n1_inputs_00_outputs_1",
+      "n_observations": 1,
+      "n_ground_truths": 25,
+      "n_queries": 25,
+      "n_valid": 17,
+      "n_unique_valid": 5,
+      "n_unique_all": 5,
+      "n_recovered_gts": 5,
+      "parse_success_rate": 1.0,
+      "in_space_rate": 0.68,
+      "valid_rate": 0.68,
+      "novelty_rate": 0.2,
+      "recovery_rate": 0.2,
+      "all_hypotheses": [
+        "NOT x AND NOT y",
+        "We must avoid repeating `NOT x AND NOT y`",
+        "NOR(x, y)",
+        "NOT (x OR y)",
+        "NOT (x OR y)",
+        "NOT (x OR y)",
+        "(NOT x) AND (NOT y)",
+        "NOR(x, y)",
+        "x NOR y",
+        "(NOT x) OR (NOT y)",
+        "NOR(x, y)",
+        "NOR(x, y)",
+        "NOT (x OR y)",
+        "x NOR y",
+        "(NOT x) OR (NOT y)",
+        "(NOT x) AND (NOT y)",
+        "NOT x",
+        "x NOR y",
+        "1.  **NOT x**: When x=0, NOT x = 1. This matches the observation. It does not depend on y, which is fine as long as it doesn't contradict other observations (there are none)",
+        "NOT y",
+        "x NOR y",
+        "x NOR y",
+        "NOT x",
+        "NOT x",
+        "y NOR y"
+      ],
+      "valid_hypotheses": [
+        "NOT x AND NOT y",
+        "NOR(x, y)",
+        "NOT (x OR y)",
+        "NOT (x OR y)",
+        "NOT (x OR y)",
+        "(NOT x) AND (NOT y)",
+        "NOR(x, y)",
+        "(NOT x) OR (NOT y)",
+        "NOR(x, y)",
+        "NOR(x, y)",
+        "NOT (x OR y)",
+        "(NOT x) OR (NOT y)",
+        "(NOT x) AND (NOT y)",
+        "NOT x",
+        "NOT y",
+        "NOT x",
+        "NOT x"
+      ],
+      "unique_valid_expressions": [
+        "NOT x AND NOT y",
+        "NOR(x, y)",
+        "(NOT x) OR (NOT y)",
+        "NOT x",
+        "NOT y"
+      ],
+      "unique_all_expressions": [
+        "NOT x AND NOT y",
+        "NOR(x, y)",
+        "(NOT x) OR (NOT y)",
+        "NOT x",
+        "NOT y"
+      ],
+      "token_usage": {
+        "prompt_tokens": 16398,
+        "completion_tokens": 692,
+        "total_tokens": 17090
+      },
+      "cost": 0.0,
+      "errors": [],
+      "error_summary": {
+        "total_errors": 0,
+        "error_types": {}
+      }
+    },
+    {
+      "observation_set_id": "n4_inputs_00_01_10_11_outputs_1011",
+      "n_observations": 4,
+      "n_ground_truths": 3,
+      "n_queries": 3,
+      "n_valid": 2,
+      "n_unique_valid": 1,
+      "n_unique_all": 1,
+      "n_recovered_gts": 1,
+      "parse_success_rate": 1.0,
+      "in_space_rate": 0.6666666666666666,
+      "valid_rate": 0.6666666666666666,
+      "novelty_rate": 0.3333333333333333,
+      "recovery_rate": 0.3333333333333333,
+      "all_hypotheses": [
+        "We are looking for a function f(x, y) such that:",
+        "x OR NOT y",
+        "x OR NOT y"
+      ],
+      "valid_hypotheses": [
+        "x OR NOT y",
+        "x OR NOT y"
+      ],
+      "unique_valid_expressions": [
+        "x OR NOT y"
+      ],
+      "unique_all_expressions": [
+        "x OR NOT y"
+      ],
+      "token_usage": {
+        "prompt_tokens": 1765,
+        "completion_tokens": 270,
+        "total_tokens": 2035
+      },
+      "cost": 0.0,
+      "errors": [],
+      "error_summary": {
+        "total_errors": 0,
+        "error_types": {}
+      }
+    },
+    {
+      "observation_set_id": "n3_inputs_01_10_11_outputs_000",
+      "n_observations": 3,
+      "n_ground_truths": 18,
+      "n_queries": 18,
+      "n_valid": 9,
+      "n_unique_valid": 1,
+      "n_unique_all": 4,
+      "n_recovered_gts": 1,
+      "parse_success_rate": 1.0,
+      "in_space_rate": 0.7222222222222222,
+      "valid_rate": 0.5,
+      "novelty_rate": 0.2222222222222222,
+      "recovery_rate": 0.05555555555555555,
+      "all_hypotheses": [
+        "NOR(x, y)",
+        "NOT (x OR y)",
+        "NOT x",
+        "To find a Boolean expression consistent with the observations, let's analyze the truth table for the given inputs and outputs:",
+        "NOR(x, y)",
+        "x AND y",
+        "NOT x",
+        "NOT y",
+        "NOR(x, y)",
+        "NOT x",
+        "NOT x",
+        "x AND y",
+        "The problem asks for a Boolean expression consistent with the following observations:",
+        "The missing observation is for (x=0, y=0). Since the function must be consistent with the provided data, any expression that yields 0 for the three specified inputs is valid, regardless of what it yields for (0,0), as long as it's a well-formed Boolean expression using the allowed operators. However, typically in such problems, we look for the simplest expression that fits the pattern or implies the remaining case if possible. Let's look at the outputs:",
+        "NOT y",
+        "The only missing observation is for (x=0, y=0). The problem states that any expression yielding 0 for the three specified inputs is valid. We need to find an expression that evaluates to 0 for (0,1), (1,0), (1,1)",
+        "x AND y",
+        "The only unobserved case is (x=0, y=0). The problem does not specify the output for this case, so any expression that evaluates to 0 for the three observed cases is valid. We should look for a simple expression that satisfies these conditions and is not equivalent to the previously generated expressions"
+      ],
+      "valid_hypotheses": [
+        "NOR(x, y)",
+        "NOT (x OR y)",
+        "To find a Boolean expression consistent with the observations, let's analyze the truth table for the given inputs and outputs:",
+        "NOR(x, y)",
+        "NOR(x, y)",
+        "The problem asks for a Boolean expression consistent with the following observations:",
+        "The missing observation is for (x=0, y=0). Since the function must be consistent with the provided data, any expression that yields 0 for the three specified inputs is valid, regardless of what it yields for (0,0), as long as it's a well-formed Boolean expression using the allowed operators. However, typically in such problems, we look for the simplest expression that fits the pattern or implies the remaining case if possible. Let's look at the outputs:",
+        "The only missing observation is for (x=0, y=0). The problem states that any expression yielding 0 for the three specified inputs is valid. We need to find an expression that evaluates to 0 for (0,1), (1,0), (1,1)",
+        "The only unobserved case is (x=0, y=0). The problem does not specify the output for this case, so any expression that evaluates to 0 for the three observed cases is valid. We should look for a simple expression that satisfies these conditions and is not equivalent to the previously generated expressions"
+      ],
+      "unique_valid_expressions": [
+        "NOR(x, y)"
+      ],
+      "unique_all_expressions": [
+        "NOR(x, y)",
+        "NOT x",
+        "x AND y",
+        "NOT y"
+      ],
+      "token_usage": {
+        "prompt_tokens": 11926,
+        "completion_tokens": 1361,
+        "total_tokens": 13287
+      },
+      "cost": 0.0,
+      "errors": [],
+      "error_summary": {
+        "total_errors": 0,
+        "error_types": {}
+      }
+    },
+    {
+      "observation_set_id": "n2_inputs_01_11_outputs_00",
+      "n_observations": 2,
+      "n_ground_truths": 26,
+      "n_queries": 26,
+      "n_valid": 21,
+      "n_unique_valid": 7,
+      "n_unique_all": 10,
+      "n_recovered_gts": 7,
+      "parse_success_rate": 1.0,
+      "in_space_rate": 0.6538461538461539,
+      "valid_rate": 0.8076923076923077,
+      "novelty_rate": 0.38461538461538464,
+      "recovery_rate": 0.2692307692307692,
+      "all_hypotheses": [
+        "NOT x",
+        "NOR(x, y)",
+        "NOT y",
+        "x AND y",
+        "x NOR y",
+        "NOR(x, x OR y)",
+        "NOT (x OR y)",
+        "(x OR y) AND NOT x",
+        "The other two combinations (x=0, y=0) and (x=1, y=0) are not constrained, so the output can be either 0 or 1 for these cases",
+        "x AND NOR(x, y)",
+        "x NOR y",
+        "NOT (x OR y)",
+        "x AND NOT y",
+        "x AND y AND NOT x",
+        "NOT x AND NOT y",
+        "*   The cases (0,0) and (1,0) are unconstrained",
+        "NOR(x, y)",
+        "x NOR y",
+        "x AND NOT y",
+        "y AND NOR(x, y)",
+        "The other two combinations (0,0) and (1,0) are unconstrained",
+        "x AND NOT x",
+        "y NOR y",
+        "(x OR y) AND NOT y",
+        "NOT (x OR y)",
+        "x AND NOT x"
+      ],
+      "valid_hypotheses": [
+        "NOR(x, y)",
+        "NOT y",
+        "x NOR y",
+        "NOR(x, x OR y)",
+        "NOT (x OR y)",
+        "The other two combinations (x=0, y=0) and (x=1, y=0) are not constrained, so the output can be either 0 or 1 for these cases",
+        "x NOR y",
+        "NOT (x OR y)",
+        "x AND NOT y",
+        "x AND y AND NOT x",
+        "NOT x AND NOT y",
+        "*   The cases (0,0) and (1,0) are unconstrained",
+        "NOR(x, y)",
+        "x NOR y",
+        "x AND NOT y",
+        "The other two combinations (0,0) and (1,0) are unconstrained",
+        "x AND NOT x",
+        "y NOR y",
+        "(x OR y) AND NOT y",
+        "NOT (x OR y)",
+        "x AND NOT x"
+      ],
+      "unique_valid_expressions": [
+        "NOR(x, y)",
+        "NOT y",
+        "x AND NOT y",
+        "x AND y AND NOT x",
+        "NOT x AND NOT y",
+        "x AND NOT x",
+        "(x OR y) AND NOT y"
+      ],
+      "unique_all_expressions": [
+        "NOT x",
+        "NOR(x, y)",
+        "NOT y",
+        "x AND y",
+        "(x OR y) AND NOT x",
+        "x AND NOT y",
+        "x AND y AND NOT x",
+        "NOT x AND NOT y",
+        "x AND NOT x",
+        "(x OR y) AND NOT y"
+      ],
+      "token_usage": {
+        "prompt_tokens": 17593,
+        "completion_tokens": 948,
+        "total_tokens": 18541
+      },
+      "cost": 0.0,
+      "errors": [],
+      "error_summary": {
+        "total_errors": 0,
+        "error_types": {}
+      }
+    },
+    {
+      "observation_set_id": "n4_inputs_00_01_10_11_outputs_1110",
+      "n_observations": 4,
+      "n_ground_truths": 2,
+      "n_queries": 2,
+      "n_valid": 1,
+      "n_unique_valid": 1,
+      "n_unique_all": 2,
+      "n_recovered_gts": 1,
+      "parse_success_rate": 1.0,
+      "in_space_rate": 1.0,
+      "valid_rate": 0.5,
+      "novelty_rate": 1.0,
+      "recovery_rate": 0.5,
+      "all_hypotheses": [
+        "NOR(x, y)",
+        "NOT (x AND y)"
+      ],
+      "valid_hypotheses": [
+        "NOT (x AND y)"
+      ],
+      "unique_valid_expressions": [
+        "NOT (x AND y)"
+      ],
+      "unique_all_expressions": [
+        "NOR(x, y)",
+        "NOT (x AND y)"
+      ],
+      "token_usage": {
+        "prompt_tokens": 1158,
+        "completion_tokens": 17,
+        "total_tokens": 1175
+      },
+      "cost": 0.0,
+      "errors": [],
+      "error_summary": {
+        "total_errors": 0,
+        "error_types": {}
+      }
+    },
+    {
+      "observation_set_id": "n3_inputs_00_10_11_outputs_000",
+      "n_observations": 3,
+      "n_ground_truths": 18,
+      "n_queries": 18,
+      "n_valid": 8,
+      "n_unique_valid": 0,
+      "n_unique_all": 3,
+      "n_recovered_gts": 0,
+      "parse_success_rate": 1.0,
+      "in_space_rate": 0.5555555555555556,
+      "valid_rate": 0.4444444444444444,
+      "novelty_rate": 0.16666666666666666,
+      "recovery_rate": 0.0,
+      "all_hypotheses": [
+        "NOR(x, y)",
+        "x NOR x",
+        "x NOR y",
+        "x NOR y",
+        "NOR(x OR y, x OR y)",
+        "NOR(x, y)",
+        "x AND y",
+        "NOR(x OR y, x OR y)",
+        "NOR(x NOR y, x NOR y)",
+        "NOR(x, x)",
+        "The only missing observation is for (x=0, y=1). The function is 0 for three out of four possible inputs",
+        "NOT x",
+        "The only missing observation is for (x=0, y=1). The function outputs 0 for three out of four possible inputs. We need an expression that evaluates to 0 for the given inputs. Note that the requirement is to be *consistent* with the observations, not necessarily to define the function uniquely for the missing case unless implied by simplicity or standard patterns. However, usually, in such problems, we look for a simple expression that fits the known data points",
+        "x NOR x",
+        "x AND y",
+        "x NOR y",
+        "NOT (x OR y)",
+        "NOR(x, x)"
+      ],
+      "valid_hypotheses": [
+        "x NOR x",
+        "x NOR y",
+        "x NOR y",
+        "NOR(x NOR y, x NOR y)",
+        "The only missing observation is for (x=0, y=1). The function is 0 for three out of four possible inputs",
+        "The only missing observation is for (x=0, y=1). The function outputs 0 for three out of four possible inputs. We need an expression that evaluates to 0 for the given inputs. Note that the requirement is to be *consistent* with the observations, not necessarily to define the function uniquely for the missing case unless implied by simplicity or standard patterns. However, usually, in such problems, we look for a simple expression that fits the known data points",
+        "x NOR x",
+        "x NOR y"
+      ],
+      "unique_valid_expressions": [],
+      "unique_all_expressions": [
+        "NOR(x, y)",
+        "x AND y",
+        "NOR(x, x)"
+      ],
+      "token_usage": {
+        "prompt_tokens": 11927,
+        "completion_tokens": 636,
+        "total_tokens": 12563
+      },
+      "cost": 0.0,
+      "errors": [],
+      "error_summary": {
+        "total_errors": 0,
+        "error_types": {}
+      }
+    },
+    {
+      "observation_set_id": "n3_inputs_00_10_11_outputs_100",
+      "n_observations": 3,
+      "n_ground_truths": 8,
+      "n_queries": 8,
+      "n_valid": 2,
+      "n_unique_valid": 2,
+      "n_unique_all": 4,
+      "n_recovered_gts": 2,
+      "parse_success_rate": 1.0,
+      "in_space_rate": 0.5,
+      "valid_rate": 0.25,
+      "novelty_rate": 0.5,
+      "recovery_rate": 0.25,
+      "all_hypotheses": [
+        "NOT x",
+        "(NOT x) AND (x OR y)",
+        "(NOT x) OR (NOT y)",
+        "NOR(x, NOT y)",
+        "NOR(x, NOT y)",
+        "NOR(x, NOT y)",
+        "NOR(x, NOT y)",
+        "NOR(x, y)"
+      ],
+      "valid_hypotheses": [
+        "NOT x",
+        "NOR(x, y)"
+      ],
+      "unique_valid_expressions": [
+        "NOT x",
+        "NOR(x, y)"
+      ],
+      "unique_all_expressions": [
+        "NOT x",
+        "(NOT x) AND (x OR y)",
+        "(NOT x) OR (NOT y)",
+        "NOR(x, y)"
+      ],
+      "token_usage": {
+        "prompt_tokens": 4761,
+        "completion_tokens": 74,
+        "total_tokens": 4835
+      },
+      "cost": 0.0,
+      "errors": [],
+      "error_summary": {
+        "total_errors": 0,
+        "error_types": {}
+      }
+    },
+    {
+      "observation_set_id": "n4_inputs_00_01_10_11_outputs_1001",
+      "n_observations": 4,
+      "n_ground_truths": 1,
+      "n_queries": 1,
+      "n_valid": 0,
+      "n_unique_valid": 0,
+      "n_unique_all": 0,
+      "n_recovered_gts": 0,
+      "parse_success_rate": 1.0,
+      "in_space_rate": 0.0,
+      "valid_rate": 0.0,
+      "novelty_rate": 0.0,
+      "recovery_rate": 0.0,
+      "all_hypotheses": [
+        "x NOR y"
+      ],
+      "valid_hypotheses": [],
+      "unique_valid_expressions": [],
+      "unique_all_expressions": [],
+      "token_usage": {
+        "prompt_tokens": 576,
+        "completion_tokens": 6,
+        "total_tokens": 582
+      },
+      "cost": 0.0,
+      "errors": [],
+      "error_summary": {
+        "total_errors": 0,
+        "error_types": {}
+      }
+    },
+    {
+      "observation_set_id": "n2_inputs_00_11_outputs_00",
+      "n_observations": 2,
+      "n_ground_truths": 24,
+      "n_queries": 24,
+      "n_valid": 4,
+      "n_unique_valid": 1,
+      "n_unique_all": 7,
+      "n_recovered_gts": 1,
+      "parse_success_rate": 1.0,
+      "in_space_rate": 0.75,
+      "valid_rate": 0.16666666666666666,
+      "novelty_rate": 0.2916666666666667,
+      "recovery_rate": 0.041666666666666664,
+      "all_hypotheses": [
+        "(x AND y)",
+        "NOR(x, y)",
+        "NOT (x AND y)",
+        "NOT x",
+        "NOT x",
+        "x OR y",
+        "x AND y",
+        "NOR(x, y)",
+        "The other two cases (0,1) and (1,0) are not specified, so the expression can evaluate to either 0 or 1 for these inputs",
+        "NOT (x OR y)",
+        "NOT (x OR y)",
+        "x AND y",
+        "NOR(x, y)",
+        "(x OR y) AND NOT (x AND y)",
+        "(x AND y) OR NOR(x, y)",
+        "NOT x AND y",
+        "The problem requires a Boolean expression for variables x and y that satisfies:",
+        "NOT x OR NOT y",
+        "(x OR y) AND NOT (x AND y)",
+        "x AND y",
+        "NOT (x AND y)",
+        "2.  **Analyze Candidate Expressions**:",
+        "NOT x",
+        "NOT (x AND y)"
+      ],
+      "valid_hypotheses": [
+        "The other two cases (0,1) and (1,0) are not specified, so the expression can evaluate to either 0 or 1 for these inputs",
+        "NOT x AND y",
+        "The problem requires a Boolean expression for variables x and y that satisfies:",
+        "2.  **Analyze Candidate Expressions**:"
+      ],
+      "unique_valid_expressions": [
+        "NOT x AND y"
+      ],
+      "unique_all_expressions": [
+        "(x AND y)",
+        "NOR(x, y)",
+        "NOT (x AND y)",
+        "NOT x",
+        "x OR y",
+        "NOT x AND y",
+        "NOT x OR NOT y"
+      ],
+      "token_usage": {
+        "prompt_tokens": 15900,
+        "completion_tokens": 943,
+        "total_tokens": 16843
+      },
+      "cost": 0.0,
+      "errors": [],
+      "error_summary": {
+        "total_errors": 0,
+        "error_types": {}
+      }
+    },
+    {
+      "observation_set_id": "n4_inputs_00_01_10_11_outputs_1111",
+      "n_observations": 4,
+      "n_ground_truths": 5,
+      "n_queries": 5,
+      "n_valid": 0,
+      "n_unique_valid": 0,
+      "n_unique_all": 2,
+      "n_recovered_gts": 0,
+      "parse_success_rate": 1.0,
+      "in_space_rate": 0.4,
+      "valid_rate": 0.0,
+      "novelty_rate": 0.4,
+      "recovery_rate": 0.0,
+      "all_hypotheses": [
+        "x OR y",
+        "NOT NOR(x, y)",
+        "x NOR (y AND x)",
+        "NOT (x AND y)",
+        "The function outputs `1` for all possible combinations of inputs. This is the **Constant 1** (or Tautology) function"
+      ],
+      "valid_hypotheses": [],
+      "unique_valid_expressions": [],
+      "unique_all_expressions": [
+        "x OR y",
+        "NOT (x AND y)"
+      ],
+      "token_usage": {
+        "prompt_tokens": 2952,
+        "completion_tokens": 290,
+        "total_tokens": 3242
+      },
+      "cost": 0.0,
+      "errors": [],
+      "error_summary": {
+        "total_errors": 0,
+        "error_types": {}
+      }
+    },
+    {
+      "observation_set_id": "n3_inputs_00_01_10_outputs_011",
+      "n_observations": 3,
+      "n_ground_truths": 4,
+      "n_queries": 4,
+      "n_valid": 2,
+      "n_unique_valid": 1,
+      "n_unique_all": 2,
+      "n_recovered_gts": 1,
+      "parse_success_rate": 1.0,
+      "in_space_rate": 1.0,
+      "valid_rate": 0.5,
+      "novelty_rate": 0.5,
+      "recovery_rate": 0.25,
+      "all_hypotheses": [
+        "x OR y",
+        "y",
+        "x OR y",
+        "y"
+      ],
+      "valid_hypotheses": [
+        "x OR y",
+        "x OR y"
+      ],
+      "unique_valid_expressions": [
+        "x OR y"
+      ],
+      "unique_all_expressions": [
+        "x OR y",
+        "y"
+      ],
+      "token_usage": {
+        "prompt_tokens": 2282,
+        "completion_tokens": 20,
+        "total_tokens": 2302
+      },
+      "cost": 0.0,
+      "errors": [],
+      "error_summary": {
+        "total_errors": 0,
+        "error_types": {}
+      }
+    },
+    {
+      "observation_set_id": "n4_inputs_00_01_10_11_outputs_0011",
+      "n_observations": 4,
+      "n_ground_truths": 5,
+      "n_queries": 5,
+      "n_valid": 2,
+      "n_unique_valid": 2,
+      "n_unique_all": 3,
+      "n_recovered_gts": 2,
+      "parse_success_rate": 1.0,
+      "in_space_rate": 0.6,
+      "valid_rate": 0.4,
+      "novelty_rate": 0.6,
+      "recovery_rate": 0.4,
+      "all_hypotheses": [
+        "x",
+        "x AND y",
+        "NOT (NOR(x, y))",
+        "x OR (y AND x)",
+        "NOT (NOR(x, NOT x))"
+      ],
+      "valid_hypotheses": [
+        "x",
+        "x OR (y AND x)"
+      ],
+      "unique_valid_expressions": [
+        "x",
+        "x OR (y AND x)"
+      ],
+      "unique_all_expressions": [
+        "x",
+        "x AND y",
+        "x OR (y AND x)"
+      ],
+      "token_usage": {
+        "prompt_tokens": 2938,
+        "completion_tokens": 43,
+        "total_tokens": 2981
+      },
+      "cost": 0.0,
+      "errors": [],
+      "error_summary": {
+        "total_errors": 0,
+        "error_types": {}
+      }
+    },
+    {
+      "observation_set_id": "n3_inputs_00_01_11_outputs_011",
+      "n_observations": 3,
+      "n_ground_truths": 8,
+      "n_queries": 8,
+      "n_valid": 4,
+      "n_unique_valid": 2,
+      "n_unique_all": 2,
+      "n_recovered_gts": 2,
+      "parse_success_rate": 1.0,
+      "in_space_rate": 0.5,
+      "valid_rate": 0.5,
+      "novelty_rate": 0.25,
+      "recovery_rate": 0.25,
+      "all_hypotheses": [
+        "x OR y",
+        "y",
+        "NOT (x AND NOT y)",
+        "NOR (x AND NOT y, x)",
+        "NOT (x AND NOT y)",
+        "y",
+        "x OR y",
+        "NOR(x, NOR(x, y))"
+      ],
+      "valid_hypotheses": [
+        "x OR y",
+        "y",
+        "y",
+        "x OR y"
+      ],
+      "unique_valid_expressions": [
+        "x OR y",
+        "y"
+      ],
+      "unique_all_expressions": [
+        "x OR y",
+        "y"
+      ],
+      "token_usage": {
+        "prompt_tokens": 4706,
+        "completion_tokens": 63,
+        "total_tokens": 4769
+      },
+      "cost": 0.0,
+      "errors": [],
+      "error_summary": {
+        "total_errors": 0,
+        "error_types": {}
+      }
+    },
+    {
+      "observation_set_id": "n2_inputs_00_11_outputs_11",
+      "n_observations": 2,
+      "n_ground_truths": 12,
+      "n_queries": 12,
+      "n_valid": 0,
+      "n_unique_valid": 0,
+      "n_unique_all": 3,
+      "n_recovered_gts": 0,
+      "parse_success_rate": 1.0,
+      "in_space_rate": 0.25,
+      "valid_rate": 0.0,
+      "novelty_rate": 0.25,
+      "recovery_rate": 0.0,
+      "all_hypotheses": [
+        "NOR(x, y)",
+        "NOT (x AND y)",
+        "NOT (x XOR y)",
+        "x OR y",
+        "NOT (x AND NOT y)",
+        "The other two cases (0,1) and (1,0) are not specified, so the function can be either 0 or 1 for these inputs. We need to find an expression that outputs 1 for (0,0) and (1,1)",
+        "To find a Boolean expression consistent with the observations (x=0, y=0) \\to 1 and (x=1, y=1) \\to 1, we need a function that outputs 1 when x and y are equal (the XNOR function)",
+        "(NOT x AND NOT y) OR (x AND y)",
+        "NOT (NOR(x, y) AND NOR(NOT x, y))",
+        "NOR(x, y) OR (x AND y)",
+        "NOT (x AND NOT y)",
+        "(x AND y) OR (NOT x AND NOT y)"
+      ],
+      "valid_hypotheses": [],
+      "unique_valid_expressions": [],
+      "unique_all_expressions": [
+        "NOR(x, y)",
+        "NOT (x AND y)",
+        "x OR y"
+      ],
+      "token_usage": {
+        "prompt_tokens": 7797,
+        "completion_tokens": 629,
+        "total_tokens": 8426
+      },
+      "cost": 0.0,
+      "errors": [],
+      "error_summary": {
+        "total_errors": 0,
+        "error_types": {}
+      }
+    },
+    {
+      "observation_set_id": "n3_inputs_00_01_11_outputs_101",
+      "n_observations": 3,
+      "n_ground_truths": 4,
+      "n_queries": 4,
+      "n_valid": 0,
+      "n_unique_valid": 0,
+      "n_unique_all": 2,
+      "n_recovered_gts": 0,
+      "parse_success_rate": 1.0,
+      "in_space_rate": 0.5,
+      "valid_rate": 0.0,
+      "novelty_rate": 0.5,
+      "recovery_rate": 0.0,
+      "all_hypotheses": [
+        "(NOT x) OR (x AND y)",
+        "To find a Boolean expression consistent with the observations, let's analyze the truth table for the given inputs",
+        "(NOT x) OR y",
+        "y OR (NOT x AND NOT y)"
+      ],
+      "valid_hypotheses": [],
+      "unique_valid_expressions": [],
+      "unique_all_expressions": [
+        "(NOT x) OR (x AND y)",
+        "(NOT x) OR y"
+      ],
+      "token_usage": {
+        "prompt_tokens": 2344,
+        "completion_tokens": 290,
+        "total_tokens": 2634
+      },
+      "cost": 0.0,
+      "errors": [],
+      "error_summary": {
+        "total_errors": 0,
+        "error_types": {}
+      }
+    },
+    {
+      "observation_set_id": "n2_inputs_01_10_outputs_00",
+      "n_observations": 2,
+      "n_ground_truths": 22,
+      "n_queries": 22,
+      "n_valid": 18,
+      "n_unique_valid": 3,
+      "n_unique_all": 3,
+      "n_recovered_gts": 3,
+      "parse_success_rate": 1.0,
+      "in_space_rate": 0.22727272727272727,
+      "valid_rate": 0.8181818181818182,
+      "novelty_rate": 0.13636363636363635,
+      "recovery_rate": 0.13636363636363635,
+      "all_hypotheses": [
+        "NOR(x, y)",
+        "x NOR y",
+        "x AND y",
+        "NOT x AND NOT y",
+        "(NOT x AND NOT y) OR (x NOR y)",
+        "(NOT x AND y) OR (x AND NOT y)",
+        "(NOT x AND y) OR (x AND NOT y)",
+        "Let's analyze the possible simple expressions and check them against the observations",
+        "x NOR y",
+        "(x OR y) AND (NOT x OR y)",
+        "NOT (x OR y)",
+        "x NOR y",
+        "x NOR y",
+        "We need an expression that is 0 for (0,1) and (1,0). The other two inputs, (0,0) and (1,1), are not observed, so the expression can be either 0 or 1 for them",
+        "x AND y",
+        "x NOR y",
+        "(NOT x AND NOT y) OR (x AND y)",
+        "x NOR y",
+        "(NOT x AND y) NOR (x AND NOT y)",
+        "(NOT x AND y) NOR (x AND NOT y)",
+        "(x NOR y) OR (x AND y)",
+        "(NOT x AND y) NOR (x AND NOT y)"
+      ],
+      "valid_hypotheses": [
+        "NOR(x, y)",
+        "x NOR y",
+        "x AND y",
+        "NOT x AND NOT y",
+        "(NOT x AND NOT y) OR (x NOR y)",
+        "Let's analyze the possible simple expressions and check them against the observations",
+        "x NOR y",
+        "NOT (x OR y)",
+        "x NOR y",
+        "x NOR y",
+        "We need an expression that is 0 for (0,1) and (1,0). The other two inputs, (0,0) and (1,1), are not observed, so the expression can be either 0 or 1 for them",
+        "x AND y",
+        "x NOR y",
+        "x NOR y",
+        "(NOT x AND y) NOR (x AND NOT y)",
+        "(NOT x AND y) NOR (x AND NOT y)",
+        "(x NOR y) OR (x AND y)",
+        "(NOT x AND y) NOR (x AND NOT y)"
+      ],
+      "unique_valid_expressions": [
+        "NOR(x, y)",
+        "x AND y",
+        "NOT x AND NOT y"
+      ],
+      "unique_all_expressions": [
+        "NOR(x, y)",
+        "x AND y",
+        "NOT x AND NOT y"
+      ],
+      "token_usage": {
+        "prompt_tokens": 14835,
+        "completion_tokens": 726,
+        "total_tokens": 15561
+      },
+      "cost": 0.0,
+      "errors": [],
+      "error_summary": {
+        "total_errors": 0,
+        "error_types": {}
+      }
+    },
+    {
+      "observation_set_id": "n3_inputs_00_01_11_outputs_100",
+      "n_observations": 3,
+      "n_ground_truths": 8,
+      "n_queries": 8,
+      "n_valid": 2,
+      "n_unique_valid": 2,
+      "n_unique_all": 5,
+      "n_recovered_gts": 2,
+      "parse_success_rate": 1.0,
+      "in_space_rate": 0.625,
+      "valid_rate": 0.25,
+      "novelty_rate": 0.625,
+      "recovery_rate": 0.25,
+      "all_hypotheses": [
+        "NOT x",
+        "NOT x AND NOT y",
+        "NOR(x, y)",
+        "(x AND y) OR NOT y",
+        "NOT x AND (NOT y OR x)",
+        "NOR(x, NOT y)",
+        "NOR(x, NOT y)",
+        "NOT x AND y"
+      ],
+      "valid_hypotheses": [
+        "NOT x AND NOT y",
+        "NOR(x, y)"
+      ],
+      "unique_valid_expressions": [
+        "NOT x AND NOT y",
+        "NOR(x, y)"
+      ],
+      "unique_all_expressions": [
+        "NOT x",
+        "NOT x AND NOT y",
+        "NOR(x, y)",
+        "(x AND y) OR NOT y",
+        "NOT x AND y"
+      ],
+      "token_usage": {
+        "prompt_tokens": 4728,
+        "completion_tokens": 69,
+        "total_tokens": 4797
+      },
+      "cost": 0.0,
+      "errors": [],
+      "error_summary": {
+        "total_errors": 0,
+        "error_types": {}
+      }
+    },
+    {
+      "observation_set_id": "n3_inputs_00_10_11_outputs_001",
+      "n_observations": 3,
+      "n_ground_truths": 8,
+      "n_queries": 8,
+      "n_valid": 1,
+      "n_unique_valid": 1,
+      "n_unique_all": 1,
+      "n_recovered_gts": 1,
+      "parse_success_rate": 1.0,
+      "in_space_rate": 0.125,
+      "valid_rate": 0.125,
+      "novelty_rate": 0.125,
+      "recovery_rate": 0.125,
+      "all_hypotheses": [
+        "x AND y",
+        "NOR(x, NOT y)",
+        "OR(x AND y, NOR(x, y))",
+        "The missing observation is for `(x=0, y=1)`. Let's look at the function behavior",
+        "To find a Boolean expression consistent with the observations, let's analyze the truth table for the variables x and y",
+        "NOR(x, NOR(x, y))",
+        "NOR(NOR(x, y), y)",
+        "NOT NOR(x, y)"
+      ],
+      "valid_hypotheses": [
+        "x AND y"
+      ],
+      "unique_valid_expressions": [
+        "x AND y"
+      ],
+      "unique_all_expressions": [
+        "x AND y"
+      ],
+      "token_usage": {
+        "prompt_tokens": 4868,
+        "completion_tokens": 572,
+        "total_tokens": 5440
+      },
+      "cost": 0.0,
+      "errors": [],
+      "error_summary": {
+        "total_errors": 0,
+        "error_types": {}
+      }
+    },
+    {
+      "observation_set_id": "n1_inputs_00_outputs_0",
+      "n_observations": 1,
+      "n_ground_truths": 40,
+      "n_queries": 40,
+      "n_valid": 36,
+      "n_unique_valid": 9,
+      "n_unique_all": 13,
+      "n_recovered_gts": 9,
+      "parse_success_rate": 1.0,
+      "in_space_rate": 0.425,
+      "valid_rate": 0.9,
+      "novelty_rate": 0.325,
+      "recovery_rate": 0.225,
+      "all_hypotheses": [
+        "x",
+        "x AND y",
+        "NOT x",
+        "y",
+        "x NOR y",
+        "(x OR y) AND y",
+        "(NOT x) AND y",
+        "y NOR y",
+        "x NOR x",
+        "y NOR x",
+        "x NOR (x OR y)",
+        "NOT (x OR y)",
+        "y AND (x NOR y)",
+        "(NOT x) AND (NOT y)",
+        "x NOR y",
+        "y AND y",
+        "(x OR y) NOR y",
+        "To find a Boolean expression consistent with the observation (x=0, y=0) \\to 0, we need to generate an expression that evaluates to 0 when both inputs are 0, and is structurally unique compared to the provided list of prior expressions",
+        "x OR y",
+        "x AND (x OR y)",
+        "x AND NOT y",
+        "To find a Boolean expression consistent with the observation (x=0, y=0) \\to 0 and structurally unique from the prior list, we can analyze the truth table of the single observation",
+        "(x OR y) AND NOT y",
+        "x NOR NOT y",
+        "x AND (NOT y)",
+        "x NOR NOT x",
+        "(x NOR y) AND y",
+        "(x OR y) AND x",
+        "(x NOR y) NOR y",
+        "NOT (x AND y)",
+        "x AND NOT y\" is explicitly listed in the prior expressions",
+        "x NOR (x NOR y)",
+        "(NOT y) AND (x NOR y)",
+        "x NOR NOT (x OR y)",
+        "(x NOR y) AND NOT x",
+        "y AND NOT x",
+        "1.  **Consistency**: The expression must evaluate to `0` when `x=0` and `y=0`",
+        "(x NOR y) AND x",
+        "(x NOR y) OR x",
+        "(x NOR y) AND NOT y"
+      ],
+      "valid_hypotheses": [
+        "x",
+        "x AND y",
+        "y",
+        "x NOR y",
+        "(x OR y) AND y",
+        "(NOT x) AND y",
+        "y NOR y",
+        "x NOR x",
+        "y NOR x",
+        "x NOR (x OR y)",
+        "y AND (x NOR y)",
+        "x NOR y",
+        "y AND y",
+        "(x OR y) NOR y",
+        "To find a Boolean expression consistent with the observation (x=0, y=0) \\to 0, we need to generate an expression that evaluates to 0 when both inputs are 0, and is structurally unique compared to the provided list of prior expressions",
+        "x OR y",
+        "x AND (x OR y)",
+        "x AND NOT y",
+        "To find a Boolean expression consistent with the observation (x=0, y=0) \\to 0 and structurally unique from the prior list, we can analyze the truth table of the single observation",
+        "(x OR y) AND NOT y",
+        "x NOR NOT y",
+        "x AND (NOT y)",
+        "x NOR NOT x",
+        "(x NOR y) AND y",
+        "(x OR y) AND x",
+        "(x NOR y) NOR y",
+        "x AND NOT y\" is explicitly listed in the prior expressions",
+        "x NOR (x NOR y)",
+        "(NOT y) AND (x NOR y)",
+        "x NOR NOT (x OR y)",
+        "(x NOR y) AND NOT x",
+        "y AND NOT x",
+        "1.  **Consistency**: The expression must evaluate to `0` when `x=0` and `y=0`",
+        "(x NOR y) AND x",
+        "(x NOR y) OR x",
+        "(x NOR y) AND NOT y"
+      ],
+      "unique_valid_expressions": [
+        "x",
+        "x AND y",
+        "y",
+        "(x OR y) AND y",
+        "(NOT x) AND y",
+        "x OR y",
+        "x AND (x OR y)",
+        "x AND NOT y",
+        "(x OR y) AND NOT y"
+      ],
+      "unique_all_expressions": [
+        "x",
+        "x AND y",
+        "NOT x",
+        "y",
+        "(x OR y) AND y",
+        "(NOT x) AND y",
+        "NOT (x OR y)",
+        "(NOT x) AND (NOT y)",
+        "x OR y",
+        "x AND (x OR y)",
+        "x AND NOT y",
+        "(x OR y) AND NOT y",
+        "NOT (x AND y)"
+      ],
+      "token_usage": {
+        "prompt_tokens": 29353,
+        "completion_tokens": 1328,
+        "total_tokens": 30681
+      },
+      "cost": 0.0,
+      "errors": [],
+      "error_summary": {
+        "total_errors": 0,
+        "error_types": {}
+      }
+    },
+    {
+      "observation_set_id": "n3_inputs_00_01_11_outputs_110",
+      "n_observations": 3,
+      "n_ground_truths": 5,
+      "n_queries": 5,
+      "n_valid": 1,
+      "n_unique_valid": 1,
+      "n_unique_all": 1,
+      "n_recovered_gts": 1,
+      "parse_success_rate": 1.0,
+      "in_space_rate": 0.2,
+      "valid_rate": 0.2,
+      "novelty_rate": 0.2,
+      "recovery_rate": 0.2,
+      "all_hypotheses": [
+        "NOR(x, y) OR y",
+        "NOT (x AND y)",
+        "x NOR x",
+        "x NOR y",
+        "We are given a Boolean function with two variables: x and y"
+      ],
+      "valid_hypotheses": [
+        "NOT (x AND y)"
+      ],
+      "unique_valid_expressions": [
+        "NOT (x AND y)"
+      ],
+      "unique_all_expressions": [
+        "NOT (x AND y)"
+      ],
+      "token_usage": {
+        "prompt_tokens": 2897,
+        "completion_tokens": 287,
+        "total_tokens": 3184
+      },
+      "cost": 0.0,
+      "errors": [],
+      "error_summary": {
+        "total_errors": 0,
+        "error_types": {}
+      }
+    },
+    {
+      "observation_set_id": "n3_inputs_00_01_11_outputs_000",
+      "n_observations": 3,
+      "n_ground_truths": 18,
+      "n_queries": 18,
+      "n_valid": 6,
+      "n_unique_valid": 0,
+      "n_unique_all": 3,
+      "n_recovered_gts": 0,
+      "parse_success_rate": 1.0,
+      "in_space_rate": 0.5,
+      "valid_rate": 0.3333333333333333,
+      "novelty_rate": 0.16666666666666666,
+      "recovery_rate": 0.0,
+      "all_hypotheses": [
+        "NOR (x, y)",
+        "x AND y",
+        "NOR (x, NOT y)",
+        "The only missing observation is for (x=1, y=0). Since the function must be consistent with the given observations, we can choose any value for this missing case (0 or 1), provided the resulting expression uses allowed operators and meets the structural constraints",
+        "NOT (x OR y)",
+        "NOR (x, NOR (x, y))",
+        "NOR (x, y)",
+        "x NOR y",
+        "NOT x",
+        "The only missing input is (x=1, y=0). The output for this case can be either 0 or 1",
+        "NOT (x OR y)",
+        "NOR (NOT x, y)",
+        "NOR (x, y)",
+        "x NOR y",
+        "NOR (x, NOT y)",
+        "x AND y",
+        "`x AND NOT x",
+        "NOR (x, y)"
+      ],
+      "valid_hypotheses": [
+        "The only missing observation is for (x=1, y=0). Since the function must be consistent with the given observations, we can choose any value for this missing case (0 or 1), provided the resulting expression uses allowed operators and meets the structural constraints",
+        "NOR (x, NOR (x, y))",
+        "x NOR y",
+        "The only missing input is (x=1, y=0). The output for this case can be either 0 or 1",
+        "x NOR y",
+        "`x AND NOT x"
+      ],
+      "unique_valid_expressions": [],
+      "unique_all_expressions": [
+        "NOR (x, y)",
+        "x AND y",
+        "NOT x"
+      ],
+      "token_usage": {
+        "prompt_tokens": 12260,
+        "completion_tokens": 894,
+        "total_tokens": 13154
+      },
+      "cost": 0.0,
+      "errors": [],
+      "error_summary": {
+        "total_errors": 0,
+        "error_types": {}
+      }
+    },
+    {
+      "observation_set_id": "n2_inputs_01_10_outputs_10",
+      "n_observations": 2,
+      "n_ground_truths": 16,
+      "n_queries": 16,
+      "n_valid": 6,
+      "n_unique_valid": 3,
+      "n_unique_all": 5,
+      "n_recovered_gts": 3,
+      "parse_success_rate": 1.0,
+      "in_space_rate": 0.5625,
+      "valid_rate": 0.375,
+      "novelty_rate": 0.3125,
+      "recovery_rate": 0.1875,
+      "all_hypotheses": [
+        "x NOR y",
+        "NOT x AND y",
+        "(x NOR y) OR y",
+        "(x NOR y) AND y",
+        "NOT (x AND y)",
+        "y AND NOT x",
+        "y",
+        "NOT (x OR y)",
+        "y AND NOT x",
+        "x NOR (x AND y)",
+        "NOT x",
+        "x NOR x",
+        "Let's analyze the observations and the constraints",
+        "x NOR (x AND y)",
+        "NOT (x AND y)",
+        "NOT x AND y"
+      ],
+      "valid_hypotheses": [
+        "NOT x AND y",
+        "y AND NOT x",
+        "y",
+        "y AND NOT x",
+        "NOT x",
+        "NOT x AND y"
+      ],
+      "unique_valid_expressions": [
+        "NOT x AND y",
+        "y",
+        "NOT x"
+      ],
+      "unique_all_expressions": [
+        "NOT x AND y",
+        "NOT (x AND y)",
+        "y",
+        "NOT (x OR y)",
+        "NOT x"
+      ],
+      "token_usage": {
+        "prompt_tokens": 9737,
+        "completion_tokens": 372,
+        "total_tokens": 10109
+      },
+      "cost": 0.0,
+      "errors": [],
+      "error_summary": {
+        "total_errors": 0,
+        "error_types": {}
+      }
+    },
+    {
+      "observation_set_id": "n3_inputs_00_01_10_outputs_000",
+      "n_observations": 3,
+      "n_ground_truths": 16,
+      "n_queries": 16,
+      "n_valid": 7,
+      "n_unique_valid": 2,
+      "n_unique_all": 7,
+      "n_recovered_gts": 2,
+      "parse_success_rate": 1.0,
+      "in_space_rate": 0.6875,
+      "valid_rate": 0.4375,
+      "novelty_rate": 0.4375,
+      "recovery_rate": 0.125,
+      "all_hypotheses": [
+        "x AND y",
+        "NOR(x, y)",
+        "NOT x",
+        "NOT x AND NOT y",
+        "x AND y AND NOT x",
+        "NOR(x, y)",
+        "x AND NOR(x, y)",
+        "NOT (x OR y)",
+        "x AND NOT y",
+        "The only input combination not specified is x=1, y=1",
+        "NOR(NOR(x, y), x)",
+        "NOR(x, y)",
+        "NOR(NOR(x, y), y)",
+        "y AND NOT x",
+        "x AND y AND NOT x",
+        "NOR(x, NOR(x, y))"
+      ],
+      "valid_hypotheses": [
+        "x AND y",
+        "x AND y AND NOT x",
+        "The only input combination not specified is x=1, y=1",
+        "NOR(NOR(x, y), x)",
+        "NOR(NOR(x, y), y)",
+        "x AND y AND NOT x",
+        "NOR(x, NOR(x, y))"
+      ],
+      "unique_valid_expressions": [
+        "x AND y",
+        "x AND y AND NOT x"
+      ],
+      "unique_all_expressions": [
+        "x AND y",
+        "NOR(x, y)",
+        "NOT x",
+        "NOT x AND NOT y",
+        "x AND y AND NOT x",
+        "x AND NOT y",
+        "y AND NOT x"
+      ],
+      "token_usage": {
+        "prompt_tokens": 10000,
+        "completion_tokens": 385,
+        "total_tokens": 10385
+      },
+      "cost": 0.0,
+      "errors": [],
+      "error_summary": {
+        "total_errors": 0,
+        "error_types": {}
+      }
+    },
+    {
+      "observation_set_id": "n4_inputs_00_01_10_11_outputs_1101",
+      "n_observations": 4,
+      "n_ground_truths": 3,
+      "n_queries": 3,
+      "n_valid": 1,
+      "n_unique_valid": 1,
+      "n_unique_all": 2,
+      "n_recovered_gts": 1,
+      "parse_success_rate": 1.0,
+      "in_space_rate": 0.6666666666666666,
+      "valid_rate": 0.3333333333333333,
+      "novelty_rate": 0.6666666666666666,
+      "recovery_rate": 0.3333333333333333,
+      "all_hypotheses": [
+        "(x OR y) AND NOT x",
+        "1.  When x=0, the output is always 1 (for y=0 and y=1). This suggests that if x is false, the result is true. This looks like NOT  x",
+        "(NOT x) OR (x AND y)"
+      ],
+      "valid_hypotheses": [
+        "(NOT x) OR (x AND y)"
+      ],
+      "unique_valid_expressions": [
+        "(NOT x) OR (x AND y)"
+      ],
+      "unique_all_expressions": [
+        "(x OR y) AND NOT x",
+        "(NOT x) OR (x AND y)"
+      ],
+      "token_usage": {
+        "prompt_tokens": 1793,
+        "completion_tokens": 280,
+        "total_tokens": 2073
+      },
+      "cost": 0.0,
+      "errors": [],
+      "error_summary": {
+        "total_errors": 0,
+        "error_types": {}
+      }
+    },
+    {
+      "observation_set_id": "n2_inputs_10_11_outputs_11",
+      "n_observations": 2,
+      "n_ground_truths": 16,
+      "n_queries": 16,
+      "n_valid": 10,
+      "n_unique_valid": 4,
+      "n_unique_all": 7,
+      "n_recovered_gts": 4,
+      "parse_success_rate": 1.0,
+      "in_space_rate": 0.8125,
+      "valid_rate": 0.625,
+      "novelty_rate": 0.4375,
+      "recovery_rate": 0.25,
+      "all_hypotheses": [
+        "x",
+        "x OR y",
+        "(x OR y) AND NOT y",
+        "x AND NOT NOR(x, y)",
+        "x AND y",
+        "x",
+        "NOR(x, y)",
+        "x",
+        "x OR NOT y",
+        "x OR y",
+        "x",
+        "x AND (x OR y)",
+        "To find a Boolean expression consistent with the observations, let's analyze the truth table for the variables x and y",
+        "x",
+        "NOT NOR(x, y)",
+        "x"
+      ],
+      "valid_hypotheses": [
+        "x",
+        "x OR y",
+        "x",
+        "x",
+        "x OR NOT y",
+        "x OR y",
+        "x",
+        "x AND (x OR y)",
+        "x",
+        "x"
+      ],
+      "unique_valid_expressions": [
+        "x",
+        "x OR y",
+        "x OR NOT y",
+        "x AND (x OR y)"
+      ],
+      "unique_all_expressions": [
+        "x",
+        "x OR y",
+        "(x OR y) AND NOT y",
+        "x AND y",
+        "NOR(x, y)",
+        "x OR NOT y",
+        "x AND (x OR y)"
+      ],
+      "token_usage": {
+        "prompt_tokens": 9668,
+        "completion_tokens": 354,
+        "total_tokens": 10022
+      },
+      "cost": 0.0,
+      "errors": [],
+      "error_summary": {
+        "total_errors": 0,
+        "error_types": {}
+      }
+    },
+    {
+      "observation_set_id": "n2_inputs_00_11_outputs_10",
+      "n_observations": 2,
+      "n_ground_truths": 13,
+      "n_queries": 13,
+      "n_valid": 9,
+      "n_unique_valid": 2,
+      "n_unique_all": 3,
+      "n_recovered_gts": 2,
+      "parse_success_rate": 1.0,
+      "in_space_rate": 0.7692307692307693,
+      "valid_rate": 0.6923076923076923,
+      "novelty_rate": 0.23076923076923078,
+      "recovery_rate": 0.15384615384615385,
+      "all_hypotheses": [
+        "NOR(x, y)",
+        "(x OR y) AND NOT x",
+        "The unspecified cases are (0,1) and (1,0). We need to construct an expression that satisfies the two given points",
+        "NOT (x AND y)",
+        "NOR(x, y)",
+        "3.  **Candidate Expressions:",
+        "NOT (x AND y)",
+        "NOT (x AND y)",
+        "NOT (x AND y)",
+        "NOR(x, y)",
+        "NOT (x AND y)",
+        "NOR(x, y)",
+        "The unspecified cases are (x=0, y=1) and (x=1, y=0). We need an expression that outputs 1 for (0,0) and 0 for (1,1)"
+      ],
+      "valid_hypotheses": [
+        "NOR(x, y)",
+        "NOT (x AND y)",
+        "NOR(x, y)",
+        "NOT (x AND y)",
+        "NOT (x AND y)",
+        "NOT (x AND y)",
+        "NOR(x, y)",
+        "NOT (x AND y)",
+        "NOR(x, y)"
+      ],
+      "unique_valid_expressions": [
+        "NOR(x, y)",
+        "NOT (x AND y)"
+      ],
+      "unique_all_expressions": [
+        "NOR(x, y)",
+        "(x OR y) AND NOT x",
+        "NOT (x AND y)"
+      ],
+      "token_usage": {
+        "prompt_tokens": 8083,
+        "completion_tokens": 856,
+        "total_tokens": 8939
+      },
+      "cost": 0.0,
+      "errors": [],
+      "error_summary": {
+        "total_errors": 0,
+        "error_types": {}
+      }
+    },
+    {
+      "observation_set_id": "n2_inputs_01_11_outputs_10",
+      "n_observations": 2,
+      "n_ground_truths": 11,
+      "n_queries": 11,
+      "n_valid": 5,
+      "n_unique_valid": 2,
+      "n_unique_all": 3,
+      "n_recovered_gts": 2,
+      "parse_success_rate": 1.0,
+      "in_space_rate": 0.6363636363636364,
+      "valid_rate": 0.45454545454545453,
+      "novelty_rate": 0.2727272727272727,
+      "recovery_rate": 0.18181818181818182,
+      "all_hypotheses": [
+        "NOT x AND y",
+        "NOR(x, NOT y)",
+        "(x OR y) AND NOT x",
+        "NOR(x, NOT y)",
+        "NOR(x, NOR(x, y))",
+        "NOR(x, NOR(x, y))",
+        "NOR(x, y)",
+        "y AND NOT x",
+        "y AND NOT x",
+        "(x OR y) AND NOT x",
+        "NOR(x, y)"
+      ],
+      "valid_hypotheses": [
+        "NOT x AND y",
+        "(x OR y) AND NOT x",
+        "y AND NOT x",
+        "y AND NOT x",
+        "(x OR y) AND NOT x"
+      ],
+      "unique_valid_expressions": [
+        "NOT x AND y",
+        "(x OR y) AND NOT x"
+      ],
+      "unique_all_expressions": [
+        "NOT x AND y",
+        "(x OR y) AND NOT x",
+        "NOR(x, y)"
+      ],
+      "token_usage": {
+        "prompt_tokens": 6553,
+        "completion_tokens": 99,
+        "total_tokens": 6652
+      },
+      "cost": 0.0,
+      "errors": [],
+      "error_summary": {
+        "total_errors": 0,
+        "error_types": {}
+      }
+    },
+    {
+      "observation_set_id": "n4_inputs_00_01_10_11_outputs_0101",
+      "n_observations": 4,
+      "n_ground_truths": 5,
+      "n_queries": 5,
+      "n_valid": 2,
+      "n_unique_valid": 1,
+      "n_unique_all": 1,
+      "n_recovered_gts": 1,
+      "parse_success_rate": 1.0,
+      "in_space_rate": 0.4,
+      "valid_rate": 0.4,
+      "novelty_rate": 0.2,
+      "recovery_rate": 0.2,
+      "all_hypotheses": [
+        "y",
+        "y",
+        "NOR(x, NOR(x, y))",
+        "NOR(x, NOR(x, y))",
+        "- When `y` is 0, the output is 0 (for both `x=0` and `x=1`)"
+      ],
+      "valid_hypotheses": [
+        "y",
+        "y"
+      ],
+      "unique_valid_expressions": [
+        "y"
+      ],
+      "unique_all_expressions": [
+        "y"
+      ],
+      "token_usage": {
+        "prompt_tokens": 2933,
+        "completion_tokens": 286,
+        "total_tokens": 3219
+      },
+      "cost": 0.0,
+      "errors": [],
+      "error_summary": {
+        "total_errors": 0,
+        "error_types": {}
+      }
+    },
+    {
+      "observation_set_id": "n3_inputs_00_01_10_outputs_101",
+      "n_observations": 3,
+      "n_ground_truths": 6,
+      "n_queries": 6,
+      "n_valid": 1,
+      "n_unique_valid": 1,
+      "n_unique_all": 2,
+      "n_recovered_gts": 1,
+      "parse_success_rate": 1.0,
+      "in_space_rate": 0.3333333333333333,
+      "valid_rate": 0.16666666666666666,
+      "novelty_rate": 0.3333333333333333,
+      "recovery_rate": 0.16666666666666666,
+      "all_hypotheses": [
+        "x OR NOT y",
+        "NOR(x, y) OR x",
+        "NOR(y, NOT x)",
+        "NOT (x AND y)",
+        "To find a Boolean expression consistent with the observations, let's analyze the truth table for the given points:",
+        "x OR NOR(x, y)"
+      ],
+      "valid_hypotheses": [
+        "x OR NOT y"
+      ],
+      "unique_valid_expressions": [
+        "x OR NOT y"
+      ],
+      "unique_all_expressions": [
+        "x OR NOT y",
+        "NOT (x AND y)"
+      ],
+      "token_usage": {
+        "prompt_tokens": 3518,
+        "completion_tokens": 301,
+        "total_tokens": 3819
+      },
+      "cost": 0.0,
+      "errors": [],
+      "error_summary": {
+        "total_errors": 0,
+        "error_types": {}
+      }
+    },
+    {
+      "observation_set_id": "n4_inputs_00_01_10_11_outputs_1010",
+      "n_observations": 4,
+      "n_ground_truths": 3,
+      "n_queries": 3,
+      "n_valid": 1,
+      "n_unique_valid": 1,
+      "n_unique_all": 1,
+      "n_recovered_gts": 1,
+      "parse_success_rate": 1.0,
+      "in_space_rate": 0.3333333333333333,
+      "valid_rate": 0.3333333333333333,
+      "novelty_rate": 0.3333333333333333,
+      "recovery_rate": 0.3333333333333333,
+      "all_hypotheses": [
+        "NOT y",
+        "NOR(y, x AND y)",
+        "NOR(y, x AND y)"
+      ],
+      "valid_hypotheses": [
+        "NOT y"
+      ],
+      "unique_valid_expressions": [
+        "NOT y"
+      ],
+      "unique_all_expressions": [
+        "NOT y"
+      ],
+      "token_usage": {
+        "prompt_tokens": 1744,
+        "completion_tokens": 25,
+        "total_tokens": 1769
+      },
+      "cost": 0.0,
+      "errors": [],
+      "error_summary": {
+        "total_errors": 0,
+        "error_types": {}
+      }
+    },
+    {
+      "observation_set_id": "n4_inputs_00_01_10_11_outputs_1000",
+      "n_observations": 4,
+      "n_ground_truths": 5,
+      "n_queries": 5,
+      "n_valid": 4,
+      "n_unique_valid": 2,
+      "n_unique_all": 2,
+      "n_recovered_gts": 2,
+      "parse_success_rate": 1.0,
+      "in_space_rate": 0.8,
+      "valid_rate": 0.8,
+      "novelty_rate": 0.4,
+      "recovery_rate": 0.4,
+      "all_hypotheses": [
+        "NOR(x, y)",
+        "NOT x AND NOT y",
+        "NOT (x OR y)",
+        "NOT (x OR y)",
+        "x NOR y"
+      ],
+      "valid_hypotheses": [
+        "NOR(x, y)",
+        "NOT x AND NOT y",
+        "NOT (x OR y)",
+        "NOT (x OR y)"
+      ],
+      "unique_valid_expressions": [
+        "NOR(x, y)",
+        "NOT x AND NOT y"
+      ],
+      "unique_all_expressions": [
+        "NOR(x, y)",
+        "NOT x AND NOT y"
+      ],
+      "token_usage": {
+        "prompt_tokens": 2955,
+        "completion_tokens": 40,
+        "total_tokens": 2995
+      },
+      "cost": 0.0,
+      "errors": [],
+      "error_summary": {
+        "total_errors": 0,
+        "error_types": {}
+      }
+    },
+    {
+      "observation_set_id": "n3_inputs_00_01_10_outputs_010",
+      "n_observations": 3,
+      "n_ground_truths": 10,
+      "n_queries": 10,
+      "n_valid": 4,
+      "n_unique_valid": 1,
+      "n_unique_all": 2,
+      "n_recovered_gts": 1,
+      "parse_success_rate": 1.0,
+      "in_space_rate": 0.5,
+      "valid_rate": 0.4,
+      "novelty_rate": 0.2,
+      "recovery_rate": 0.1,
+      "all_hypotheses": [
+        "x NOR y",
+        "y AND NOT x",
+        "y NOR x",
+        "y NOR x",
+        "NOT x AND y",
+        "NOT (x NOR y)",
+        "NOT (x AND y)",
+        "y AND NOT x",
+        "y AND NOT x",
+        "y NOR x"
+      ],
+      "valid_hypotheses": [
+        "y AND NOT x",
+        "NOT x AND y",
+        "y AND NOT x",
+        "y AND NOT x"
+      ],
+      "unique_valid_expressions": [
+        "y AND NOT x"
+      ],
+      "unique_all_expressions": [
+        "y AND NOT x",
+        "NOT (x AND y)"
+      ],
+      "token_usage": {
+        "prompt_tokens": 5929,
+        "completion_tokens": 70,
+        "total_tokens": 5999
+      },
+      "cost": 0.0,
+      "errors": [],
+      "error_summary": {
+        "total_errors": 0,
+        "error_types": {}
+      }
+    },
+    {
+      "observation_set_id": "n1_inputs_01_outputs_1",
+      "n_observations": 1,
+      "n_ground_truths": 27,
+      "n_queries": 27,
+      "n_valid": 7,
+      "n_unique_valid": 6,
+      "n_unique_all": 9,
+      "n_recovered_gts": 6,
+      "parse_success_rate": 1.0,
+      "in_space_rate": 0.4074074074074074,
+      "valid_rate": 0.25925925925925924,
+      "novelty_rate": 0.3333333333333333,
+      "recovery_rate": 0.2222222222222222,
+      "all_hypotheses": [
+        "y",
+        "(NOT x) OR y",
+        "To find a Boolean expression consistent with the observation (x=0, y=1) \\to 1 and avoiding the previously generated expressions y and (NOT x) OR y, we can analyze simple combinations of the variables using the allowed operators (AND, OR, NOT, NOR)",
+        "NOT x",
+        "x OR y",
+        "x AND y",
+        "NOR(x, NOT y)",
+        "y AND (NOT x)",
+        "NOR(x, NOR(y, y))",
+        "NOR(NOT x, NOT y)",
+        "(NOT y) OR x",
+        "NOR(NOR(x, y), NOT y)",
+        "NOR(NOR(x, y), y)",
+        "NOR(x, y)",
+        "x OR (NOT y)",
+        "NOR(x, NOT x) OR y",
+        "NOR(x, NOR(x, y))",
+        "NOR(NOR(x, x), y)",
+        "NOR(NOR(x, y), x)",
+        "To find a Boolean expression consistent with the observation (x=0, y=1) \\to 1 and not in the prior list, let's analyze the constraints",
+        "(x AND y) OR y",
+        "NOR(x, NOR(x, y)) OR y",
+        "To find a Boolean expression consistent with the observation (x=0, y=1) \\to 1 that is structurally unique from the prior list, let's analyze the constraints and available operators",
+        "y OR (NOT x)",
+        "To find a Boolean expression consistent with the observation (x=0, y=1) \\to 1 and structurally unique from the prior list, let's analyze the constraints and available operators",
+        "To find a Boolean expression consistent with the observation (x=0, y=1) \\to 1 that is structurally unique from the prior list, we analyze the truth table requirements",
+        "NOR(NOT x, y)"
+      ],
+      "valid_hypotheses": [
+        "y",
+        "(NOT x) OR y",
+        "NOT x",
+        "x OR y",
+        "y AND (NOT x)",
+        "(x AND y) OR y",
+        "y OR (NOT x)"
+      ],
+      "unique_valid_expressions": [
+        "y",
+        "(NOT x) OR y",
+        "NOT x",
+        "x OR y",
+        "y AND (NOT x)",
+        "(x AND y) OR y"
+      ],
+      "unique_all_expressions": [
+        "y",
+        "(NOT x) OR y",
+        "NOT x",
+        "x OR y",
+        "x AND y",
+        "y AND (NOT x)",
+        "(NOT y) OR x",
+        "NOR(x, y)",
+        "(x AND y) OR y"
+      ],
+      "token_usage": {
+        "prompt_tokens": 19292,
+        "completion_tokens": 1735,
+        "total_tokens": 21027
+      },
+      "cost": 0.0,
+      "errors": [],
+      "error_summary": {
+        "total_errors": 0,
+        "error_types": {}
+      }
+    },
+    {
+      "observation_set_id": "n1_inputs_11_outputs_0",
+      "n_observations": 1,
+      "n_ground_truths": 37,
+      "n_queries": 37,
+      "n_valid": 34,
+      "n_unique_valid": 6,
+      "n_unique_all": 8,
+      "n_recovered_gts": 6,
+      "parse_success_rate": 1.0,
+      "in_space_rate": 0.7027027027027027,
+      "valid_rate": 0.918918918918919,
+      "novelty_rate": 0.21621621621621623,
+      "recovery_rate": 0.16216216216216217,
+      "all_hypotheses": [
+        "NOT (x AND y)",
+        "NOT (x OR y)",
+        "x NOR y",
+        "x NOR y",
+        "NOT x",
+        "x NOR y",
+        "NOT x AND NOT y",
+        "NOT (x AND y)",
+        "x AND y",
+        "To find a Boolean expression consistent with the observation (x=1, y=1) \\to 0, we need an expression that evaluates to 0 when both x and y are 1",
+        "Let's analyze the observations and the constraints",
+        "x NOR y",
+        "NOT (x AND y)",
+        "x NOR y",
+        "NOT x",
+        "Let's evaluate the simple candidate expressions:",
+        "NOT x",
+        "x AND y",
+        "NOT (x AND y)",
+        "NOT x OR NOT y",
+        "NOT (x OR y)",
+        "NOT x AND NOT y",
+        "NOT (x AND y)",
+        "NOT y",
+        "NOT (x AND y)",
+        "NOT y",
+        "NOT y",
+        "NOT y",
+        "NOT y",
+        "x NOR y",
+        "x NOR y",
+        "x NOR y",
+        "NOT y",
+        "NOT x AND NOT y",
+        "x OR y",
+        "NOT y",
+        "NOT (x OR y)"
+      ],
+      "valid_hypotheses": [
+        "NOT (x AND y)",
+        "NOT (x OR y)",
+        "x NOR y",
+        "x NOR y",
+        "NOT x",
+        "x NOR y",
+        "NOT x AND NOT y",
+        "NOT (x AND y)",
+        "To find a Boolean expression consistent with the observation (x=1, y=1) \\to 0, we need an expression that evaluates to 0 when both x and y are 1",
+        "Let's analyze the observations and the constraints",
+        "x NOR y",
+        "NOT (x AND y)",
+        "x NOR y",
+        "NOT x",
+        "Let's evaluate the simple candidate expressions:",
+        "NOT x",
+        "NOT (x AND y)",
+        "NOT x OR NOT y",
+        "NOT (x OR y)",
+        "NOT x AND NOT y",
+        "NOT (x AND y)",
+        "NOT y",
+        "NOT (x AND y)",
+        "NOT y",
+        "NOT y",
+        "NOT y",
+        "NOT y",
+        "x NOR y",
+        "x NOR y",
+        "x NOR y",
+        "NOT y",
+        "NOT x AND NOT y",
+        "NOT y",
+        "NOT (x OR y)"
+      ],
+      "unique_valid_expressions": [
+        "NOT (x AND y)",
+        "NOT (x OR y)",
+        "NOT x",
+        "NOT x AND NOT y",
+        "NOT x OR NOT y",
+        "NOT y"
+      ],
+      "unique_all_expressions": [
+        "NOT (x AND y)",
+        "NOT (x OR y)",
+        "NOT x",
+        "NOT x AND NOT y",
+        "x AND y",
+        "NOT x OR NOT y",
+        "NOT y",
+        "x OR y"
+      ],
+      "token_usage": {
+        "prompt_tokens": 25690,
+        "completion_tokens": 997,
+        "total_tokens": 26687
+      },
+      "cost": 0.0,
+      "errors": [],
+      "error_summary": {
+        "total_errors": 0,
+        "error_types": {}
+      }
+    },
+    {
+      "observation_set_id": "n2_inputs_01_11_outputs_01",
+      "n_observations": 2,
+      "n_ground_truths": 12,
+      "n_queries": 12,
+      "n_valid": 7,
+      "n_unique_valid": 2,
+      "n_unique_all": 3,
+      "n_recovered_gts": 2,
+      "parse_success_rate": 1.0,
+      "in_space_rate": 0.6666666666666666,
+      "valid_rate": 0.5833333333333334,
+      "novelty_rate": 0.25,
+      "recovery_rate": 0.16666666666666666,
+      "all_hypotheses": [
+        "x",
+        "NOR(NOT x, NOT y)",
+        "x OR y",
+        "x AND y",
+        "2.  **Analyze the function behavior:",
+        "Let's evaluate simple expressions based on the allowed operators (AND, OR, NOT, NOR) and check them against the observations",
+        "x",
+        "x AND y",
+        "x AND y",
+        "x",
+        "x",
+        "NOR(NOT x, NOT y)"
+      ],
+      "valid_hypotheses": [
+        "x",
+        "x AND y",
+        "x",
+        "x AND y",
+        "x AND y",
+        "x",
+        "x"
+      ],
+      "unique_valid_expressions": [
+        "x",
+        "x AND y"
+      ],
+      "unique_all_expressions": [
+        "x",
+        "x OR y",
+        "x AND y"
+      ],
+      "token_usage": {
+        "prompt_tokens": 7198,
+        "completion_tokens": 574,
+        "total_tokens": 7772
+      },
+      "cost": 0.0,
+      "errors": [],
+      "error_summary": {
+        "total_errors": 0,
+        "error_types": {}
+      }
+    },
+    {
+      "observation_set_id": "n1_inputs_10_outputs_0",
+      "n_observations": 1,
+      "n_ground_truths": 38,
+      "n_queries": 38,
+      "n_valid": 31,
+      "n_unique_valid": 9,
+      "n_unique_all": 13,
+      "n_recovered_gts": 9,
+      "parse_success_rate": 1.0,
+      "in_space_rate": 0.631578947368421,
+      "valid_rate": 0.8157894736842105,
+      "novelty_rate": 0.34210526315789475,
+      "recovery_rate": 0.23684210526315788,
+      "all_hypotheses": [
+        "NOT x",
+        "x AND y",
+        "x NOR y",
+        "Let's analyze the observations and constraints",
+        "(NOT x) OR y",
+        "x AND (NOT y)",
+        "(NOT y) AND x",
+        "x NOR y",
+        "y",
+        "x NOR y",
+        "y",
+        "To find a Boolean expression consistent with the observation (x=1, y=0) \\to 0, we need an expression that evaluates to 0 when x is true and y is false",
+        "NOT y",
+        "(x OR y) AND y",
+        "y AND x",
+        "x AND (NOT y)",
+        "1.  **x**: E(1, 0) = 1. (Incorrect)",
+        "x AND (NOT x)",
+        "NOT (x OR y)",
+        "(x OR y) AND y",
+        "x AND y",
+        "Let's evaluate simple expressions and check against the prior list to ensure uniqueness:",
+        "(NOT x) AND y",
+        "(NOT x) AND (NOT y)",
+        "Let's evaluate some simple expressions not yet used in the prior list:",
+        "y AND (NOT x)",
+        "NOT (x AND y)",
+        "x AND y",
+        "x NOR y",
+        "The allowed operators are AND, OR, NOT, and NOR",
+        "To find a Boolean expression consistent with the observation (x=1, y=0) \\to 0, we need an expression that evaluates to 0 when x is True and y is False",
+        "Let's evaluate simple expressions against this constraint and check for uniqueness against the prior list",
+        "x AND NOT y",
+        "(NOT x) OR (NOT y)",
+        "y\" is already in the list. So we must avoid this",
+        "NOT x AND y",
+        "(NOT x) AND (NOT y)",
+        "Let's evaluate some simple expressions that are not in the \"Prior expressions\" list"
+      ],
+      "valid_hypotheses": [
+        "NOT x",
+        "x AND y",
+        "x NOR y",
+        "Let's analyze the observations and constraints",
+        "(NOT x) OR y",
+        "x NOR y",
+        "y",
+        "x NOR y",
+        "y",
+        "To find a Boolean expression consistent with the observation (x=1, y=0) \\to 0, we need an expression that evaluates to 0 when x is true and y is false",
+        "(x OR y) AND y",
+        "y AND x",
+        "1.  **x**: E(1, 0) = 1. (Incorrect)",
+        "x AND (NOT x)",
+        "NOT (x OR y)",
+        "(x OR y) AND y",
+        "x AND y",
+        "Let's evaluate simple expressions and check against the prior list to ensure uniqueness:",
+        "(NOT x) AND y",
+        "(NOT x) AND (NOT y)",
+        "Let's evaluate some simple expressions not yet used in the prior list:",
+        "y AND (NOT x)",
+        "x AND y",
+        "x NOR y",
+        "The allowed operators are AND, OR, NOT, and NOR",
+        "To find a Boolean expression consistent with the observation (x=1, y=0) \\to 0, we need an expression that evaluates to 0 when x is True and y is False",
+        "Let's evaluate simple expressions against this constraint and check for uniqueness against the prior list",
+        "y\" is already in the list. So we must avoid this",
+        "NOT x AND y",
+        "(NOT x) AND (NOT y)",
+        "Let's evaluate some simple expressions that are not in the \"Prior expressions\" list"
+      ],
+      "unique_valid_expressions": [
+        "NOT x",
+        "x AND y",
+        "(NOT x) OR y",
+        "y",
+        "(x OR y) AND y",
+        "x AND (NOT x)",
+        "NOT (x OR y)",
+        "(NOT x) AND y",
+        "(NOT x) AND (NOT y)"
+      ],
+      "unique_all_expressions": [
+        "NOT x",
+        "x AND y",
+        "(NOT x) OR y",
+        "x AND (NOT y)",
+        "y",
+        "NOT y",
+        "(x OR y) AND y",
+        "x AND (NOT x)",
+        "NOT (x OR y)",
+        "(NOT x) AND y",
+        "(NOT x) AND (NOT y)",
+        "NOT (x AND y)",
+        "(NOT x) OR (NOT y)"
+      ],
+      "token_usage": {
+        "prompt_tokens": 27614,
+        "completion_tokens": 2777,
+        "total_tokens": 30391
+      },
+      "cost": 0.0,
+      "errors": [],
+      "error_summary": {
+        "total_errors": 0,
+        "error_types": {}
+      }
+    },
+    {
+      "observation_set_id": "n2_inputs_00_10_outputs_11",
+      "n_observations": 2,
+      "n_ground_truths": 13,
+      "n_queries": 13,
+      "n_valid": 6,
+      "n_unique_valid": 3,
+      "n_unique_all": 5,
+      "n_recovered_gts": 3,
+      "parse_success_rate": 1.0,
+      "in_space_rate": 0.6923076923076923,
+      "valid_rate": 0.46153846153846156,
+      "novelty_rate": 0.38461538461538464,
+      "recovery_rate": 0.23076923076923078,
+      "all_hypotheses": [
+        "NOT x",
+        "x OR y",
+        "NOT (x AND y)",
+        "x OR NOT y",
+        "NOT y",
+        "x OR NOT y",
+        "NOR(x, y) OR x",
+        "x OR NOT y",
+        "NOT y",
+        "x OR y",
+        "x OR NOR(x, y)",
+        "x OR NOR(x, y)",
+        "x OR NOR(x, y)"
+      ],
+      "valid_hypotheses": [
+        "NOT (x AND y)",
+        "x OR NOT y",
+        "NOT y",
+        "x OR NOT y",
+        "x OR NOT y",
+        "NOT y"
+      ],
+      "unique_valid_expressions": [
+        "NOT (x AND y)",
+        "x OR NOT y",
+        "NOT y"
+      ],
+      "unique_all_expressions": [
+        "NOT x",
+        "x OR y",
+        "NOT (x AND y)",
+        "x OR NOT y",
+        "NOT y"
+      ],
+      "token_usage": {
+        "prompt_tokens": 7683,
+        "completion_tokens": 97,
+        "total_tokens": 7780
+      },
+      "cost": 0.0,
+      "errors": [],
+      "error_summary": {
+        "total_errors": 0,
+        "error_types": {}
+      }
+    },
+    {
+      "observation_set_id": "n3_inputs_01_10_11_outputs_101",
+      "n_observations": 3,
+      "n_ground_truths": 8,
+      "n_queries": 8,
+      "n_valid": 1,
+      "n_unique_valid": 1,
+      "n_unique_all": 2,
+      "n_recovered_gts": 1,
+      "parse_success_rate": 1.0,
+      "in_space_rate": 0.25,
+      "valid_rate": 0.125,
+      "novelty_rate": 0.25,
+      "recovery_rate": 0.125,
+      "all_hypotheses": [
+        "x OR y",
+        "y",
+        "NOR(NOT x, y)",
+        "(x OR y) AND NOT (x AND NOT y)",
+        "y OR (x AND NOT y)",
+        "NOR(NOT x, NOT y)",
+        "The missing observation is for `(x=0, y=0)`. Let's look at the function behavior",
+        "(x OR y) AND (y OR NOT x)"
+      ],
+      "valid_hypotheses": [
+        "y"
+      ],
+      "unique_valid_expressions": [
+        "y"
+      ],
+      "unique_all_expressions": [
+        "x OR y",
+        "y"
+      ],
+      "token_usage": {
+        "prompt_tokens": 4758,
+        "completion_tokens": 329,
+        "total_tokens": 5087
+      },
+      "cost": 0.0,
+      "errors": [],
+      "error_summary": {
+        "total_errors": 0,
+        "error_types": {}
+      }
+    },
+    {
+      "observation_set_id": "n3_inputs_01_10_11_outputs_010",
+      "n_observations": 3,
+      "n_ground_truths": 8,
+      "n_queries": 8,
+      "n_valid": 2,
+      "n_unique_valid": 1,
+      "n_unique_all": 2,
+      "n_recovered_gts": 1,
+      "parse_success_rate": 1.0,
+      "in_space_rate": 0.375,
+      "valid_rate": 0.25,
+      "novelty_rate": 0.25,
+      "recovery_rate": 0.125,
+      "all_hypotheses": [
+        "x AND NOT y",
+        "NOR(x, y)",
+        "NOT NOR(x, y)",
+        "The output is 1 only when x=1 and y=0. This is the definition of x AND NOT y (also known as XNOR if we consider the missing 0,0 case, but let's stick to the given constraints)",
+        "x AND NOR(x, y)",
+        "x AND NOR(x, y)",
+        "x AND NOR(x, y)",
+        "x AND NOT y"
+      ],
+      "valid_hypotheses": [
+        "x AND NOT y",
+        "x AND NOT y"
+      ],
+      "unique_valid_expressions": [
+        "x AND NOT y"
+      ],
+      "unique_all_expressions": [
+        "x AND NOT y",
+        "NOR(x, y)"
+      ],
+      "token_usage": {
+        "prompt_tokens": 4916,
+        "completion_tokens": 317,
+        "total_tokens": 5233
+      },
+      "cost": 0.0,
+      "errors": [],
+      "error_summary": {
+        "total_errors": 0,
+        "error_types": {}
+      }
+    }
+  ]
+}

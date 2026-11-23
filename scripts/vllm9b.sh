@@ -22,6 +22,11 @@ cmd=${1:-status}
 case "$cmd" in
   start)
     ssh9 "cd $DIR && nohup ./scripts/start_vllm_9b.sh > logs/vllm_9b_\$(date +%Y%m%d_%H%M).log 2>&1 & echo started"
+    echo -n "loading"
+    # Wait for the model, not just the process: requests sent mid-load fail and still cost budget.
+    ssh9 "for i in \$(seq 1 60); do curl -s -m 2 http://127.0.0.1:8001/v1/models | grep -q '\"id\"' && exit 0; sleep 3; done; exit 1" \
+      && echo " ready" \
+      || { echo " timeout after 180s; see $DIR/logs/vllm_9b_*.log" >&2; exit 1; }
     ;;
   stop)
     # [v]llm keeps pkill from matching the shell that runs it (and killing this SSH session).

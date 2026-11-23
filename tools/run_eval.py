@@ -26,6 +26,7 @@ import yaml
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "tools"))
 from bench import ensure  # noqa: E402
+from merge_shards import merge  # noqa: E402
 
 HS = ensure()
 
@@ -95,6 +96,42 @@ def runner_args(task, seed, out, cfg, run_dir):
     return a
 
 
+def run_sharded(name, task, argv, out, run_dir, n):
+    """Run n runner processes on round-robin shards in parallel, then merge into `out`.
+
+    Finished shards (<task>.shardI.json) are kept, so a re-run only redoes the missing ones.
+    """
+    shard_out = [run_dir / f"{name}.shard{i}.json" for i in range(n)]
+    procs = []
+    for i, so in enumerate(shard_out):
+        if so.exists():
+            print(f"[skip] {name} shard {i}/{n}: {so.name} exists")
+            continue
+        a = list(argv)
+        a[a.index("--output") + 1] = str(so)
+        a += ["--shard", f"{i}/{n}"]
+        log = open(run_dir / f"{name}.shard{i}.log", "w")
+        procs.append((i, log, subprocess.Popen(a, cwd=RUNNERS[task["domain"]].parent, stdout=log, stderr=subprocess.STDOUT)))
+    print(f"[run ] {name}: {len(procs)} shard processes (logs: {name}.shard*.log)", flush=True)
+    rc = 0
+    for i, log, proc in procs:
+        code = proc.wait()
+        log.close()
+        if code != 0 or not shard_out[i].exists():
+            print(f"[FAIL] {name} shard {i}/{n}: exit {code}")
+            rc = rc or code or 1
+            continue
+        res = json.loads(shard_out[i].read_text())
+        if res.get("error_summary", {}).get("error_types", {}).get("connection_error", 0):
+            shard_out[i].rename(shard_out[i].with_suffix(".connfail.json"))  # so a re-run redoes it
+            print(f"[FAIL] {name} shard {i}/{n}: connection errors")
+            rc = rc or 1
+    if rc:
+        return rc
+    out.write_text(json.dumps(merge([json.loads(p.read_text()) for p in shard_out]), indent=2))
+    return 0
+
+
 def main():
     p = argparse.ArgumentParser()
     p.add_argument("--model", required=True, help="configs/models/*.yaml")
@@ -104,6 +141,9 @@ def main():
     p.add_argument("--base-url", help="override base_url")
     p.add_argument("--tag", help="suffix for the run directory, e.g. sft-v1")
     p.add_argument("--run-dir", help="resume into an existing run directory")
+    p.add_argument("--shards", type=int, default=1,
+                   help="causal only: split instances round-robin over N parallel runner processes "
+                        "(needs vLLM --max-num-seqs >= N); shards are merged into <task>.json")
     args = p.parse_args()
 
     model = yaml.safe_load(Path(args.model).read_text())
@@ -142,6 +182,7 @@ def main():
         "git": git_state(),
         "started": datetime.now().isoformat(timespec="seconds"),
         "argv": sys.argv,
+        "shards": args.shards,
     }
     (run_dir / "meta.json").write_text(json.dumps(meta, indent=2))
     print(f"run dir: {run_dir}")
@@ -154,12 +195,15 @@ def main():
             continue
         cfg = run_dir / f"config.{task['domain']}.yaml"
         cfg.write_text(yaml.safe_dump(runner_config(model, task["domain"]), sort_keys=False))
-        print(f"[run ] {name} -> {out.name} (log: {name}.log)", flush=True)
-        with open(run_dir / f"{name}.log", "w") as log:
-            rc = subprocess.run(
-                runner_args(task, suite["seed"], out, cfg, run_dir),
-                cwd=RUNNERS[task["domain"]].parent, stdout=log, stderr=subprocess.STDOUT,
-            ).returncode
+        argv = runner_args(task, suite["seed"], out, cfg, run_dir)
+        if args.shards > 1 and task["domain"] == "causal":
+            rc = run_sharded(name, task, argv, out, run_dir, args.shards)
+        else:
+            print(f"[run ] {name} -> {out.name} (log: {name}.log)", flush=True)
+            with open(run_dir / f"{name}.log", "w") as log:
+                rc = subprocess.run(
+                    argv, cwd=RUNNERS[task["domain"]].parent, stdout=log, stderr=subprocess.STDOUT,
+                ).returncode
         if rc != 0 or not out.exists():
             failed.append(name)
             print(f"[FAIL] {name}: exit {rc}, see {run_dir / (name + '.log')}")

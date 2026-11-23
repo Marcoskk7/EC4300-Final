@@ -11,7 +11,7 @@ exec vllm serve /opt/data/private/isaaclab/ec4300/hf-cache/Qwen3.8-27B-NVFP4 \
   --kv-cache-dtype fp8 \
   --enforce-eager \
   --gpu-memory-utilization 0.90 \
-  --max-num-seqs 1 \
+  --max-num-seqs "${MAX_NUM_SEQS:-1}" \
   --language-model-only \
   --reasoning-parser qwen3 \
   --attention-backend TRITON_ATTN \

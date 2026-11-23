@@ -385,8 +385,8 @@
  class ResponseParser:
      """Parser for extracting causal graphs from LLM responses."""
      
---- a/causal/run_causal_benchmark.py	2026-11-23 19:42:32.454333611 +0800
-+++ b/causal/run_causal_benchmark.py	2026-11-23 19:47:07.803802641 +0800
+--- a/causal/run_causal_benchmark.py
++++ b/causal/run_causal_benchmark.py
 @@ -16,7 +16,7 @@
  import traceback
  
@@ -396,10 +396,45 @@
  from generate_causal_dataset import PerturbationObservation, CausalDatasetGenerator
  
  class CausalBenchmarkEnhanced:
-@@ -840,6 +840,17 @@
+@@ -513,7 +513,9 @@
+         seed: Optional[int] = None,
+         verbose: bool = True,
+         checkpoint_dir: str = "checkpoints",
+-        max_retries: int = 3
++        max_retries: int = 3,
++        shard_index: int = 0,
++        n_shards: int = 1
+     ) -> Dict:
+         """
+         Run the enhanced benchmark with comprehensive tracking.
+@@ -538,7 +540,8 @@
+         # Generate run ID and checkpoint file
+         run_id = datetime.now().strftime("%Y%m%d_%H%M%S")
+         safe_llm_name = llm.get_name().replace('/', '_').replace('(', '_').replace(')', '_').replace(' ', '_')
+-        checkpoint_file = checkpoint_path / f"checkpoint_causal_enhanced_{safe_llm_name}_{run_id}.json"
++        shard_tag = f"_shard{shard_index}of{n_shards}" if n_shards > 1 else ""
++        checkpoint_file = checkpoint_path / f"checkpoint_causal_enhanced_{safe_llm_name}_{run_id}{shard_tag}.json"
+         
+         print(f"\nRunning Enhanced Causal Benchmark")
+         print(f"LLM: {llm.get_name()}")
+@@ -553,6 +556,11 @@
+         
+         # Sample observation sets
+         sampled_sets = self.sample_observation_sets(n_samples, seed)
++        if n_shards > 1:
++            # Same seeded sample as an unsharded run, split round-robin across parallel workers.
++            sampled_sets = sampled_sets[shard_index::n_shards]
++            n_samples = len(sampled_sets)
++            print(f"Shard {shard_index}/{n_shards}: {n_samples} observation sets")
+         
+         # Initialize results tracking
+         all_results = []
+@@ -838,6 +846,17 @@
+             model=kwargs.get('model', 'anthropic/claude-3.5-sonnet'),
+             api_key=api_key,
              temperature=kwargs.get('temperature', 0.7)
-         )
-     
++        )
++    
 +    elif llm_type == "local":
 +        return LocalLLM(
 +            model=kwargs.get('model', 'qwen3.8-27b'),
@@ -409,12 +444,18 @@
 +            max_tokens=kwargs.get('max_tokens', 1024),
 +            system_prompt=kwargs.get('system_prompt') or 'You are a helpful assistant.',
 +            extra_body=kwargs.get('extra_body'),
-+        )
-+    
+         )
+     
      else:
-         raise ValueError(f"Unknown LLM type: {llm_type}")
- 
-@@ -958,7 +969,8 @@
+@@ -939,6 +958,7 @@
+     parser.add_argument("--max-retries", type=int, default=3, help="Maximum retries per query")
+     parser.add_argument("--seed", type=int, default=None, help="Random seed for sampling")
+     parser.add_argument("--checkpoint-dir", default="checkpoints", help="Directory for checkpoints")
++    parser.add_argument("--shard", default=None, help="Run only shard i of n of the sampled sets, e.g. '0/8'")
+     parser.add_argument("--output", default=None, help="Output file path")
+     parser.add_argument("--verbose", action="store_true", default=True, help="Verbose output")
+     parser.add_argument("--quiet", action="store_true", help="Disable verbose output")
+@@ -958,7 +978,8 @@
          default_models = {
              'openrouter': 'openai/gpt-3.5-turbo',
              'openai': 'gpt-4o',
@@ -424,7 +465,7 @@
          }
          model = default_models.get(llm_type)
      
-@@ -967,7 +979,8 @@
+@@ -967,7 +988,8 @@
          env_vars = {
              'openai': 'OPENAI_API_KEY',
              'anthropic': 'ANTHROPIC_API_KEY',
@@ -434,7 +475,7 @@
          }
          if llm_type in env_vars:
              api_key = os.environ.get(env_vars[llm_type])
-@@ -1035,7 +1048,11 @@
+@@ -1035,7 +1057,11 @@
          llm_type,
          model=model,
          api_key=api_key,
@@ -447,3 +488,14 @@
      )
      
      # Run benchmark
+@@ -1047,7 +1073,9 @@
+         seed=args.seed,
+         verbose=verbose,
+         checkpoint_dir=checkpoint_dir,
+-        max_retries=args.max_retries
++        max_retries=args.max_retries,
++        shard_index=int(args.shard.split('/')[0]) if args.shard else 0,
++        n_shards=int(args.shard.split('/')[1]) if args.shard else 1
+     )
+     
+     # Save final results

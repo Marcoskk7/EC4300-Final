@@ -37,7 +37,7 @@ def rows():
         if (meta.get("suite") or "").startswith("smoke"):  # pipeline checks, never reportable
             continue
         for f in sorted(run.glob("*.json")):
-            if f.name == "meta.json" or f.name.endswith(".connfail.json"):
+            if f.name == "meta.json" or f.name.endswith(".connfail.json") or ".shard" in f.name:
                 continue
             res = json.loads(f.read_text())
             if "statistics" not in res:

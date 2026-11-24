@@ -5,7 +5,7 @@ observation_set_id appears in the rerun is swapped in as a whole (original order
 statistics, tokens, errors and the truncation summary are recomputed from the per-sample records
 with merge_shards.merge, i.e. exactly as upstream.
 
-Usage: python tools/replace_samples.py OUT.json BASE.json RERUN.json
+Usage: python tools/replace_samples.py OUT.json BASE.json RERUN.json [RERUN_MAX_TOKENS]
 """
 
 import json
@@ -30,7 +30,7 @@ def _totals(per_sample: list[dict]) -> dict:
     }
 
 
-def replace(base: dict, rerun: dict) -> dict:
+def replace(base: dict, rerun: dict, max_tokens: int | None = None) -> dict:
     new = {r["observation_set_id"]: r for r in rerun["per_sample_results"]}
     known = {r["observation_set_id"] for r in base["per_sample_results"]}
     if not set(new) <= known:
@@ -38,15 +38,16 @@ def replace(base: dict, rerun: dict) -> dict:
     per_sample = [new.get(r["observation_set_id"], r) for r in base["per_sample_results"]]
     out = merge([{**base, **_totals(per_sample), "per_sample_results": per_sample}])
     out["n_shards"] = base.get("n_shards", 1)
-    out["replaced_samples"] = {"n": len(new), "ids": sorted(new), "from_run_id": rerun["run_id"]}
+    out["replaced_samples"] = {"n": len(new), "ids": sorted(new), "from_run_id": rerun["run_id"], "max_tokens": max_tokens}
     return out
 
 
 def main() -> None:
-    if len(sys.argv) != 4:
+    if len(sys.argv) not in (4, 5):
         sys.exit(__doc__)
-    out, base, rerun = (Path(p) for p in sys.argv[1:])
-    res = replace(json.loads(base.read_text()), json.loads(rerun.read_text()))
+    out, base, rerun = (Path(p) for p in sys.argv[1:4])
+    mt = int(sys.argv[4]) if len(sys.argv) == 5 else None
+    res = replace(json.loads(base.read_text()), json.loads(rerun.read_text()), mt)
     out.write_text(json.dumps(res, indent=2))
     print(f"replaced {res['replaced_samples']['n']} samples -> {out}")
 

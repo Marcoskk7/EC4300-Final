@@ -25,6 +25,12 @@ def budget(res, meta_task):
     return f"x{m:g}" if m is not None else "?"
 
 
+def max_tokens(res, meta):
+    mt = (meta.get("sampling") or {}).get("max_tokens")
+    rep = res.get("replaced_samples")
+    return f"{mt}; {rep['n']} rerun @{rep['max_tokens']}" if rep and rep.get("max_tokens") else mt
+
+
 def parse_rate(res):
     rates = [r["parse_success_rate"] for r in res["per_sample_results"] if "parse_success_rate" in r]
     return sum(rates) / len(rates) if rates else None
@@ -36,8 +42,10 @@ def rows():
         meta = json.loads(meta_path.read_text()) if meta_path.exists() else {}
         if (meta.get("suite") or "").startswith("smoke"):  # pipeline checks, never reportable
             continue
+        if meta.get("only_ids"):  # partial reruns are folded into their base run by replace_samples.py
+            continue
         for f in sorted(run.glob("*.json")):
-            if f.name == "meta.json" or f.name.endswith(".connfail.json") or ".shard" in f.name:
+            if f.name == "meta.json" or "." in f.stem:  # shards, connfail, pre-rerun copies
                 continue
             res = json.loads(f.read_text())
             if "statistics" not in res:
@@ -49,7 +57,7 @@ def rows():
                 "model": meta.get("served_model") or res.get("llm_name", "?"),
                 "tag": meta.get("tag") or "",
                 "budget": budget(res, meta.get("tasks", {}).get(f.stem)),
-                "max_tokens": (meta.get("sampling") or {}).get("max_tokens"),
+                "max_tokens": max_tokens(res, meta),
                 "n": len(res["per_sample_results"]),
                 "parse": parse_rate(res),
                 "VR": s["valid_rate"]["mean"],

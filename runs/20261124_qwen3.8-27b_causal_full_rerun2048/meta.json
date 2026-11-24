@@ -1,0 +1,48 @@
+{
+  "model": "qwen3.8-27b",
+  "served_model": "qwen3.8-27b",
+  "base_url": "http://127.0.0.1:8000/v1",
+  "suite": "causal_full",
+  "tag": "rerun2048",
+  "seed": 33550336,
+  "tasks": {
+    "causal_n4_all": {
+      "domain": "causal",
+      "dataset": "data/causal/n4.json",
+      "n_samples": 847,
+      "multiplier": 2.0
+    }
+  },
+  "sampling": {
+    "temperature": 0.7,
+    "max_tokens": 2048,
+    "extra_body": {
+      "chat_template_kwargs": {
+        "enable_thinking": false
+      }
+    }
+  },
+  "git": {
+    "commit": "5e88f08da1ab469bda127a200dd649a5c77aeb90",
+    "dirty": true
+  },
+  "started": "2026-11-24T03:22:45",
+  "argv": [
+    "tools/run_eval.py",
+    "--model",
+    "private/qwen3.8-27b.node.yaml",
+    "--suite",
+    "configs/suites/causal_full.yaml",
+    "--only-ids",
+    "private/trunc27_ids.json",
+    "--max-tokens",
+    "2048",
+    "--shards",
+    "8",
+    "--tag",
+    "rerun2048"
+  ],
+  "shards": 8,
+  "only_ids": "private/trunc27_ids.json",
+  "finished": "2026-11-24T05:45:16"
+}

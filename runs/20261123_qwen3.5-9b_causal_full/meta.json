@@ -1,0 +1,38 @@
+{
+  "model": "qwen3.5-9b",
+  "served_model": "qwen3.5-9b",
+  "base_url": "http://127.0.0.1:8001/v1",
+  "suite": "causal_full",
+  "tag": null,
+  "seed": 33550336,
+  "tasks": {
+    "causal_n4_all": {
+      "domain": "causal",
+      "dataset": "data/causal/n4.json",
+      "n_samples": 847,
+      "multiplier": 2.0
+    }
+  },
+  "sampling": {
+    "temperature": 0.7,
+    "max_tokens": 1024,
+    "extra_body": {
+      "chat_template_kwargs": {
+        "enable_thinking": false
+      }
+    }
+  },
+  "git": {
+    "commit": "0367a2922c5ed6817d3ddbf03a485629d43f0c98",
+    "dirty": false
+  },
+  "started": "2026-11-23T18:09:16",
+  "argv": [
+    "tools/run_eval.py",
+    "--model",
+    "private/qwen3.5-9b.node.yaml",
+    "--suite",
+    "configs/suites/causal_full.yaml"
+  ],
+  "finished": "2026-11-23T21:00:31"
+}

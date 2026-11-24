@@ -1,0 +1,316 @@
+Inferred max_edges=6 from ground truth graphs
+Loaded complete dataset with 847 observation sets
+Nodes: A, B, C, D
+Max edges in hypothesis space: 6
+
+============================================================
+ENHANCED CAUSAL BENCHMARK CONFIGURATION
+============================================================
+Dataset: /opt/data/private/isaaclab/ec4300/repo/data/causal/n4.json
+LLM Type: local
+Model: qwen3.8-27b
+Temperature: 0.7
+Samples: 847
+Queries per sample: 2.0x ground truths (adaptive)
+Max retries: 3
+Seed: 33550336
+Checkpoint dir: /opt/data/private/isaaclab/ec4300/repo/runs/20261124_qwen3.8-27b_causal_full_rerun2048/checkpoints
+Output: /opt/data/private/isaaclab/ec4300/repo/runs/20261124_qwen3.8-27b_causal_full_rerun2048/causal_n4_all.shard0.json
+============================================================
+
+Running Enhanced Causal Benchmark
+LLM: Local(qwen3.8-27b)
+Sampling 847 observation sets
+Queries per sample: 2.0x number of ground truths (adaptive)
+Max retries: 3
+Checkpoint file: /opt/data/private/isaaclab/ec4300/repo/runs/20261124_qwen3.8-27b_causal_full_rerun2048/checkpoints/checkpoint_causal_enhanced_Local_qwen3.8-27b__20261124_032248_shard0of8.json
+--------------------------------------------------
+Only-ids: 187 observation sets
+Shard 0/8: 24 observation sets
+
+Sample 1/24
+  Observation set ID: n2_044
+  Number of observations: 2
+  Number of ground truths: 48
+  Using 96 queries (2.0x 48 ground truths)
+  Parse success rate: 98.96%
+  Valid rate: 68.75%
+  Novelty rate: 18.75%
+  Recovery rate: 18.75%
+
+Sample 2/24
+  Observation set ID: n3_255
+  Number of observations: 3
+  Number of ground truths: 8
+  Using 16 queries (2.0x 8 ground truths)
+  Parse success rate: 100.00%
+  Valid rate: 0.00%
+  Novelty rate: 37.50%
+  Recovery rate: 0.00%
+
+Sample 3/24
+  Observation set ID: n3_244
+  Number of observations: 3
+  Number of ground truths: 8
+  Using 16 queries (2.0x 8 ground truths)
+  Parse success rate: 100.00%
+  Valid rate: 18.75%
+  Novelty rate: 68.75%
+  Recovery rate: 37.50%
+
+Sample 4/24
+  Observation set ID: n3_129
+  Number of observations: 3
+  Number of ground truths: 12
+  Using 24 queries (2.0x 12 ground truths)
+  Parse success rate: 91.67%
+  Valid rate: 16.67%
+  Novelty rate: 37.50%
+  Recovery rate: 16.67%
+
+Sample 5/24
+  Observation set ID: n3_154
+  Number of observations: 3
+  Number of ground truths: 16
+  Using 32 queries (2.0x 16 ground truths)
+  Parse success rate: 100.00%
+  Valid rate: 18.75%
+  Novelty rate: 34.38%
+  Recovery rate: 12.50%
+
+Sample 6/24
+  Observation set ID: n2_032
+  Number of observations: 2
+  Number of ground truths: 8
+  Using 16 queries (2.0x 8 ground truths)
+  Parse success rate: 100.00%
+  Valid rate: 31.25%
+  Novelty rate: 93.75%
+  Recovery rate: 50.00%
+
+Sample 7/24
+  Observation set ID: n4_196
+  Number of observations: 4
+  Number of ground truths: 8
+  Using 16 queries (2.0x 8 ground truths)
+  Parse success rate: 100.00%
+  Valid rate: 6.25%
+  Novelty rate: 50.00%
+  Recovery rate: 12.50%
+
+Sample 8/24
+  Observation set ID: n4_007
+  Number of observations: 4
+  Number of ground truths: 1
+  Using 2 queries (2.0x 1 ground truths)
+  Parse success rate: 100.00%
+  Valid rate: 50.00%
+  Novelty rate: 100.00%
+  Recovery rate: 100.00%
+
+Sample 9/24
+  Observation set ID: n4_192
+  Number of observations: 4
+  Number of ground truths: 4
+  Using 8 queries (2.0x 4 ground truths)
+  Parse success rate: 100.00%
+  Valid rate: 0.00%
+  Novelty rate: 75.00%
+  Recovery rate: 0.00%
+
+Sample 10/24
+  Observation set ID: n3_360
+  Number of observations: 3
+  Number of ground truths: 4
+  Using 8 queries (2.0x 4 ground truths)
+  Parse success rate: 100.00%
+  Valid rate: 62.50%
+  Novelty rate: 62.50%
+  Recovery rate: 50.00%
+
+Sample 11/24
+  Observation set ID: n3_375
+  Number of observations: 3
+  Number of ground truths: 3
+  Using 6 queries (2.0x 3 ground truths)
+  Parse success rate: 100.00%
+  Valid rate: 0.00%
+  Novelty rate: 50.00%
+  Recovery rate: 0.00%
+
+Sample 12/24
+  Observation set ID: n3_221
+  Number of observations: 3
+  Number of ground truths: 2
+  Using 4 queries (2.0x 2 ground truths)
+  Parse success rate: 75.00%
+  Valid rate: 0.00%
+  Novelty rate: 75.00%
+  Recovery rate: 0.00%
+
+Sample 13/24
+  Observation set ID: n2_021
+  Number of observations: 2
+  Number of ground truths: 48
+  Using 96 queries (2.0x 48 ground truths)
+  Parse success rate: 96.88%
+  Valid rate: 44.79%
+  Novelty rate: 21.88%
+  Recovery rate: 16.67%
+
+Sample 14/24
+  Observation set ID: n2_105
+  Number of observations: 2
+  Number of ground truths: 48
+  Using 96 queries (2.0x 48 ground truths)
+  Parse success rate: 96.88%
+  Valid rate: 50.00%
+  Novelty rate: 13.54%
+  Recovery rate: 4.17%
+
+Sample 15/24
+  Observation set ID: n3_357
+  Number of observations: 3
+  Number of ground truths: 2
+  Using 4 queries (2.0x 2 ground truths)
+  Parse success rate: 75.00%
+  Valid rate: 50.00%
+  Novelty rate: 50.00%
+  Recovery rate: 50.00%
+
+Sample 16/24
+  Observation set ID: n3_092
+  Number of observations: 3
+  Number of ground truths: 8
+  Using 16 queries (2.0x 8 ground truths)
+  Parse success rate: 100.00%
+  Valid rate: 31.25%
+  Novelty rate: 43.75%
+  Recovery rate: 25.00%
+
+Sample 17/24
+  Observation set ID: n3_387
+  Number of observations: 3
+  Number of ground truths: 12
+  Using 24 queries (2.0x 12 ground truths)
+  Parse success rate: 100.00%
+  Valid rate: 33.33%
+  Novelty rate: 45.83%
+  Recovery rate: 33.33%
+
+Sample 18/24
+  Observation set ID: n2_128
+  Number of observations: 2
+  Number of ground truths: 8
+  Using 16 queries (2.0x 8 ground truths)
+  Parse success rate: 87.50%
+  Valid rate: 43.75%
+  Novelty rate: 75.00%
+  Recovery rate: 62.50%
+
+Sample 19/24
+  Observation set ID: n4_069
+  Number of observations: 4
+  Number of ground truths: 2
+  Using 4 queries (2.0x 2 ground truths)
+  Parse success rate: 100.00%
+  Valid rate: 25.00%
+  Novelty rate: 75.00%
+  Recovery rate: 50.00%
+
+Sample 20/24
+  Observation set ID: n3_021
+  Number of observations: 3
+  Number of ground truths: 1
+  Using 2 queries (2.0x 1 ground truths)
+  Parse success rate: 100.00%
+  Valid rate: 50.00%
+  Novelty rate: 100.00%
+  Recovery rate: 100.00%
+
+Sample 21/24
+  Observation set ID: n3_196
+  Number of observations: 3
+  Number of ground truths: 8
+  Using 16 queries (2.0x 8 ground truths)
+  Parse success rate: 100.00%
+  Valid rate: 43.75%
+  Novelty rate: 56.25%
+  Recovery rate: 25.00%
+
+Sample 22/24
+  Observation set ID: n2_093
+  Number of observations: 2
+  Number of ground truths: 12
+  Using 24 queries (2.0x 12 ground truths)
+  Parse success rate: 100.00%
+  Valid rate: 37.50%
+  Novelty rate: 41.67%
+  Recovery rate: 16.67%
+
+Sample 23/24
+  Observation set ID: n4_176
+  Number of observations: 4
+  Number of ground truths: 2
+  Using 4 queries (2.0x 2 ground truths)
+  Parse success rate: 100.00%
+  Valid rate: 25.00%
+  Novelty rate: 100.00%
+  Recovery rate: 50.00%
+
+Sample 24/24
+  Observation set ID: n2_056
+  Number of observations: 2
+  Number of ground truths: 24
+  Using 48 queries (2.0x 24 ground truths)
+  Parse success rate: 93.75%
+  Valid rate: 18.75%
+  Novelty rate: 31.25%
+  Recovery rate: 8.33%
+
+============================================================
+ENHANCED BENCHMARK RESULTS SUMMARY
+============================================================
+Samples evaluated: 24/24
+Max edges constraint: 6
+
+Parse Success Rate:
+  Mean ± Std: 0.965 ± 0.072
+  Variance: 0.005
+  Range: [0.750, 1.000]
+  p-value: 0.0000
+
+Valid Rate:
+  Mean ± Std: 0.303 ± 0.200
+  Variance: 0.040
+  Range: [0.000, 0.688]
+  p-value: 0.0000
+
+Novelty Rate:
+  Mean ± Std: 0.566 ± 0.255
+  Variance: 0.065
+  Range: [0.135, 1.000]
+  p-value: 0.0000
+
+Recovery Rate:
+  Mean ± Std: 0.308 ± 0.281
+  Variance: 0.079
+  Range: [0.000, 1.000]
+  p-value: 0.0000
+
+Token Usage:
+  Total tokens: 448,374
+  Prompt tokens: 393,155
+  Completion tokens: 55,219
+  Avg tokens/sample: 18682.2
+  Avg tokens/query: 18682.2
+
+Cost:
+  Total cost: $0.0000
+  Avg cost/sample: $0.0000
+  Avg cost/query: $0.000000
+============================================================
+
+Cleaned up checkpoint: /opt/data/private/isaaclab/ec4300/repo/runs/20261124_qwen3.8-27b_causal_full_rerun2048/checkpoints/checkpoint_causal_enhanced_Local_qwen3.8-27b__20261124_032248_shard0of8.json
+
+Final results saved to: /opt/data/private/isaaclab/ec4300/repo/runs/20261124_qwen3.8-27b_causal_full_rerun2048/causal_n4_all.shard0.json

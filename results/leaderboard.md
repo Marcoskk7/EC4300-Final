@@ -10,6 +10,13 @@
 | 20261122_qwen3.8-27b_main_zero | qwen3.8-27b | zero | x2 | 1024 | 200 | 95.7 | 28.7 | 42.0 | 20.7 | 38435 |  |
 | 20261122_qwen3.5-9b_main_zero | qwen3.5-9b | zero | x2 | 1024 | 200 | 100.0 | 25.9 | 38.1 | 8.3 | 31865 |  |
 
+## causal_n4_all
+
+| run | 模型 | tag | 预算 | max_tokens | 实例数 | parse | VR | NR | RR | 每样本 token | commit |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| 20261123_qwen3.8-27b_causal_full | qwen3.8-27b |  | x2 | 1024; 187 rerun @2048 | 847 | 99.2 | 31.9 | 68.3 | 43.0 | 16005 | afb625b6 |
+| 20261123_qwen3.5-9b_causal_full | qwen3.5-9b |  | x2 | 1024 | 847 | 99.9 | 24.2 | 63.7 | 22.9 | 13596 | 0367a292 |
+
 ## 3d
 
 | run | 模型 | tag | 预算 | max_tokens | 实例数 | parse | VR | NR | RR | 每样本 token | commit |

@@ -30,7 +30,7 @@ make eval MODEL=configs/models/qwen3.8-27b.yaml ARGS="--base-url http://127.0.0.
 - 27B NVFP4 必须 `--enforce-eager`，否则 CUDA graph capture 阶段 OOM。
 - 9B 以 bf16 从 `/opt/data/private/isaaclab/ec4300-9b/hf-cache/Qwen3.5-9B-bf16` 加载。
 
-`scripts/serve/start_vllm_{9b,27b}.sh` 是节点上运行脚本的副本（2026-11-23 取回）；以节点上的原件为准。两者分别使用 `--max-num-seqs 1`（27B）/ `4`（9B），这是做吞吐优化时第一个该动的参数。
+`scripts/serve/start_vllm_{9b,27b}.sh` 是节点上运行脚本的副本（2026-11-23 取回）；以节点上的原件为准。27B 脚本的 `--max-num-seqs` 读环境变量 `MAX_NUM_SEQS`（默认 1）；2026-11-24 起 27B 以 `MAX_NUM_SEQS=8` 运行（KV cache 可容纳约 15 个 8K 请求，显存 29.2 GB），配合 `run_eval.py --shards 8` 生成吞吐约 90 token/s，单请求时约 12。重启 27B 时要带上这个变量。9B 为 `4`。
 
 ## 显存分配
 

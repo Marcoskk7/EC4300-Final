@@ -141,6 +141,8 @@ def main():
     p.add_argument("--base-url", help="override base_url")
     p.add_argument("--tag", help="suffix for the run directory, e.g. sft-v1")
     p.add_argument("--run-dir", help="resume into an existing run directory")
+    p.add_argument("--only-ids", help="causal only: JSON list of observation_set_ids to rerun (subset of the seeded sample)")
+    p.add_argument("--max-tokens", type=int, help="override max_tokens (e.g. to rerun truncated instances)")
     p.add_argument("--shards", type=int, default=1,
                    help="causal only: split instances round-robin over N parallel runner processes "
                         "(needs vLLM --max-num-seqs >= N); shards are merged into <task>.json")
@@ -152,6 +154,8 @@ def main():
         model["served_model"] = args.served_model
     if args.base_url:
         model["base_url"] = args.base_url
+    if args.max_tokens:
+        model["max_tokens"] = args.max_tokens
     model["base_url"] = expand_env(model["base_url"])
 
     tasks = suite["tasks"]
@@ -183,6 +187,7 @@ def main():
         "started": datetime.now().isoformat(timespec="seconds"),
         "argv": sys.argv,
         "shards": args.shards,
+        "only_ids": args.only_ids,
     }
     (run_dir / "meta.json").write_text(json.dumps(meta, indent=2))
     print(f"run dir: {run_dir}")
@@ -196,6 +201,8 @@ def main():
         cfg = run_dir / f"config.{task['domain']}.yaml"
         cfg.write_text(yaml.safe_dump(runner_config(model, task["domain"]), sort_keys=False))
         argv = runner_args(task, suite["seed"], out, cfg, run_dir)
+        if args.only_ids and task["domain"] == "causal":
+            argv += ["--only-ids", str(Path(args.only_ids).resolve())]
         if args.shards > 1 and task["domain"] == "causal":
             rc = run_sharded(name, task, argv, out, run_dir, args.shards)
         else:

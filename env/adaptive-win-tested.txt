@@ -1,0 +1,14 @@
+# Minimal dependencies used for local adaptive pilot verification, Python 3.11.
+# GPU serving remains on the remote existing vLLM node.
+certifi==2026.11.20
+charset-normalizer==3.5.3
+idna==3.20
+networkx==3.6.1
+numpy==2.4.6
+pyyaml==6.0.4
+requests==2.34.2
+scipy==1.17.1
+urllib3==2.8.0
+
+sympy==1.14.0
+mpmath==1.3.0

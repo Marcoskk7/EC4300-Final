@@ -1,0 +1,159 @@
+{
+  "seeds": [
+    33550336,
+    33550337
+  ],
+  "n_instances": 35,
+  "split": "full_benchmark",
+  "limitation": "full_benchmark split, 2 seeds on 35 shared instances; bootstrap clusters by instance, not individual requests. Runs may differ in wall-clock serving conditions.",
+  "per_seed": {
+    "33550336": {
+      "baseline": {
+        "VR": 0.6685714285714286,
+        "NR": 0.3,
+        "RR": 0.22857142857142856,
+        "duplicate_rate": 0.5247619047619048,
+        "parse": 0.98
+      },
+      "random": {
+        "VR": 0.7542857142857143,
+        "NR": 0.3523809523809524,
+        "RR": 0.26,
+        "duplicate_rate": 0.52,
+        "parse": 0.9971428571428571
+      },
+      "ucb": {
+        "VR": 0.7742857142857142,
+        "NR": 0.36857142857142855,
+        "RR": 0.28285714285714286,
+        "duplicate_rate": 0.5085714285714286,
+        "parse": 0.9971428571428571
+      },
+      "repair_only": {
+        "VR": 0.7771428571428571,
+        "NR": 0.31523809523809526,
+        "RR": 0.2761904761904762,
+        "duplicate_rate": 0.5123809523809524,
+        "parse": 0.98
+      }
+    },
+    "33550337": {
+      "baseline": {
+        "VR": 0.7495238095238095,
+        "NR": 0.3142857142857143,
+        "RR": 0.2419047619047619,
+        "duplicate_rate": 0.5619047619047619,
+        "parse": 0.9857142857142858
+      },
+      "random": {
+        "VR": 0.8133333333333334,
+        "NR": 0.3485714285714286,
+        "RR": 0.2761904761904762,
+        "duplicate_rate": 0.5523809523809524,
+        "parse": 0.9942857142857143
+      },
+      "ucb": {
+        "VR": 0.8371428571428572,
+        "NR": 0.3961904761904762,
+        "RR": 0.32857142857142857,
+        "duplicate_rate": 0.5142857142857143,
+        "parse": 1.0
+      },
+      "repair_only": {
+        "VR": 0.7742857142857142,
+        "NR": 0.33904761904761904,
+        "RR": 0.26666666666666666,
+        "duplicate_rate": 0.5323809523809524,
+        "parse": 0.9857142857142858
+      }
+    }
+  },
+  "pooled": {
+    "baseline": {
+      "VR": 0.709047619047619,
+      "NR": 0.30714285714285716,
+      "RR": 0.23523809523809525,
+      "duplicate_rate": 0.5433333333333333,
+      "parse": 0.9828571428571429,
+      "requests": 300,
+      "tokens": 167302,
+      "seconds": 321.55824897810817,
+      "new_valid": 60
+    },
+    "random": {
+      "VR": 0.7838095238095238,
+      "NR": 0.3504761904761905,
+      "RR": 0.2680952380952381,
+      "duplicate_rate": 0.5361904761904762,
+      "parse": 0.9957142857142857,
+      "requests": 300,
+      "tokens": 171751,
+      "seconds": 283.4049274781719,
+      "new_valid": 73
+    },
+    "ucb": {
+      "VR": 0.8057142857142857,
+      "NR": 0.3823809523809524,
+      "RR": 0.3057142857142857,
+      "duplicate_rate": 0.5114285714285715,
+      "parse": 0.9985714285714286,
+      "requests": 300,
+      "tokens": 172742,
+      "seconds": 289.83009141730145,
+      "new_valid": 81
+    },
+    "repair_only": {
+      "VR": 0.7757142857142857,
+      "NR": 0.3271428571428571,
+      "RR": 0.2714285714285714,
+      "duplicate_rate": 0.5223809523809524,
+      "parse": 0.9828571428571429,
+      "requests": 300,
+      "tokens": 171768,
+      "seconds": 463.2847157623619,
+      "new_valid": 69
+    }
+  },
+  "paired_RR": {
+    "ucb_minus_baseline": {
+      "mean": 0.07047619047619048,
+      "descriptive_instance_bootstrap_95": [
+        0.036190476190476197,
+        0.1061904761904762
+      ],
+      "wins": 15,
+      "ties": 19,
+      "losses": 1
+    },
+    "ucb_minus_random": {
+      "mean": 0.03761904761904762,
+      "descriptive_instance_bootstrap_95": [
+        0.009523809523809523,
+        0.06952380952380953
+      ],
+      "wins": 9,
+      "ties": 24,
+      "losses": 2
+    },
+    "ucb_minus_repair_only": {
+      "mean": 0.03428571428571429,
+      "descriptive_instance_bootstrap_95": [
+        0.002857142857142858,
+        0.06619047619047619
+      ],
+      "wins": 10,
+      "ties": 22,
+      "losses": 3
+    },
+    "repair_only_minus_baseline": {
+      "mean": 0.03619047619047619,
+      "descriptive_instance_bootstrap_95": [
+        0.005714285714285714,
+        0.06857142857142857
+      ],
+      "wins": 9,
+      "ties": 25,
+      "losses": 1
+    }
+  }
+}

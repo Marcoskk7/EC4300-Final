@@ -12,6 +12,12 @@
 
 预算按实例计算：`n_queries = max(1, floor(|H_O| * multiplier))`。不同 multiplier 下的 RR 不可比，所以下表每一行都标注预算。
 
+## 新增：9B 反馈与自适应探索实验
+
+已完成三个领域、五组任务的四方法双种子评测，共 97,952 次正式请求。实现、复现命令与限制见 [运行说明](docs/adaptive_evaluation.md)，完整结果见 [正式报告](docs/adaptive_results_zh.md)，机器可读摘要见 `results/adaptive_9b/`。
+
+这些实验重跑了匹配基线，并修正了 Boolean 验证器的一致性问题；不要与下方历史基线混用。UCB 并非所有任务最优，固定修复是重要对照。
+
 ## 方法概况
 
 强模型在 causal 和 3D 上的 VR 已饱和，论文也表明温度、top-p 和 3× 预算都不能提升 RR（其 Table 6）。因此提升空间在于**预算怎么花**：失败来自重复和无效提议，而不是模型容量不足。

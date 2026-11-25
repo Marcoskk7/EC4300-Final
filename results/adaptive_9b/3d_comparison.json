@@ -1,0 +1,159 @@
+{
+  "seeds": [
+    33550336,
+    33550337
+  ],
+  "n_instances": 129,
+  "split": "full_benchmark",
+  "limitation": "full_benchmark split, 2 seeds on 129 shared instances; bootstrap clusters by instance, not individual requests. Runs may differ in wall-clock serving conditions.",
+  "per_seed": {
+    "33550336": {
+      "baseline": {
+        "VR": 0.6345104794717198,
+        "NR": 0.3290267011197244,
+        "RR": 0.202411714039621,
+        "duplicate_rate": 0.670686190066035,
+        "parse": 1.0
+      },
+      "random": {
+        "VR": 0.69710020097617,
+        "NR": 0.3743898937697387,
+        "RR": 0.23112259546368072,
+        "duplicate_rate": 0.6230261269020959,
+        "parse": 1.0
+      },
+      "ucb": {
+        "VR": 0.7545219638242894,
+        "NR": 0.36118288831467127,
+        "RR": 0.22681596325007178,
+        "duplicate_rate": 0.6388171116853287,
+        "parse": 1.0
+      },
+      "repair_only": {
+        "VR": 0.7863910422049957,
+        "NR": 0.3318977892621303,
+        "RR": 0.22739018087855295,
+        "duplicate_rate": 0.6646569049669825,
+        "parse": 1.0
+      }
+    },
+    "33550337": {
+      "baseline": {
+        "VR": 0.49813379270743613,
+        "NR": 0.3784094171691071,
+        "RR": 0.1719781797301177,
+        "duplicate_rate": 0.6207292563881711,
+        "parse": 1.0
+      },
+      "random": {
+        "VR": 0.7097329888027563,
+        "NR": 0.39219064025265576,
+        "RR": 0.23284524834912432,
+        "duplicate_rate": 0.6066609244903819,
+        "parse": 1.0
+      },
+      "ucb": {
+        "VR": 0.7602641401091014,
+        "NR": 0.3838644846396784,
+        "RR": 0.2354292276772897,
+        "duplicate_rate": 0.6144128624748779,
+        "parse": 1.0
+      },
+      "repair_only": {
+        "VR": 0.7309790410565604,
+        "NR": 0.37352856732701695,
+        "RR": 0.22624174562159058,
+        "duplicate_rate": 0.6230261269020959,
+        "parse": 1.0
+      }
+    }
+  },
+  "pooled": {
+    "baseline": {
+      "VR": 0.5663221360895779,
+      "NR": 0.35371805914441573,
+      "RR": 0.18719494688486935,
+      "duplicate_rate": 0.645707723227103,
+      "parse": 1.0,
+      "requests": 5238,
+      "tokens": 8919610,
+      "seconds": 24415.905274561606,
+      "new_valid": 784
+    },
+    "random": {
+      "VR": 0.7034165948894631,
+      "NR": 0.3832902670111972,
+      "RR": 0.23198392190640252,
+      "duplicate_rate": 0.6148435256962389,
+      "parse": 1.0,
+      "requests": 5238,
+      "tokens": 8706695,
+      "seconds": 22893.22943338845,
+      "new_valid": 988
+    },
+    "ucb": {
+      "VR": 0.7573930519666954,
+      "NR": 0.3725236864771748,
+      "RR": 0.23112259546368072,
+      "duplicate_rate": 0.6266149870801033,
+      "parse": 1.0,
+      "requests": 5238,
+      "tokens": 8779960,
+      "seconds": 23253.42578783119,
+      "new_valid": 1004
+    },
+    "repair_only": {
+      "VR": 0.7586850416307781,
+      "NR": 0.3527131782945736,
+      "RR": 0.22681596325007178,
+      "duplicate_rate": 0.6438415159345392,
+      "parse": 1.0,
+      "requests": 5238,
+      "tokens": 9030219,
+      "seconds": 24427.400274534244,
+      "new_valid": 950
+    }
+  },
+  "paired_RR": {
+    "ucb_minus_baseline": {
+      "mean": 0.04392764857881137,
+      "descriptive_instance_bootstrap_95": [
+        0.026988228538616134,
+        0.0610106230261269
+      ],
+      "wins": 78,
+      "ties": 19,
+      "losses": 32
+    },
+    "ucb_minus_random": {
+      "mean": -0.0008613264427217925,
+      "descriptive_instance_bootstrap_95": [
+        -0.014068331897789265,
+        0.011915015790984782
+      ],
+      "wins": 51,
+      "ties": 35,
+      "losses": 43
+    },
+    "ucb_minus_repair_only": {
+      "mean": 0.004306632213608958,
+      "descriptive_instance_bootstrap_95": [
+        -0.011484352569623888,
+        0.020097616996841802
+      ],
+      "wins": 51,
+      "ties": 32,
+      "losses": 46
+    },
+    "repair_only_minus_baseline": {
+      "mean": 0.03962101636520241,
+      "descriptive_instance_bootstrap_95": [
+        0.02540913006029285,
+        0.05483778351995406
+      ],
+      "wins": 73,
+      "ties": 32,
+      "losses": 24
+    }
+  }
+}

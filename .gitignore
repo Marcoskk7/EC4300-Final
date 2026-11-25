@@ -10,3 +10,7 @@ runs/*/config.*.yaml
 .env
 runs/*_smoke*/
 .DS_Store
+# Local experiment traces and remote deployment records
+runs/adaptive_*/
+runs/*_remote/
+*.tar.gz

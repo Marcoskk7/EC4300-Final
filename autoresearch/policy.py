@@ -26,6 +26,7 @@ class Policy:
         self.counts = dict.fromkeys(ARMS, 0)
         self.rewards = dict.fromkeys(ARMS, 0)
         self.valid_seen = set()
+        self.last_duplicate = False
         self.arm = None
 
     def choose(self):
@@ -61,6 +62,11 @@ class Policy:
             prompt += (f'\nRepair the previous candidate{comma} while satisfying ALL observations and avoiding '
                        'prior predictions.\nPrevious response:\n' + self.last_response[:2000]
                        + '\nValidation feedback:\n' + '\n'.join(self.last_errors))
+        elif self.last_duplicate:
+            prompt += ('\nYour previous answer was IDENTICAL to a prior prediction, which wastes the attempt:\n'
+                       + self.last_response[:500].strip()
+                       + '\nOutput a candidate that is genuinely different from EVERY prior prediction listed above, '
+                       'while still satisfying all observations. Keep the same output format.')
         elif self.arm == 'structure':
             prompt += (f'\nExploration direction: {self.direction()}. If impossible, return another valid, '
                        'non-repeated candidate. Keep the same output format.')
@@ -75,3 +81,4 @@ class Policy:
         self.counts[self.arm] += 1
         self.rewards[self.arm] += reward
         self.last_response, self.last_errors = outcome.response, outcome.errors
+        self.last_duplicate = outcome.duplicate

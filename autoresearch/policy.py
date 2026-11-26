@@ -45,6 +45,7 @@ class Policy:
         self.valid_seen = set()
         self.last_duplicate = False
         self.history_keys = set()
+        self.base_uses = {}
         self.valid_texts = []
         self.height_maps = []
         self.used_exprs = []
@@ -90,7 +91,9 @@ class Policy:
                              f'and no node reachable from {p} may have a path into them.')
         return '\n'.join(lines)
     def mutation_prompt(self):
-        base = self.rng.choice(self.valid_texts)
+        low = min(self.base_uses.get(t, 0) for t in self.valid_texts)
+        base = self.rng.choice([t for t in self.valid_texts if self.base_uses.get(t, 0) == low])
+        self.base_uses[base] = low + 1
         return ('\nA known valid answer is:\n' + base + '\nProduce a NEW answer by making one small '
                 'structural change to it: ' + self.rng.choice(MUTATIONS[self.info.domain[:4]]) + '. It must '
                 'still satisfy ALL observations and differ from every prior prediction (if this edit cannot, '

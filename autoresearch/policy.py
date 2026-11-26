@@ -53,9 +53,26 @@ class Policy:
             return f'try a structure with exactly {self.rng.randint(1, pub["max_height"])} nonempty layers'
         return f'try an expression whose outermost operator is {self.rng.choice(pub["operators"])}'
 
+    def causal_hints(self):
+        """Restate each observation as reachability constraints (no candidate graphs are given)."""
+        lines = ['\nHow to read the observations as constraints:']
+        for o in self.info.observations:
+            p = o['perturbed_node']
+            on = [n for n, v in o['effects'].items() if v == 1 and n != p]
+            off = [n for n, v in o['effects'].items() if v == 0 and n != p]
+            if on:
+                lines.append(f'- {", ".join(on)} must each be reachable from {p} by a directed path '
+                             f'(a direct edge {p}->X or a chain {p}->...->X).')
+            if off:
+                lines.append(f'- {", ".join(off)} must NOT be reachable from {p}: no edge {p}->X for these, '
+                             f'and no node reachable from {p} may have a path into them.')
+        return '\n'.join(lines)
+
     def next_messages(self):
         self.arm = self.choose()
         prompt = self.info.base_prompt(self.history)
+        if self.info.domain == 'causal':
+            prompt += self.causal_hints()
         if self.arm == 'repair':
             comma = ',' if self.info.domain == 'causal' else ''  # matches the formal runs verbatim
             prompt += (f'\nRepair the previous candidate{comma} while satisfying ALL observations and avoiding '

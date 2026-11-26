@@ -14,3 +14,8 @@ runs/*_smoke*/
 runs/adaptive_*/
 runs/*_remote/
 *.tar.gz
+
+# autoresearch loop artefacts
+runs/autoresearch/
+autoresearch/results.tsv
+run.log

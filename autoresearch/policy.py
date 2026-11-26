@@ -17,6 +17,15 @@ import math
 ARMS = ('explore', 'repair', 'structure')
 METHOD = 'repair_only'  # baseline | repair_only | random | ucb
 
+MUTATIONS = {
+    'caus': ('add one edge', 'remove one edge', 'reverse one edge (keep it acyclic)',
+             'replace one edge with a different edge'),
+    '3d': ('raise one column by 1', 'lower one column by 1 (a column keeps at least 1 block)',
+           'raise one column and lower another', 'change the heights of two columns'),
+    'bool': ('replace one operator', 'negate or double-negate a sub-term',
+             'wrap a sub-term with another operator', 'add a redundant term'),
+}
+
 
 class Policy:
     def __init__(self, info, rng):
@@ -28,6 +37,7 @@ class Policy:
         self.valid_seen = set()
         self.last_duplicate = False
         self.history_keys = set()
+        self.valid_texts = []
         self.arm = None
 
     def choose(self):
@@ -69,6 +79,12 @@ class Policy:
                 lines.append(f'- {", ".join(off)} must NOT be reachable from {p}: no edge {p}->X for these, '
                              f'and no node reachable from {p} may have a path into them.')
         return '\n'.join(lines)
+    def mutation_prompt(self):
+        base = self.rng.choice(self.valid_texts)
+        return ('\nA known valid answer is:\n' + base + '\nProduce a NEW answer by making one small '
+                'structural change to it: ' + self.rng.choice(MUTATIONS[self.info.domain[:4]]) + '. It must '
+                'still satisfy ALL observations and differ from every prior prediction (if this edit cannot, '
+                'use another small edit). Keep the same output format.')
 
     def next_messages(self):
         self.arm = self.choose()
@@ -85,6 +101,8 @@ class Policy:
                        + self.last_response[:500].strip()
                        + '\nOutput a candidate that is genuinely different from EVERY prior prediction listed above, '
                        'while still satisfying all observations. Keep the same output format.')
+        elif self.valid_texts:
+            prompt += self.mutation_prompt()
         elif self.arm == 'structure':
             prompt += (f'\nExploration direction: {self.direction()}. If impossible, return another valid, '
                        'non-repeated candidate. Keep the same output format.')
@@ -92,6 +110,8 @@ class Policy:
 
     def observe(self, outcome):
         reward = int(outcome.valid and outcome.key not in self.valid_seen)
+        if outcome.valid and outcome.key not in self.valid_seen:
+            self.valid_texts.append(outcome.response.strip()[:600])
         if outcome.valid:
             self.valid_seen.add(outcome.key)
         if outcome.candidate is not None and outcome.key not in self.history_keys:

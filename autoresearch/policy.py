@@ -27,6 +27,14 @@ MUTATIONS = {
 }
 
 
+def height_map(structure):
+    layers = [[[int(v) for v in row] for row in layer] for layer in structure.layers]
+    n = len(layers[0]) if layers else 0
+    if not n or any(len(layer) != n or any(len(row) != n for row in layer) for layer in layers):
+        return None
+    return ' / '.join(' '.join(str(sum(layer[r][c] for layer in layers)) for c in range(n)) for r in range(n))
+
+
 class Policy:
     def __init__(self, info, rng):
         self.info, self.rng = info, rng
@@ -38,6 +46,7 @@ class Policy:
         self.last_duplicate = False
         self.history_keys = set()
         self.valid_texts = []
+        self.height_maps = []
         self.arm = None
 
     def choose(self):
@@ -88,7 +97,18 @@ class Policy:
 
     def next_messages(self):
         self.arm = self.choose()
-        prompt = self.info.base_prompt(self.history)
+        compact = self.info.domain == '3d'
+        prompt = self.info.base_prompt([] if compact else self.history)
+        if compact and self.height_maps:
+            prompt += ('\nPrior predictions as column-height maps (each number = how many blocks are stacked at '
+                       'that position). Do NOT repeat any of these height maps:\n'
+                       + '\n'.join(f'{i + 1}) {m}' for i, m in enumerate(self.height_maps)))
+        if self.info.domain == '3d':
+            h = self.info.public['max_height']
+            prompt += ('\nKey fact: because every block needs support, Layer 1 must be EXACTLY the top view, and '
+                       'each position that is 1 in the top view is a column of height 1 to ' + str(h) +
+                       '. Different valid answers differ only in these column heights; Layer k contains '
+                       'the columns of height >= k. Omit layers that would be all zeros.')
         if self.info.domain == 'causal':
             prompt += self.causal_hints()
         if self.arm == 'repair':
@@ -117,6 +137,10 @@ class Policy:
         if outcome.candidate is not None and outcome.key not in self.history_keys:
             self.history_keys.add(outcome.key)
             self.history.append(outcome.candidate)
+            if self.info.domain == '3d':
+                m = height_map(outcome.candidate)
+                if m is not None:
+                    self.height_maps.append(m)
         self.counts[self.arm] += 1
         self.rewards[self.arm] += reward
         self.last_response, self.last_errors = outcome.response, outcome.errors

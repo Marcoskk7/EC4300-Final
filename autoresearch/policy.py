@@ -22,8 +22,8 @@ MUTATIONS = {
              'replace one edge with a different edge'),
     '3d': ('raise one column by 1', 'lower one column by 1 (a column keeps at least 1 block)',
            'raise one column and lower another', 'change the heights of two columns'),
-    'bool': ('replace one operator', 'negate or double-negate a sub-term',
-             'wrap a sub-term with another operator', 'add a redundant term'),
+    'bool': ('e.g. replace one operator, negate or double-negate a sub-term, wrap a sub-term with another '
+             'operator, or add a redundant term',),
 }
 
 

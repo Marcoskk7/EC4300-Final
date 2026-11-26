@@ -4,6 +4,7 @@
 #   autoresearch/remote_run.sh [--smoke] > run.log 2>&1        # 9B (default)
 #   AR_RUN=27b autoresearch/remote_run.sh > run.log 2>&1       # 27B
 #   AR_FINAL=1 autoresearch/remote_run.sh > final.log 2>&1     # once, after a loop: final_eval.py
+#   AR_CAUSAL_FULL=1 autoresearch/remote_run.sh > causal_full.log 2>&1  # all 847 causal instances
 #
 # Pushes policy.py, refuses to run if the node's locked files differ from local ones,
 # runs the harness detached on the node (survives SSH drops), polls until it finishes,
@@ -25,7 +26,10 @@ DIR=${AR_DIR:-$DEFAULT_DIR}
 MODEL=${AR_MODEL:-$DEFAULT_MODEL}
 WORKERS=${AR_WORKERS:-$DEFAULT_WORKERS}
 PY=${AR_PY:-../repo/.venv/bin/python}
-if [[ ${AR_FINAL:-0} == 1 ]]; then
+CAUSAL_FULL=${AR_CAUSAL_FULL:-0}
+if [[ $CAUSAL_FULL == 1 ]]; then
+  SCRIPT=autoresearch/causal_full_eval.py; ENVV=""; TIMEOUT=${AR_TIMEOUT:-7200}
+elif [[ ${AR_FINAL:-0} == 1 ]]; then
   SCRIPT=autoresearch/final_eval.py; ENVV="AUTORESEARCH_FINAL=1"; TIMEOUT=${AR_TIMEOUT:-$DEFAULT_FINAL_TIMEOUT}
 else
   SCRIPT=autoresearch/harness.py; ENVV=""; TIMEOUT=${AR_TIMEOUT:-$DEFAULT_RUN_TIMEOUT}
@@ -44,7 +48,12 @@ node_config() { sed -e 's#127.0.0.1:18001#127.0.0.1:8001#' -e 's#127.0.0.1:18000
 local_sums=$(for f in "${LOCKED[@]}"; do
   if [[ $f == configs/* ]]; then node_config "$f"; else cat "$f"; fi | shasum -a 256 | cut -c1-64
 done)
-policy_b64=$(base64 < autoresearch/policy.py | tr -d '\n')
+POLICY=${AR_POLICY:-autoresearch/policy.py}
+policy_b64=$(base64 < "$POLICY" | tr -d '\n')
+script_b64=""
+if [[ $CAUSAL_FULL == 1 ]]; then
+  script_b64=$(base64 < autoresearch/causal_full_eval.py | tr -d '\n')
+fi
 id=$(date +%Y%m%d%H%M%S)-$$
 
 on_node <<EOF
@@ -57,9 +66,12 @@ fi
 exec 9>/tmp/ar_run.lock
 flock -n 9 || { echo "another autoresearch run is active on the node" >&2; exit 4; }
 echo "$policy_b64" | base64 -d > autoresearch/policy.py
+if [[ "$CAUSAL_FULL" == 1 ]]; then
+  echo "$script_b64" | base64 -d > autoresearch/causal_full_eval.py
+fi
 nohup setsid bash -c 'flock 9; $ENVV timeout $TIMEOUT $PY $SCRIPT --model $MODEL --workers $WORKERS $* > /tmp/ar_$id.log 2>&1; echo \$? > /tmp/ar_$id.rc' 9>/tmp/ar_run.lock >/dev/null 2>&1 &
 EOF
-echo "started on $NODE_PORT: id=$id model=$MODEL workers=$WORKERS"
+echo "started on $NODE_PORT: id=$id model=$MODEL workers=$WORKERS policy=$POLICY"
 
 while :; do
   sleep "$POLL"

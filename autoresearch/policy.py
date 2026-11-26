@@ -47,6 +47,7 @@ class Policy:
         self.history_keys = set()
         self.valid_texts = []
         self.height_maps = []
+        self.used_exprs = []
         self.arm = None
 
     def choose(self):
@@ -130,6 +131,9 @@ class Policy:
         elif self.arm == 'structure':
             prompt += (f'\nExploration direction: {self.direction()}. If impossible, return another valid, '
                        'non-repeated candidate. Keep the same output format.')
+        if self.info.domain.startswith('boolean') and self.used_exprs:
+            prompt += ('\nAlready used (any of these again counts as a wasted repeat): '
+                       + '; '.join(self.used_exprs[-30:]))
         return [{'role': 'system', 'content': self.info.system}, {'role': 'user', 'content': prompt}]
 
     def observe(self, outcome):
@@ -145,6 +149,8 @@ class Policy:
                 m = height_map(outcome.candidate)
                 if m is not None:
                     self.height_maps.append(m)
+            if self.info.domain.startswith('boolean'):
+                self.used_exprs.append(str(outcome.candidate))
         self.counts[self.arm] = self.counts.get(self.arm, 0) + 1
         self.rewards[self.arm] = self.rewards.get(self.arm, 0) + reward
         self.last_response, self.last_errors = outcome.response, outcome.errors

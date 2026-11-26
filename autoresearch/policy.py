@@ -27,6 +27,7 @@ class Policy:
         self.rewards = dict.fromkeys(ARMS, 0)
         self.valid_seen = set()
         self.last_duplicate = False
+        self.history_keys = set()
         self.arm = None
 
     def choose(self):
@@ -93,7 +94,8 @@ class Policy:
         reward = int(outcome.valid and outcome.key not in self.valid_seen)
         if outcome.valid:
             self.valid_seen.add(outcome.key)
-        if outcome.candidate is not None:
+        if outcome.candidate is not None and outcome.key not in self.history_keys:
+            self.history_keys.add(outcome.key)
             self.history.append(outcome.candidate)
         self.counts[self.arm] += 1
         self.rewards[self.arm] += reward

@@ -111,7 +111,11 @@ class Policy:
                        'the columns of height >= k. Omit layers that would be all zeros.')
         if self.info.domain == 'causal':
             prompt += self.causal_hints()
-        if self.arm == 'repair':
+        if self.info.domain == 'causal' and self.valid_texts and self.rng.random() < 0.7:
+            self.arm = 'mutate'
+        if self.arm == 'mutate':
+            prompt += self.mutation_prompt()
+        elif self.arm == 'repair':
             comma = ',' if self.info.domain == 'causal' else ''  # matches the formal runs verbatim
             prompt += (f'\nRepair the previous candidate{comma} while satisfying ALL observations and avoiding '
                        'prior predictions.\nPrevious response:\n' + self.last_response[:2000]
@@ -141,7 +145,7 @@ class Policy:
                 m = height_map(outcome.candidate)
                 if m is not None:
                     self.height_maps.append(m)
-        self.counts[self.arm] += 1
-        self.rewards[self.arm] += reward
+        self.counts[self.arm] = self.counts.get(self.arm, 0) + 1
+        self.rewards[self.arm] = self.rewards.get(self.arm, 0) + reward
         self.last_response, self.last_errors = outcome.response, outcome.errors
         self.last_duplicate = outcome.duplicate
